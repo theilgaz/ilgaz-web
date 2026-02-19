@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom'
 
 const posts = [
   {
+    slug: 'yapay-zeka-caginda-yazilimcinin-yeri',
+    title: 'yapay zeka çağında yazılımcının yeri',
+    date: '19 Şub 2026',
+    readingTime: 11,
+    tags: ['tefekkür', 'yazılım'],
+  },
+  {
     slug: 'essiz-yaraticinin-izniyle',
     title: 'eşsiz yaratıcının izniyle',
     date: '29 Oca 2026',
