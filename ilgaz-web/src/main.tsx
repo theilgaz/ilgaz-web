@@ -8,6 +8,7 @@ import { Blog } from './pages/Blog'
 import { BlogPost } from './pages/BlogPost'
 import { Now } from './pages/Now'
 import { Projects } from './pages/Projects'
+import { ProjectDetail } from './pages/ProjectDetail'
 import './styles/global.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/now" element={<Now />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

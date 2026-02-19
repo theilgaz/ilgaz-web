@@ -1,9 +1,8 @@
+import { Link } from 'react-router-dom'
+
 export function Projects() {
   const projects = [
-    { name: 'Project A', description: 'yakında duyurulacak' },
-    { name: 'Project B', description: 'yakında duyurulacak' },
-    { name: 'Project C', description: 'yakında duyurulacak' },
-    { name: 'Project D', description: 'yakında duyurulacak' },
+    { name: 'Seyyar 42', slug: 'seyyar-42', description: 'Göçer ruha, sabit güç' },
   ]
 
   return (
@@ -16,8 +15,17 @@ export function Projects() {
       <ul className="project-list">
         {projects.map((project) => (
           <li key={project.name} className="project-item">
-            <span className="project-item-name">{project.name}</span>
-            <span className="project-item-desc">{project.description}</span>
+            {project.slug ? (
+              <Link to={`/projects/${project.slug}`} className="project-item-link">
+                <span className="project-item-name">{project.name}</span>
+                <span className="project-item-desc">{project.description}</span>
+              </Link>
+            ) : (
+              <>
+                <span className="project-item-name">{project.name}</span>
+                <span className="project-item-desc">{project.description}</span>
+              </>
+            )}
           </li>
         ))}
       </ul>
