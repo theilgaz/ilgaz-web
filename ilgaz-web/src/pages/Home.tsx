@@ -31,7 +31,7 @@ export function Home() {
 
 
       <div className="landing-links">
-        <Link to="/blog">blog</Link>
+        <Link to="/blog">yazılar</Link>
         <Link to="/projects">projeler</Link>
         <Link to="/now">şu an</Link>
         <Link to="/about">hakkımda</Link>

@@ -91,7 +91,7 @@ a:hover {
 
 .logo {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 400;
   color: var(--text);
   letter-spacing: -0.01em;
@@ -110,7 +110,7 @@ a:hover {
 
 .nav-link {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
   text-decoration: none;
   transition: opacity 0.2s ease;
@@ -165,14 +165,14 @@ p {
 }
 
 .lead {
-  font-size: 1.111rem;
+  font-size: 1.125rem;
   color: var(--text-secondary);
   margin-bottom: 32px;
 }
 
 .meta {
   font-family: var(--font-sans);
-  font-size: 0.778rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
 }
 
@@ -195,7 +195,7 @@ blockquote {
   padding: 0;
   text-align: center;
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-muted);
   margin-bottom: 48px;
 }
@@ -238,7 +238,7 @@ li {
 
 .footer-content {
   font-family: var(--font-sans);
-  font-size: 0.778rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
   display: flex;
   justify-content: space-between;
@@ -269,7 +269,7 @@ li {
   bottom: 100%;
   margin-bottom: 6px;
   font-family: var(--font-sans);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   white-space: nowrap;
   opacity: 0;
@@ -306,7 +306,7 @@ li {
 
 .post-title {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0;
   line-height: 1.4;
@@ -330,20 +330,20 @@ li {
 
 .post-date {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .post-reading-time {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   opacity: 0.7;
 }
 
 .post-excerpt {
   color: var(--text-secondary);
-  font-size: 0.944rem;
+  font-size: 1rem;
   margin-bottom: 8px;
 }
 
@@ -357,7 +357,7 @@ li {
 
 .tag-filter {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   background: var(--bg-alt);
   border: 1px solid var(--border);
@@ -395,7 +395,7 @@ li {
 
 .article-meta span {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
@@ -415,7 +415,7 @@ li {
 
 .article-tag {
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--text-muted);
@@ -448,7 +448,7 @@ li {
 
 .back-link {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
   text-decoration: none;
   display: inline-flex;
@@ -485,7 +485,7 @@ li {
 }
 
 .signature-separator {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   opacity: 0.5;
   margin-bottom: 4px;
@@ -515,7 +515,7 @@ li {
 .social-links {
   margin-top: 24px;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   text-align: center;
 }
 
@@ -538,7 +538,7 @@ li {
   bottom: 100%;
   margin-bottom: 8px;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--bg);
   background: var(--text);
   padding: 6px 10px;
@@ -566,7 +566,7 @@ li {
 
 .tag {
   font-family: var(--font-sans);
-  font-size: 0.722rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   background: var(--bg-alt);
   padding: 3px 8px;
@@ -581,7 +581,7 @@ li {
 
 .now-label {
   font-family: var(--font-sans);
-  font-size: 0.722rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -671,7 +671,7 @@ li {
 
 .project-name {
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 600;
   margin-bottom: 6px;
   display: flex;
@@ -689,7 +689,7 @@ li {
 
 .project-role {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   background: var(--bg-alt);
   padding: 2px 6px;
@@ -698,7 +698,7 @@ li {
 
 .project-desc {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   margin: 0;
   line-height: 1.5;
 }
@@ -706,7 +706,7 @@ li {
 /* Section titles */
 .section-title {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -719,7 +719,7 @@ li {
 /* Subtle cursor hint */
 .explore-hint {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   opacity: 0.6;
   margin-top: 64px;
@@ -767,7 +767,7 @@ li {
 
 .now-card-label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
@@ -786,7 +786,7 @@ li {
 
 .now-card-title {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -799,7 +799,7 @@ li {
 }
 
 .now-card-desc {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: var(--text-secondary);
   margin: 0;
   line-height: 1.5;
@@ -824,7 +824,7 @@ li {
 
 .progress-text {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   margin-top: 6px;
 }
@@ -844,7 +844,7 @@ li {
 
 .now-column-title {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -866,19 +866,19 @@ li {
   display: block;
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   margin-bottom: 2px;
 }
 
 .now-item-desc {
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
 }
 
 /* Now page: Tek sütun basit liste */
 .now-section-title {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -891,7 +891,7 @@ li {
 }
 
 .now-icon {
-  font-size: 0.5rem;
+  font-size: 0.75rem;
 }
 
 .now-simple-list {
@@ -913,7 +913,7 @@ li {
 
 .now-simple-label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-muted);
@@ -929,7 +929,7 @@ li {
 .now-simple-title {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   display: block;
 }
 
@@ -942,7 +942,7 @@ li {
 }
 
 .now-simple-desc {
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
   display: block;
   margin-top: 2px;
@@ -950,7 +950,7 @@ li {
 
 .now-simple-badge {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 600;
   background: var(--bg-alt);
   border: 1px solid var(--border);
@@ -983,7 +983,7 @@ li {
 
 .now-progress-text {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
@@ -1050,13 +1050,13 @@ li {
 
 .now-timeline-content h4 {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0 0 4px 0;
 }
 
 .now-timeline-content p {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: var(--text-secondary);
   margin: 0;
   text-align: left;
@@ -1064,7 +1064,7 @@ li {
 
 .now-timeline-label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
@@ -1098,12 +1098,12 @@ li {
 .project-item-name {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .project-item-desc {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
@@ -1167,7 +1167,7 @@ li {
 
 .project-gallery figcaption {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   margin-top: 8px;
   text-align: center;
@@ -1195,7 +1195,7 @@ li {
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--text-muted);
@@ -1236,7 +1236,7 @@ li {
 
 .newspaper-byline {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -1318,7 +1318,7 @@ li {
 
 .newspaper-section-title {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1337,7 +1337,7 @@ li {
   position: relative;
   padding-left: 16px;
   margin-bottom: 10px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.6;
 }
 
@@ -1359,7 +1359,7 @@ li {
 
 .newspaper-specs-title {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -1379,7 +1379,7 @@ li {
 
 .newspaper-spec-item dt {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -1388,7 +1388,7 @@ li {
 
 .newspaper-spec-item dd {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   margin: 0;
 }
 
@@ -1403,7 +1403,7 @@ li {
 
 .newspaper-gallery figcaption {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   margin-top: 6px;
   font-style: italic;
@@ -1415,7 +1415,7 @@ li {
 
 .newspaper-back {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
   text-decoration: none;
 }
@@ -1444,7 +1444,7 @@ li {
 
 .newspaper-hero figcaption {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   text-align: center;
   margin-top: 8px;
@@ -1520,7 +1520,7 @@ li {
 
 .landing-bismillah {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   text-transform: lowercase;
   letter-spacing: 0.1em;
@@ -1614,7 +1614,7 @@ li {
 }
 
 .landing-bio p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: 16px;
@@ -1631,7 +1631,7 @@ li {
 
 .landing-label {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -1641,7 +1641,7 @@ li {
 
 .landing-project-list {
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 .landing-project-list a {
@@ -1666,7 +1666,7 @@ li {
 
 .landing-links a {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -1682,6 +1682,26 @@ li {
   .header nav { gap: 16px; }
   .nav-links { gap: 16px; }
   h1 { font-size: 1.75rem; }
+
+  /* Mobile typography improvements */
+  .nav-link { font-size: 0.875rem; }
+  .logo { font-size: 0.9375rem; }
+  .post-title { font-size: 1.0625rem; }
+  .post-date { font-size: 0.8125rem; }
+  .post-reading-time { font-size: 0.8125rem; }
+  .landing-links a { font-size: 0.9375rem; }
+  .landing-bio p { font-size: 1.0625rem; }
+  .landing-tagline { font-size: 1.125rem; }
+  .article-content { font-size: 1.0625rem; line-height: 1.85; }
+  .footer-content { font-size: 0.875rem; }
+
+  /* Ensure minimum readable size for all small text */
+  .tag, .tag-filter, .meta, .back-link,
+  .now-simple-label, .now-section-title, .now-card-label,
+  .project-role, .project-item-desc, .section-title,
+  .newspaper-masthead, .newspaper-byline {
+    font-size: 0.8125rem;
+  }
 
   .hero {
     flex-direction: column;
