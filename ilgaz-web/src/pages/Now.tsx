@@ -19,9 +19,9 @@ export function Now() {
                 <span className="now-simple-title">Mülk Suresi</span>
                 <div className="now-progress">
                   <div className="now-progress-bar">
-                    <div className="now-progress-fill" style={{ width: '0%' }} />
+                    <div className="now-progress-fill" style={{ width: '3.33%' }} />
                   </div>
-                  <span className="now-progress-text">0 / 30 ayet</span>
+                  <span className="now-progress-text">1 / 30 ayet</span>
                 </div>
               </div>
             </li>
