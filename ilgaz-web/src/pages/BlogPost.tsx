@@ -408,7 +408,11 @@ export function BlogPost() {
   return (
     <article>
       <header className="article-header">
-        <div className="article-tag">{post.tags[0]}</div>
+        <div className="article-tags">
+          {post.tags.map(tag => (
+            <span key={tag} className="article-tag">{tag}</span>
+          ))}
+        </div>
         <div className="article-meta">
           <span>{post.date}</span>
           <span className="separator">·</span>
