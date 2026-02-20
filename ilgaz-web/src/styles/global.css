@@ -421,11 +421,14 @@ li {
 
 .article-tag {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
-  opacity: 0.5;
+  opacity: 0.6;
+  padding: 4px 8px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
 }
 
 .article-content {
