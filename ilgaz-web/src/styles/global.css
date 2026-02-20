@@ -425,10 +425,10 @@ li {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
-  opacity: 0.6;
+  opacity: 0.4;
   padding: 4px 8px;
-  border: 1px solid currentColor;
-  border-radius: 2px;
+  border: 1px dashed currentColor;
+  border-radius: 12px;
 }
 
 .article-content {
