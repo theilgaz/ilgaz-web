@@ -9,6 +9,8 @@ import { BlogPost } from './pages/BlogPost'
 import { Now } from './pages/Now'
 import { Projects } from './pages/Projects'
 import { ProjectDetail } from './pages/ProjectDetail'
+import { Collections } from './pages/Collections'
+import { CollectionDetail } from './pages/CollectionDetail'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -23,6 +25,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/now" element={<Now />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
+          <Route path="/koleksiyonlar" element={<Collections />} />
+          <Route path="/koleksiyonlar/:slug" element={<CollectionDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

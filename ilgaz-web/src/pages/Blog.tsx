@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { posts } from '../content/posts'
+import { posts, postsBySlug } from '../content/posts'
+import { collections } from '../content/collections'
 
 export function Blog() {
   const [activeTag, setActiveTag] = useState<string | null>(null)
+  const [showCollections, setShowCollections] = useState(false)
 
   const allTags = [...new Set(posts.flatMap(post => post.meta.tags))]
 
@@ -22,7 +24,7 @@ export function Blog() {
         Yazılım, teknoloji ve hayat üzerine düşünceler.
       </p>
 
-      <div className="tag-filters">
+      <div className="tag-filters centered">
         <button
           className={`tag-filter ${activeTag === null ? 'active' : ''}`}
           onClick={() => setActiveTag(null)}
@@ -56,6 +58,43 @@ export function Blog() {
 
       {filteredPosts.length === 0 && (
         <p className="meta">Bu kategoride yazı yok.</p>
+      )}
+
+      {collections.length > 0 && (
+        <section className="collections-toggle-section">
+          <button
+            className={`collections-toggle ${showCollections ? 'open' : ''}`}
+            onClick={() => setShowCollections(!showCollections)}
+          >
+            <span>koleksiyonlar</span>
+            <span className="toggle-icon">{showCollections ? '−' : '+'}</span>
+          </button>
+
+          {showCollections && (
+            <div className="collections-dropdown">
+              {collections.map((collection) => {
+                const totalReadingTime = collection.posts.reduce((acc, slug) => {
+                  const post = postsBySlug[slug]
+                  return acc + (post?.meta.readingTime || 0)
+                }, 0)
+
+                return (
+                  <Link
+                    key={collection.slug}
+                    to={`/koleksiyonlar/${collection.slug}`}
+                    className="collection-dropdown-item"
+                  >
+                    <div className="collection-dropdown-title">{collection.title}</div>
+                    <div className="collection-dropdown-description">{collection.description}</div>
+                    <div className="collection-dropdown-meta">
+                      {collection.posts.length} yazı · {totalReadingTime} dk
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+          )}
+        </section>
       )}
     </>
   )
