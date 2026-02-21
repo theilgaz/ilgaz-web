@@ -1,37 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
-const posts = [
-  {
-    slug: 'yapay-zeka-caginda-yazilimcinin-yeri',
-    title: 'yapay zeka çağında yazılımcının yeri',
-    date: '19 Şub 2026',
-    readingTime: 11,
-    tags: ['tefekkür', 'yazılım'],
-  },
-  {
-    slug: 'essiz-yaraticinin-izniyle',
-    title: 'eşsiz yaratıcının izniyle',
-    date: '29 Oca 2026',
-    readingTime: 4,
-    tags: ['tefekkür'],
-  },
-  {
-    slug: 'sessizligin-basladigi-yer',
-    title: 'sessizliğin başladığı yer',
-    date: '23 Oca 2026',
-    readingTime: 3,
-    tags: ['tefekkür'],
-  },
-]
+import { posts } from '../content/posts'
 
 export function Blog() {
   const [activeTag, setActiveTag] = useState<string | null>(null)
 
-  const allTags = [...new Set(posts.flatMap(post => post.tags))]
+  const allTags = [...new Set(posts.flatMap(post => post.meta.tags))]
 
   const filteredPosts = activeTag
-    ? posts.filter(post => post.tags.includes(activeTag))
+    ? posts.filter(post => post.meta.tags.includes(activeTag))
     : posts
 
   return (
@@ -65,13 +42,13 @@ export function Blog() {
 
       <ul className="post-list">
         {filteredPosts.map((post) => (
-          <li key={post.slug} className="post-item">
+          <li key={post.meta.slug} className="post-item">
             <h3 className="post-title">
-              <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+              <Link to={`/blog/${post.meta.slug}`}>{post.meta.title}</Link>
             </h3>
             <div className="post-meta">
-              <span className="post-reading-time">{post.readingTime} dk</span>
-              <span className="post-date">{post.date}</span>
+              <span className="post-reading-time">{post.meta.readingTime} dk</span>
+              <span className="post-date">{post.meta.date}</span>
             </div>
           </li>
         ))}

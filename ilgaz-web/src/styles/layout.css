@@ -1,0 +1,135 @@
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  padding: 48px 0 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+
+.header nav {
+  display: flex;
+  align-items: baseline;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.logo:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+main {
+  padding-bottom: 96px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.footer {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+
+.footer-content {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-content.footer-centered {
+  justify-content: center;
+}
+
+.footer a {
+  color: var(--text-secondary);
+}
+
+.footer-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.1rem;
+  cursor: default;
+  position: relative;
+}
+
+.footer-arabic::after {
+  content: attr(title);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 100%;
+  margin-bottom: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.footer-arabic:hover::after {
+  opacity: 1;
+}
+
+/* Section titles */
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Subtle cursor hint */
+.explore-hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-top: 64px;
+  text-align: center;
+}

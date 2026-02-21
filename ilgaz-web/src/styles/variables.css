@@ -1,0 +1,14 @@
+:root {
+  --bg: #f8f8f8;
+  --bg-alt: #f0f0f0;
+  --text: #111;
+  --text-secondary: #444;
+  --text-muted: #777;
+  --accent: #111;
+  --accent-hover: #333;
+  --border: #ddd;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Space Grotesk', -apple-system, sans-serif;
+  --font-mono: 'Space Mono', 'SF Mono', 'Consolas', monospace;
+  --font-arabic: 'Scheherazade New', serif;
+}

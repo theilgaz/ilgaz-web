@@ -9,7 +9,7 @@ import { BlogPost } from './pages/BlogPost'
 import { Now } from './pages/Now'
 import { Projects } from './pages/Projects'
 import { ProjectDetail } from './pages/ProjectDetail'
-import './styles/global.css'
+import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
