@@ -29,22 +29,6 @@ export function About() {
         Beyefendilerle anadolulu anlamda bir <a href="https://konyahackerspace.org" target="_blank" rel="noopener noreferrer">hackerspace</a> denemesi yapıyoruz.
       </p>
 
-      <h2>İç Dünya</h2>
-      <ul>
-        <li>Kuran-ı Kerim, felsefe, sosyoloji, tarih okuyorum</li>
-        <li>Arapça öğreniyorum</li>
-        <li>Tefekkür ve sükûnet arıyorum</li>
-      </ul>
-
-      <h2>Dış Dünya</h2>
-      <ul>
-        <li>.NET, C#, TypeScript, bulut sistemleri</li>
-        <li>Bambu A1 Mini ve H2S<span className="tooltip-trigger"><sup className="asterisk">*</sup><span className="tooltip">Haşmet diye bilinir</span></span>, benden çok çalışıyorlar <span className="subtle-smile">:)</span></li>
-        <li>Motor sporları, powerslide, kampçılık, yürüyüş</li>
-        <li>Sokak fotoğrafçılığı</li>
-        <li>Yerel değerler üzerine minimalist oyun fikirleri</li>
-      </ul>
-
       <h2>Bu Site</h2>
       <p>
         Algoritmalardan uzak, kendi kurallarımla içerik ürettiğim bir köşe. E-Ink bir ekrana

@@ -17,11 +17,27 @@
   background: var(--text);
   padding: 6px 10px;
   border-radius: 4px;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 280px;
+  width: max-content;
+  text-align: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
   z-index: 100;
+}
+
+@media (max-width: 640px) {
+  .tooltip {
+    left: 0;
+    transform: none;
+    max-width: 200px;
+  }
+
+  .tooltip::after {
+    left: 20px;
+    transform: none;
+  }
 }
 
 .tooltip::after {
