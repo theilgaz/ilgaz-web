@@ -1,7 +1,7 @@
 export function Now() {
   return (
     <>
-      <h1>Şu An</h1>
+      <h1>Şimdi</h1>
       <p className="lead">
         Hayatımda neler oluyor, ne yapıyorum.
       </p>

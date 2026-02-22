@@ -43,6 +43,119 @@ function useDayProgress() {
   return progress
 }
 
+function SunArc({ progress }: { progress: number }) {
+  // Güneş yayı üzerindeki pozisyon (0-100 -> 180-0 derece, sağdan sola)
+  const angle = Math.PI - (progress / 100) * Math.PI
+  const radius = 38
+  const centerX = 50
+  const centerY = 44
+
+  // Güneşin pozisyonu
+  const sunX = centerX + radius * Math.cos(angle)
+  const sunY = centerY - radius * Math.sin(angle)
+
+  // Gece mi gündüz mü? (yaklaşık olarak %25-%75 arası gündüz)
+  const isDay = progress >= 25 && progress <= 75
+
+  return (
+    <svg className="sun-arc" viewBox="0 0 100 55" fill="none">
+      {/* Horizon çizgisi */}
+      <line
+        x1="8" y1="44" x2="92" y2="44"
+        stroke="rgba(0,0,0,0.08)"
+        strokeWidth="1"
+        strokeDasharray="2 2"
+      />
+
+      {/* Yay - güneşin yolu */}
+      <path
+        d={`M 12 44 A 38 38 0 0 1 88 44`}
+        stroke="url(#arcGradient)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.4"
+      />
+
+      {/* İlerleme yayı */}
+      <path
+        d={`M 12 44 A 38 38 0 0 1 ${sunX} ${sunY}`}
+        stroke="url(#progressGradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.8"
+      />
+
+      {/* Güneş/Ay */}
+      <g className="celestial-body">
+        {isDay ? (
+          <>
+            {/* Güneş glow */}
+            <circle cx={sunX} cy={sunY} r="8" fill="url(#sunGlow)" opacity="0.5" />
+            {/* Güneş */}
+            <circle cx={sunX} cy={sunY} r="5" fill="url(#sunGradient)" />
+            {/* Güneş ışınları */}
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
+              const rad = (deg * Math.PI) / 180
+              const x1 = sunX + 7 * Math.cos(rad)
+              const y1 = sunY + 7 * Math.sin(rad)
+              const x2 = sunX + 9 * Math.cos(rad)
+              const y2 = sunY + 9 * Math.sin(rad)
+              return (
+                <line
+                  key={deg}
+                  x1={x1} y1={y1} x2={x2} y2={y2}
+                  stroke="#f59e0b"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  opacity="0.6"
+                />
+              )
+            })}
+          </>
+        ) : (
+          <>
+            {/* Ay glow */}
+            <circle cx={sunX} cy={sunY} r="7" fill="url(#moonGlow)" opacity="0.4" />
+            {/* Ay */}
+            <circle cx={sunX} cy={sunY} r="4.5" fill="#e2e8f0" />
+            <circle cx={sunX - 1.5} cy={sunY - 0.5} r="4" fill="rgba(0,0,0,0.08)" />
+          </>
+        )}
+      </g>
+
+      {/* Gradients */}
+      <defs>
+        <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#7c3aed" />
+          <stop offset="25%" stopColor="#f59e0b" />
+          <stop offset="50%" stopColor="#eab308" />
+          <stop offset="75%" stopColor="#f59e0b" />
+          <stop offset="100%" stopColor="#7c3aed" />
+        </linearGradient>
+        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#8b5cf6" />
+          <stop offset="50%" stopColor="#f59e0b" />
+          <stop offset="100%" stopColor="#ef4444" />
+        </linearGradient>
+        <radialGradient id="sunGradient">
+          <stop offset="0%" stopColor="#fcd34d" />
+          <stop offset="100%" stopColor="#f59e0b" />
+        </radialGradient>
+        <radialGradient id="sunGlow">
+          <stop offset="0%" stopColor="#fbbf24" />
+          <stop offset="100%" stopColor="transparent" />
+        </radialGradient>
+        <radialGradient id="moonGlow">
+          <stop offset="0%" stopColor="#a5b4fc" />
+          <stop offset="100%" stopColor="transparent" />
+        </radialGradient>
+      </defs>
+    </svg>
+  )
+}
+
 export function Home() {
   const [showPhoto, setShowPhoto] = useState(false)
   const dayProgress = useDayProgress()
@@ -72,9 +185,9 @@ export function Home() {
         </p>
       </div>
 
-      <Link to="/progress" className="landing-day-progress">
-        <span className="day-progress-value">{dayProgress}%</span>
-        <span className="day-progress-label">progress</span>
+      <Link to="/progress" className="sun-arc-container">
+        <SunArc progress={dayProgress} />
+        <span className="sun-arc-label">{dayProgress}%</span>
       </Link>
 
       {showPhoto && (

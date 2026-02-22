@@ -217,15 +217,14 @@ interface ProgressItemConfig {
   description?: string
 }
 
-// Vakit renkleri - günün organik ışık döngüsü
-// mavi (gece) → turkuaz (şafak) → sarı (güneş) → turuncu (öğle) → kırmızı (batış) → mor (gece)
+// Vakit renkleri - Apple style, light theme friendly
 const prayerColors = {
-  fajr: '#06b6d4',    // sabah - şafak turkuazı
-  sunrise: '#fbbf24', // güneş - altın sarısı
-  dhuhr: '#f59e0b',   // öğle - sıcak amber
-  asr: '#f97316',     // ikindi - turuncu
-  maghrib: '#dc2626', // akşam - batış kırmızısı
-  isha: '#7c3aed',    // yatsı - gece moru
+  fajr: '#0891b2',    // sabah - cyan
+  sunrise: '#d97706', // güneş - amber
+  dhuhr: '#ca8a04',   // öğle - yellow
+  asr: '#ea580c',     // ikindi - orange
+  maghrib: '#dc2626', // akşam - red
+  isha: '#7c3aed',    // yatsı - violet
 }
 
 // Islam - Vakit bilgileri
@@ -974,6 +973,195 @@ function TimeSlotDisplay({ slot }: { slot: TimeSlot }) {
   )
 }
 
+function PrayerSunArc({
+  currentMinutes,
+  prayerTimes,
+  nextPrayerId
+}: {
+  currentMinutes: number
+  prayerTimes: PrayerTimes
+  nextPrayerId: string
+}) {
+  const [hoveredPrayer, setHoveredPrayer] = useState<{ label: string; time: string; color: string } | null>(null)
+
+  // Günün yüzdesi (0-100)
+  const dayProgress = (currentMinutes / 1440) * 100
+
+  // Güneş yayı üzerindeki pozisyon
+  const angle = Math.PI - (dayProgress / 100) * Math.PI
+  const radius = 52
+  const centerX = 70
+  const centerY = 58
+
+  const sunX = centerX + radius * Math.cos(angle)
+  const sunY = centerY - radius * Math.sin(angle)
+
+  // Gece mi gündüz mü?
+  const sunriseMinutes = prayerTimes.sunrise.split(':').map(Number).reduce((h, m) => h * 60 + m)
+  const maghribMinutes = prayerTimes.maghrib.split(':').map(Number).reduce((h, m) => h * 60 + m)
+  const isDay = currentMinutes >= sunriseMinutes && currentMinutes < maghribMinutes
+
+  // Vakit noktaları için pozisyonları hesapla
+  const getPrayerPosition = (timeStr: string) => {
+    const [h, m] = timeStr.split(':').map(Number)
+    const minutes = h * 60 + m
+    const progress = (minutes / 1440) * 100
+    const pAngle = Math.PI - (progress / 100) * Math.PI
+    return {
+      x: centerX + radius * Math.cos(pAngle),
+      y: centerY - radius * Math.sin(pAngle)
+    }
+  }
+
+  const prayerPositions = prayerList.map(p => ({
+    ...p,
+    pos: getPrayerPosition(prayerTimes[p.key]),
+    time: prayerTimes[p.key],
+    isNext: p.id === nextPrayerId
+  }))
+
+  return (
+    <div className="prayer-sun-arc-container">
+      <svg className="prayer-sun-arc" viewBox="0 0 140 72" fill="none">
+        {/* Horizon çizgisi */}
+        <line
+          x1="12" y1="58" x2="128" y2="58"
+          stroke="rgba(0,0,0,0.06)"
+          strokeWidth="1"
+        />
+
+        {/* Ana yay - güneşin yolu */}
+        <path
+          d={`M 18 58 A 52 52 0 0 1 122 58`}
+          stroke="url(#prayerArcGradient)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          fill="none"
+          opacity="0.25"
+        />
+
+        {/* İlerleme yayı */}
+        <path
+          d={`M 18 58 A 52 52 0 ${dayProgress > 50 ? 1 : 0} 1 ${sunX} ${sunY}`}
+          stroke="url(#prayerProgressGradient)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          fill="none"
+          opacity="0.7"
+        />
+
+        {/* Vakit noktaları */}
+        {prayerPositions.map(p => (
+          <g
+            key={p.id}
+            className="prayer-dot-group"
+            onMouseEnter={() => setHoveredPrayer({ label: p.label, time: p.time, color: p.color })}
+            onMouseLeave={() => setHoveredPrayer(null)}
+            style={{ cursor: 'pointer' }}
+          >
+            {/* Görünmez büyük tıklama alanı */}
+            <circle
+              cx={p.pos.x}
+              cy={p.pos.y}
+              r="8"
+              fill="transparent"
+            />
+            {p.isNext && (
+              <circle
+                cx={p.pos.x}
+                cy={p.pos.y}
+                r="6"
+                fill={p.color}
+                opacity="0.15"
+              />
+            )}
+            <circle
+              cx={p.pos.x}
+              cy={p.pos.y}
+              r={p.isNext ? 3.5 : 2.5}
+              fill={p.color}
+              opacity={p.isNext ? 1 : 0.6}
+              className="prayer-dot"
+            />
+          </g>
+        ))}
+
+      {/* Güneş/Ay */}
+      <g className="prayer-celestial">
+        {isDay ? (
+          <>
+            <circle cx={sunX} cy={sunY} r="10" fill="url(#prayerSunGlow)" opacity="0.4" />
+            <circle cx={sunX} cy={sunY} r="6" fill="url(#prayerSunGradient)" />
+            {[0, 60, 120, 180, 240, 300].map((deg) => {
+              const rad = (deg * Math.PI) / 180
+              const x1 = sunX + 8 * Math.cos(rad)
+              const y1 = sunY + 8 * Math.sin(rad)
+              const x2 = sunX + 11 * Math.cos(rad)
+              const y2 = sunY + 11 * Math.sin(rad)
+              return (
+                <line
+                  key={deg}
+                  x1={x1} y1={y1} x2={x2} y2={y2}
+                  stroke="#f59e0b"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  opacity="0.5"
+                />
+              )
+            })}
+          </>
+        ) : (
+          <>
+            <circle cx={sunX} cy={sunY} r="9" fill="url(#prayerMoonGlow)" opacity="0.35" />
+            <circle cx={sunX} cy={sunY} r="5.5" fill="#e2e8f0" />
+            <circle cx={sunX - 2} cy={sunY - 0.5} r="4.5" fill="rgba(0,0,0,0.1)" />
+          </>
+        )}
+      </g>
+
+      {/* Gradients */}
+      <defs>
+        <linearGradient id="prayerArcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#7c3aed" />
+          <stop offset="20%" stopColor="#0891b2" />
+          <stop offset="40%" stopColor="#d97706" />
+          <stop offset="60%" stopColor="#ea580c" />
+          <stop offset="80%" stopColor="#dc2626" />
+          <stop offset="100%" stopColor="#7c3aed" />
+        </linearGradient>
+        <linearGradient id="prayerProgressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#8b5cf6" />
+          <stop offset="50%" stopColor="#f59e0b" />
+          <stop offset="100%" stopColor="#ef4444" />
+        </linearGradient>
+        <radialGradient id="prayerSunGradient">
+          <stop offset="0%" stopColor="#fcd34d" />
+          <stop offset="100%" stopColor="#f59e0b" />
+        </radialGradient>
+        <radialGradient id="prayerSunGlow">
+          <stop offset="0%" stopColor="#fbbf24" />
+          <stop offset="100%" stopColor="transparent" />
+        </radialGradient>
+        <radialGradient id="prayerMoonGlow">
+          <stop offset="0%" stopColor="#a5b4fc" />
+          <stop offset="100%" stopColor="transparent" />
+        </radialGradient>
+      </defs>
+    </svg>
+    <div className={`prayer-arc-tooltip ${hoveredPrayer ? 'visible' : ''}`}>
+      {hoveredPrayer && (
+        <>
+          <span className="prayer-arc-tooltip-label" style={{ color: hoveredPrayer.color }}>
+            {hoveredPrayer.label}
+          </span>
+          <span className="prayer-arc-tooltip-time">{hoveredPrayer.time}</span>
+        </>
+      )}
+    </div>
+  </div>
+  )
+}
+
 function PrayerTimesCard({ prayerTimes, cityName, onCityClick, timezone = 3 }: { prayerTimes: PrayerTimes | null; cityName?: string; onCityClick?: () => void; timezone?: number }) {
   const [, setTick] = useState(0)
 
@@ -1022,11 +1210,11 @@ function PrayerTimesCard({ prayerTimes, cityName, onCityClick, timezone = 3 }: {
           <span>{cityName.toLowerCase()}</span>
         </button>
       )}
-      <div className="prayer-day-strip">
-        <span className="day-strip-icon sun">☀</span>
-        <div className="day-strip-bar" />
-        <span className="day-strip-icon moon">☾</span>
-      </div>
+      <PrayerSunArc
+        currentMinutes={currentMinutes}
+        prayerTimes={prayerTimes}
+        nextPrayerId={nextPrayer.id}
+      />
       <div className="prayer-list">
         {prayersWithData.map((p, i) => {
           const nextColor = prayersWithData[(i + 1) % prayersWithData.length].color
@@ -1238,35 +1426,37 @@ export function Progress() {
                 </div>
               </section>
 
-              {/* Kozmos ve Teknoloji */}
-              {(['kozmos', 'teknoloji'] as const).map(category => {
-                const items = otherItems.filter(item => item.category === category)
-                const config = categoryConfig[category]
-                if (items.length === 0) return null
-                return (
-                  <section
-                    key={category}
-                    className="progress-section"
-                    style={{ '--section-color': config.color } as React.CSSProperties}
-                  >
-                    <div className="progress-section-header">
-                      <span className="progress-section-icon">{config.icon}</span>
-                      <h2 className="progress-category">{config.label}</h2>
-                    </div>
-                    <div className="progress-cards">
-                      {items.map(item => (
-                        <ProgressCard
-                          key={item.id}
-                          item={item}
-                          prayerTimes={prayerTimes || undefined}
-                          color={config.color}
-                          timezone={cities[city]?.timezone ?? 3}
-                        />
-                      ))}
-                    </div>
-                  </section>
-                )
-              })}
+              {/* Kozmos ve Teknoloji - Yan yana */}
+              <div className="progress-duo">
+                {(['kozmos', 'teknoloji'] as const).map(category => {
+                  const items = otherItems.filter(item => item.category === category)
+                  const config = categoryConfig[category]
+                  if (items.length === 0) return null
+                  return (
+                    <section
+                      key={category}
+                      className="progress-section progress-section-half"
+                      style={{ '--section-color': config.color } as React.CSSProperties}
+                    >
+                      <div className="progress-section-header">
+                        <span className="progress-section-icon">{config.icon}</span>
+                        <h2 className="progress-category">{config.label}</h2>
+                      </div>
+                      <div className="progress-cards progress-cards-vertical">
+                        {items.map(item => (
+                          <ProgressCard
+                            key={item.id}
+                            item={item}
+                            prayerTimes={prayerTimes || undefined}
+                            color={config.color}
+                            timezone={cities[city]?.timezone ?? 3}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  )
+                })}
+              </div>
             </div>
           </div>
         )}

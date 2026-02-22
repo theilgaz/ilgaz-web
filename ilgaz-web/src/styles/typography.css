@@ -16,16 +16,17 @@ h1 {
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 24px;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 h2 {
   font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.35;
   margin-top: 48px;
   margin-bottom: 16px;
+  letter-spacing: -0.01em;
 }
 
 h3 {
@@ -34,6 +35,7 @@ h3 {
   font-weight: 600;
   margin-top: 32px;
   margin-bottom: 12px;
+  letter-spacing: -0.01em;
 }
 
 p {
@@ -52,6 +54,7 @@ p {
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   color: var(--text-muted);
+  letter-spacing: 0.01em;
 }
 
 hr {
@@ -79,11 +82,11 @@ blockquote {
 }
 
 code {
-  font-family: 'SF Mono', Consolas, monospace;
-  font-size: 0.9em;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
   background: var(--bg-alt);
   padding: 2px 6px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 pre {

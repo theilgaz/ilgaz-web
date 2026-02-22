@@ -2,6 +2,8 @@ html {
   font-size: 18px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'cv01', 'cv02', 'cv03', 'cv04';
 }
 
 body {

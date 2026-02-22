@@ -1,7 +1,7 @@
-/* Inline tooltip */
+/* Inline tooltip - Apple Style */
 .tooltip-trigger {
   position: relative;
-  border-bottom: 1px dotted var(--text-muted);
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.3);
   cursor: help;
 }
 
@@ -10,17 +10,22 @@
   left: 50%;
   transform: translateX(-50%);
   bottom: 100%;
-  margin-bottom: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--bg);
-  background: var(--text);
-  padding: 6px 10px;
-  border-radius: 4px;
+  margin-bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.85);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   white-space: normal;
   max-width: 280px;
   width: max-content;
   text-align: center;
+  line-height: 1.5;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -46,22 +51,24 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: var(--text);
+  border: 6px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.95);
 }
 
 .tooltip-trigger:hover .tooltip {
   opacity: 1;
 }
 
-/* Lightbox */
+/* Lightbox - Apple Style */
 .lightbox {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,7 +78,9 @@
 }
 
 .lightbox img {
-  max-width: 95%;
-  max-height: 95%;
+  max-width: 90%;
+  max-height: 90%;
   object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
