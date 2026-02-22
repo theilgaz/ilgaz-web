@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 
 const DIYANET_API = 'https://ezanvakti.emushaf.net'
 
@@ -839,11 +839,6 @@ function LocationPicker({
     return nameMatch || plateMatch
   })
 
-  const handleCitySelect = (key: string) => {
-    onSelect(key)
-    onClose()
-  }
-
   if (!isOpen) return null
 
   return (
@@ -1135,7 +1130,6 @@ export function Progress() {
     return localStorage.getItem('progress-city') || 'konya'
   })
   const [prayerTimes, setPrayerTimes] = useState<PrayerTimes | null>(null)
-  const [prayerInfo, setPrayerInfo] = useState<{ name: string; time: string } | null>(null)
   const [isLocationPickerOpen, setIsLocationPickerOpen] = useState(false)
   const [progressExpanded, setProgressExpanded] = useState(false)
 
@@ -1161,8 +1155,6 @@ export function Progress() {
       const diyanetTimes = await fetchDiyanetPrayerTimes(city)
       if (diyanetTimes) {
         setPrayerTimes(diyanetTimes)
-        const info = getNextPrayer(diyanetTimes, locationData.timezone)
-        setPrayerInfo({ name: info.name, time: info.time })
         return
       }
     }
@@ -1170,8 +1162,6 @@ export function Progress() {
     // Diyanet yoksa hesapla
     const times = calculatePrayerTimes(locationData.lat, locationData.lng, new Date(), locationData.timezone)
     setPrayerTimes(times)
-    const info = getNextPrayer(times, locationData.timezone)
-    setPrayerInfo({ name: info.name, time: info.time })
   }, [getLocationData, city])
 
   useEffect(() => {
@@ -1185,8 +1175,6 @@ export function Progress() {
     // Notify other components (e.g., top bar widget)
     window.dispatchEvent(new CustomEvent('city-changed', { detail: city }))
   }, [city])
-
-  const categories = ['islam', 'kozmos', 'teknoloji'] as const
 
   return (
     <div className="progress-page">
