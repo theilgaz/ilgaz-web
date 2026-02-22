@@ -214,7 +214,7 @@
 }
 
 .newspaper-headline {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -225,7 +225,7 @@
 }
 
 .newspaper-subhead {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-style: italic;
   color: rgba(0, 0, 0, 0.55);
@@ -269,7 +269,7 @@
 
 .newspaper-dropcap::first-letter {
   float: left;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 2rem;
   line-height: 0.9;
   padding-right: 6px;
@@ -279,7 +279,7 @@
 }
 
 .newspaper-pullquote {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-style: italic;
   text-align: center;
@@ -296,7 +296,7 @@
 .newspaper-pullquote::before,
 .newspaper-pullquote::after {
   content: '"';
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 2.5rem;
   color: rgba(0, 0, 0, 0.15);
   position: absolute;
