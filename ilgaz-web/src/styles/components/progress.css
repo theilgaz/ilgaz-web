@@ -1,0 +1,771 @@
+.progress-page {
+  max-width: 600px;
+}
+
+/* Expandable section */
+.progress-expandable {
+  margin-top: 48px;
+  border-top: 1px solid #222;
+  padding-top: 24px;
+}
+
+.progress-expandable-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.progress-expandable-header:hover {
+  color: var(--text);
+}
+
+.progress-expand-icon {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.progress-expandable-content {
+  padding-top: 24px;
+}
+
+/* DeLorean Wrapper */
+.delorean-wrapper {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.progress-expandable-content .delorean-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delorean-illustration {
+  display: block;
+  width: 280px;
+  height: auto;
+  margin: 0 auto -14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* DeLorean Panel */
+.delorean-panel {
+  position: relative;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  padding-top: 24px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.delorean-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.delorean-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #666;
+}
+
+.delorean-indicator {
+  width: 8px;
+  height: 8px;
+  background: #e8b87a;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #e8b87a, 0 0 16px rgba(232, 184, 122, 0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.delorean-slots {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.time-slot {
+  --slot-color: #e8b87a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 6px;
+  background: #111;
+  border-radius: 4px;
+  border: 1px solid #2a2a2a;
+}
+
+.time-slot-display {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.time-slot-value {
+  font-family: 'SF Mono', 'Consolas', monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--slot-color);
+  letter-spacing: -0.02em;
+}
+
+.time-slot-unit {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #555;
+}
+
+.time-slot-bar {
+  width: 100%;
+  height: 3px;
+  background: #2a2a2a;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.time-slot-fill {
+  height: 100%;
+  background: var(--slot-color);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.time-slot-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--slot-color);
+  text-transform: lowercase;
+  opacity: 0.8;
+}
+
+.time-slot-remaining {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: #666;
+}
+
+
+/* Location Modal */
+.location-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.location-modal {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.location-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #333;
+}
+
+.location-modal-header h3 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin: 0;
+}
+
+.location-modal-close {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.location-modal-close:hover {
+  color: var(--text);
+}
+
+.location-search {
+  padding: 16px 20px;
+  border-bottom: 1px solid #333;
+}
+
+.location-search input {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 10px 14px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+}
+
+.location-search input::placeholder {
+  color: #555;
+}
+
+.location-search input:focus {
+  outline: none;
+  border-color: #4285F4;
+}
+
+.location-city-list {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.location-continent-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.location-continent-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid #222;
+  background: none;
+  text-align: left;
+}
+
+.location-continent-label.collapsible {
+  cursor: pointer;
+}
+
+.location-continent-label.collapsible:hover {
+  color: #999;
+}
+
+.collapse-icon {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.location-continent-cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.location-city-item {
+  width: 88px;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #888;
+  cursor: pointer;
+  text-transform: lowercase;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.location-city-item:hover {
+  border-color: #555;
+  background: #222;
+  color: #fff;
+}
+
+.location-city-item.selected {
+  border-color: #4285F4;
+  background: rgba(66, 133, 244, 0.1);
+  color: #4285F4;
+}
+
+.city-name {
+  font-weight: 500;
+  color: inherit;
+}
+
+.city-timezone {
+  opacity: 0.5;
+  font-size: 0.6rem;
+}
+
+/* Prayer Times Card */
+.prayer-times-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.prayer-day-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.day-strip-icon {
+  font-size: 0.65rem;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.prayer-times-card:hover .day-strip-icon {
+  opacity: 0.8;
+}
+
+.day-strip-icon.sun {
+  color: #fbbf24;
+}
+
+.day-strip-icon.moon {
+  color: #7c3aed;
+}
+
+.day-strip-bar {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    #06b6d4 0%,      /* sabah - turkuaz */
+    #fbbf24 20%,     /* güneş - altın */
+    #f59e0b 35%,     /* öğle - amber */
+    #f97316 50%,     /* ikindi - turuncu */
+    #dc2626 70%,     /* akşam - kırmızı */
+    #7c3aed 85%,     /* yatsı - mor */
+    #06b6d4 100%     /* yeni gün - turkuaz */
+  );
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.prayer-times-card:hover .day-strip-bar {
+  opacity: 1;
+}
+
+.prayer-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.prayer-city-btn {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+}
+
+.prayer-city-btn::before {
+  content: '◉';
+  margin-right: 6px;
+  font-size: 0.5rem;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.prayer-city-btn:hover {
+  border-color: rgba(255,255,255,0.15);
+  color: #888;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  transform: translateY(-1px);
+}
+
+.prayer-city-btn:hover::before {
+  opacity: 1;
+  color: var(--active-prayer-color);
+}
+
+.prayer-city-btn span {
+  transition: opacity 0.2s ease;
+}
+
+.prayer-city-btn:hover span {
+  opacity: 0;
+}
+
+.prayer-city-btn::after {
+  content: attr(data-hover);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  padding-left: 14px;
+}
+
+.prayer-city-btn:hover::after {
+  opacity: 1;
+}
+
+.prayer-item {
+  --prayer-color: #888;
+  --next-color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--prayer-color) 8%, transparent) 0%,
+    color-mix(in srgb, var(--next-color) 5%, transparent) 100%
+  );
+  transition: all 0.3s ease;
+}
+
+.prayer-item:hover {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--prayer-color) 15%, transparent) 0%,
+    color-mix(in srgb, var(--next-color) 10%, transparent) 100%
+  );
+}
+
+.prayer-item:hover .prayer-item-label {
+  color: var(--prayer-color);
+}
+
+.prayer-item.is-next {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--prayer-color) 20%, transparent) 0%,
+    color-mix(in srgb, var(--next-color) 12%, transparent) 100%
+  );
+}
+
+.prayer-item.is-next .prayer-item-label {
+  color: var(--prayer-color);
+}
+
+.prayer-item.is-next .prayer-item-time {
+  color: var(--prayer-color);
+}
+
+.prayer-item.is-next .prayer-item-remaining {
+  color: var(--prayer-color);
+  opacity: 0.7;
+}
+
+.prayer-item-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: #444;
+  text-transform: lowercase;
+  transition: color 0.2s ease;
+}
+
+.prayer-item-time {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.prayer-item-remaining {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: #444;
+}
+
+/* Progress Items */
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.progress-section {
+  --section-color: #888;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.progress-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #222;
+}
+
+.progress-section-icon {
+  font-size: 1.2rem;
+  color: var(--section-color);
+}
+
+.progress-category {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.1em;
+  color: var(--section-color);
+  margin: 0;
+}
+
+.progress-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.progress-cards-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.progress-row-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #555;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.progress-card {
+  --card-color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: color-mix(in srgb, var(--card-color) 12%, #111);
+  border: 1px solid color-mix(in srgb, var(--card-color) 20%, #222);
+  border-radius: 12px;
+  min-width: 100px;
+  transition: all 0.2s ease;
+}
+
+.progress-card:hover {
+  border-color: color-mix(in srgb, var(--card-color) 70%, #222);
+  background: color-mix(in srgb, var(--card-color) 18%, #111);
+}
+
+/* Tooltip */
+.progress-card.has-tooltip {
+  position: relative;
+}
+
+.progress-card.has-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #ccc;
+  width: max-content;
+  max-width: 240px;
+  text-align: center;
+  line-height: 1.5;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.progress-card.has-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #333;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.progress-card.has-tooltip:hover::after,
+.progress-card.has-tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.progress-card-ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.progress-card-ring svg {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-ring-bg {
+  stroke: #222;
+}
+
+.progress-ring-fill {
+  stroke: var(--card-color);
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-card-percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--card-color);
+}
+
+.progress-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.progress-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #ccc;
+  text-transform: lowercase;
+}
+
+.progress-card-remaining {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 540px) {
+  .delorean-illustration {
+    width: 220px;
+    margin-bottom: -6px;
+  }
+
+  .delorean-slots {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .time-slot-value {
+    font-size: 1.3rem;
+  }
+
+  .prayer-list {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .progress-card {
+    min-width: 85px;
+    padding: 12px;
+  }
+
+  .progress-card-ring {
+    width: 64px;
+    height: 64px;
+  }
+
+  .progress-card-percent {
+    font-size: 0.85rem;
+  }
+
+  .progress-card-label {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .delorean-illustration {
+    width: 180px;
+    margin-bottom: -5px;
+  }
+
+  .delorean-slots {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -11,6 +11,7 @@ import { Projects } from './pages/Projects'
 import { ProjectDetail } from './pages/ProjectDetail'
 import { Collections } from './pages/Collections'
 import { CollectionDetail } from './pages/CollectionDetail'
+import { Progress } from './pages/Progress'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/koleksiyonlar" element={<Collections />} />
           <Route path="/koleksiyonlar/:slug" element={<CollectionDetail />} />
+          <Route path="/progress" element={<Progress />} />
         </Route>
       </Routes>
     </BrowserRouter>

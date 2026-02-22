@@ -1,8 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+
+function useDayProgress() {
+  const [progress, setProgress] = useState(() => {
+    const now = new Date()
+    const minutes = now.getHours() * 60 + now.getMinutes()
+    return Math.round((minutes / 1440) * 100)
+  })
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date()
+      const minutes = now.getHours() * 60 + now.getMinutes()
+      setProgress(Math.round((minutes / 1440) * 100))
+    }, 60000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return progress
+}
 
 export function Home() {
   const [showPhoto, setShowPhoto] = useState(false)
+  const dayProgress = useDayProgress()
 
   return (
     <div className="landing">
@@ -29,6 +49,10 @@ export function Home() {
         </p>
       </div>
 
+      <Link to="/progress" className="landing-day-progress">
+        <span className="day-progress-value">{dayProgress}%</span>
+        <span className="day-progress-label">gün</span>
+      </Link>
 
       <div className="landing-links">
         <Link to="/blog">yazılar</Link>
