@@ -15,6 +15,7 @@ import { Progress } from './pages/Progress'
 import { Tools } from './pages/Tools'
 import { Pomodoro } from './pages/Pomodoro'
 import { JsonFormatterPage } from './pages/JsonFormatterPage'
+import { Base64Page } from './pages/Base64Page'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -35,6 +36,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/araclar" element={<Tools />} />
           <Route path="/pomodoro" element={<Pomodoro />} />
           <Route path="/json-formatter" element={<JsonFormatterPage />} />
+          <Route path="/base64" element={<Base64Page />} />
         </Route>
       </Routes>
     </BrowserRouter>
