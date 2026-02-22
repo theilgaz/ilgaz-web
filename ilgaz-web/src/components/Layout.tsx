@@ -213,6 +213,9 @@ export function Layout() {
             <NavLink to="/about" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
               hakkında
             </NavLink>
+            <NavLink to="/araclar" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
+              araçlar
+            </NavLink>
           </div>
           {nextPrayer && (
             <Link
