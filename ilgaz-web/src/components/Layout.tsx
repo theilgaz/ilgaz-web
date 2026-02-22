@@ -65,8 +65,18 @@ function calculatePrayerTimes(lat: number, lng: number, timezone: number) {
 
 const districtCache: Record<string, string> = {}
 
+// Vakit renkleri - Progress.tsx ile senkron
+const prayerColors: Record<string, string> = {
+  fajr: '#0891b2',    // sabah - cyan
+  sunrise: '#d97706', // güneş - amber
+  dhuhr: '#ca8a04',   // öğle - yellow
+  asr: '#ea580c',     // ikindi - orange
+  maghrib: '#dc2626', // akşam - red
+  isha: '#7c3aed',    // yatsı - violet
+}
+
 function useNextPrayer() {
-  const [prayerInfo, setPrayerInfo] = useState<{ name: string; time: string; remaining: string } | null>(null)
+  const [prayerInfo, setPrayerInfo] = useState<{ id: string; name: string; time: string; remaining: string } | null>(null)
 
   useEffect(() => {
     const fetchPrayerTimes = async () => {
@@ -113,12 +123,12 @@ function useNextPrayer() {
         }
 
         const prayers = [
-          { name: 'imsak', time: prayerTimes.fajr },
-          { name: 'güneş', time: prayerTimes.sunrise },
-          { name: 'öğle', time: prayerTimes.dhuhr },
-          { name: 'ikindi', time: prayerTimes.asr },
-          { name: 'akşam', time: prayerTimes.maghrib },
-          { name: 'yatsı', time: prayerTimes.isha },
+          { id: 'fajr', name: 'imsak', time: prayerTimes.fajr },
+          { id: 'sunrise', name: 'güneş', time: prayerTimes.sunrise },
+          { id: 'dhuhr', name: 'öğle', time: prayerTimes.dhuhr },
+          { id: 'asr', name: 'ikindi', time: prayerTimes.asr },
+          { id: 'maghrib', name: 'akşam', time: prayerTimes.maghrib },
+          { id: 'isha', name: 'yatsı', time: prayerTimes.isha },
         ]
 
         const cityTime = getCurrentTimeInTimezone(timezone)
@@ -132,6 +142,7 @@ function useNextPrayer() {
             const hours = Math.floor(remaining / 60)
             const mins = remaining % 60
             setPrayerInfo({
+              id: prayer.id,
               name: prayer.name,
               time: prayer.time,
               remaining: hours > 0 ? `${hours}sa ${mins}dk` : `${mins}dk`
@@ -146,6 +157,7 @@ function useNextPrayer() {
         const hours = Math.floor(remaining / 60)
         const mins = remaining % 60
         setPrayerInfo({
+          id: prayers[0].id,
           name: prayers[0].name,
           time: prayers[0].time,
           remaining: hours > 0 ? `${hours}sa ${mins}dk` : `${mins}dk`
@@ -203,12 +215,16 @@ export function Layout() {
             </NavLink>
           </div>
           {nextPrayer && (
-            <Link to="/progress" className="top-bar-prayer">
+            <Link
+              to="/progress"
+              className="top-bar-prayer"
+              style={{ '--prayer-color': prayerColors[nextPrayer.id] } as React.CSSProperties}
+            >
               <span className="prayer-icon">☪</span>
               <span className="prayer-name">{nextPrayer.name}</span>
               <span className="prayer-time">{nextPrayer.time}</span>
               <span className="prayer-dot">·</span>
-            <span className="prayer-remaining">{nextPrayer.remaining}</span>
+              <span className="prayer-remaining">{nextPrayer.remaining}</span>
             </Link>
           )}
         </div>
