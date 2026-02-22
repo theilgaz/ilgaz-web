@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { Pomodoro, PomodoroHeatmap } from '../components/Pomodoro'
+import { JsonFormatter } from '../components/JsonFormatter'
 
 const cityTimezones: Record<string, number> = {
   konya: 3, istanbul: 3, ankara: 3, izmir: 3,
@@ -202,60 +203,6 @@ function NasaApod() {
         </div>
       )}
     </>
-  )
-}
-
-// JSON Formatter
-function JsonFormatter() {
-  const [input, setInput] = useState('')
-  const [output, setOutput] = useState('')
-  const [error, setError] = useState('')
-  const [copied, setCopied] = useState(false)
-
-  const format = () => {
-    try {
-      const parsed = JSON.parse(input)
-      setOutput(JSON.stringify(parsed, null, 2))
-      setError('')
-    } catch {
-      setError('Geçersiz JSON')
-      setOutput('')
-    }
-  }
-
-  const clear = () => {
-    setInput('')
-    setOutput('')
-    setError('')
-  }
-
-  const copyOutput = () => {
-    navigator.clipboard.writeText(output)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
-  }
-
-  return (
-    <div className="json-formatter">
-      <textarea
-        value={input}
-        onChange={e => setInput(e.target.value)}
-        placeholder="JSON yapıştır..."
-      />
-      <div className="json-buttons">
-        <button onClick={format}>Format</button>
-        <button onClick={clear} className="secondary">Temizle</button>
-      </div>
-      {error && <span className="json-error">{error}</span>}
-      {output && (
-        <div className="json-output">
-          <pre>{output}</pre>
-          <button className="copy-btn" onClick={copyOutput}>
-            {copied ? '✓' : '⎘'}
-          </button>
-        </div>
-      )}
-    </div>
   )
 }
 
@@ -533,19 +480,16 @@ export function Tools() {
       category: 'zaman',
       title: 'Pomodoro',
       desc: '25 dakika odaklan, 5 dakika nefes al. Basit ama etkili.',
+      detailLink: '/pomodoro',
       visual: <Pomodoro />,
-      extra: (
-        <>
-          <Link to="/pomodoro" className="tool-card-link">Tam sayfa aç →</Link>
-          <PomodoroHeatmap />
-        </>
-      ),
+      extra: <PomodoroHeatmap />,
     },
     {
       id: 'json-formatter',
       category: 'gelistirici',
       title: 'JSON Formatter',
       desc: 'Karmaşık JSON\'u okunabilir hale getir.',
+      detailLink: '/json-formatter',
       visual: <JsonFormatter />,
     },
     {
@@ -621,6 +565,11 @@ export function Tools() {
             </Link>
           ) : (
             <div className="tool-card" key={tool.id}>
+              {'detailLink' in tool && tool.detailLink && (
+                <Link to={tool.detailLink} className="tool-card-expand" title="Tam sayfa aç">
+                  <span>↗</span>
+                </Link>
+              )}
               <div className="tool-card-visual">{tool.visual}</div>
               <div className="tool-card-info">
                 <h3 className="tool-card-title">{tool.title}</h3>
