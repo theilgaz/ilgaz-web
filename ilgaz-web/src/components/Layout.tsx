@@ -184,32 +184,34 @@ export function Layout() {
   return (
     <>
       <nav className="top-bar">
-        <Link to="/" className="top-bar-brand">
-          <img src="/favicon.png" alt="ilg.az" />
-        </Link>
-        <div className="top-bar-nav">
-          <NavLink to="/blog" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-            yazılar
-          </NavLink>
-          <NavLink to="/projects" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-            projeler
-          </NavLink>
-          <NavLink to="/now" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-            şu an
-          </NavLink>
-          <NavLink to="/about" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-            hakkımda
-          </NavLink>
-        </div>
-        {nextPrayer && (
-          <Link to="/progress" className="top-bar-prayer">
-            <span className="prayer-icon">☪</span>
-            <span className="prayer-name">{nextPrayer.name}</span>
-            <span className="prayer-time">{nextPrayer.time}</span>
-            <span className="prayer-dot">·</span>
-            <span className="prayer-remaining">{nextPrayer.remaining}</span>
+        <div className="top-bar-container">
+          <Link to="/" className="top-bar-brand">
+            <img src="/favicon.png" alt="ilg.az" />
           </Link>
-        )}
+          <div className="top-bar-nav">
+            <NavLink to="/blog" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
+              yazı
+            </NavLink>
+            <NavLink to="/projects" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
+              proje
+            </NavLink>
+            <NavLink to="/now" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
+              şimdi
+            </NavLink>
+            <NavLink to="/about" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
+              hakkında
+            </NavLink>
+          </div>
+          {nextPrayer && (
+            <Link to="/progress" className="top-bar-prayer">
+              <span className="prayer-icon">☪</span>
+              <span className="prayer-name">{nextPrayer.name}</span>
+              <span className="prayer-time">{nextPrayer.time}</span>
+              <span className="prayer-dot">·</span>
+            <span className="prayer-remaining">{nextPrayer.remaining}</span>
+            </Link>
+          )}
+        </div>
       </nav>
 
       <main>

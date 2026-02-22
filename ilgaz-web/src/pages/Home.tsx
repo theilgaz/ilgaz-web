@@ -74,15 +74,8 @@ export function Home() {
 
       <Link to="/progress" className="landing-day-progress">
         <span className="day-progress-value">{dayProgress}%</span>
-        <span className="day-progress-label">gün</span>
+        <span className="day-progress-label">progress</span>
       </Link>
-
-      <div className="landing-links">
-        <Link to="/blog">yazılar</Link>
-        <Link to="/projects">projeler</Link>
-        <Link to="/now">şu an</Link>
-        <Link to="/about">hakkımda</Link>
-      </div>
 
       {showPhoto && (
         <div className="photo-modal" onClick={() => setShowPhoto(false)}>
