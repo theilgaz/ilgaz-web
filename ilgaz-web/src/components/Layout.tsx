@@ -67,12 +67,12 @@ const districtCache: Record<string, string> = {}
 
 // Vakit renkleri - Progress.tsx ile senkron
 const prayerColors: Record<string, string> = {
-  fajr: '#0891b2',    // sabah - cyan
-  sunrise: '#d97706', // güneş - amber
-  dhuhr: '#ca8a04',   // öğle - yellow
-  asr: '#ea580c',     // ikindi - orange
-  maghrib: '#dc2626', // akşam - red
-  isha: '#7c3aed',    // yatsı - violet
+  fajr: '#0f172a',    // imsak - lacivert/siyah (gece)
+  sunrise: '#dc2626', // güneş - kırmızı (kerahat)
+  dhuhr: '#ca8a04',   // öğle - altın (sabah güneşi)
+  asr: '#ea580c',     // ikindi - turuncu (öğleden sonra)
+  maghrib: '#dc2626', // akşam - kırmızı (kerahat)
+  isha: '#1e1b2e',    // yatsı - mor/siyah (gece)
 }
 
 function useNextPrayer() {

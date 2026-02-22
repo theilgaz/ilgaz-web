@@ -217,14 +217,14 @@ interface ProgressItemConfig {
   description?: string
 }
 
-// Vakit renkleri - Apple style, light theme friendly
+// Vakit renkleri - gün döngüsüne göre
 const prayerColors = {
-  fajr: '#0891b2',    // sabah - cyan
-  sunrise: '#d97706', // güneş - amber
-  dhuhr: '#ca8a04',   // öğle - yellow
-  asr: '#ea580c',     // ikindi - orange
-  maghrib: '#dc2626', // akşam - red
-  isha: '#7c3aed',    // yatsı - violet
+  fajr: '#0f172a',    // imsak - lacivert/siyah (gece)
+  sunrise: '#dc2626', // güneş - kırmızı (kerahat)
+  dhuhr: '#ca8a04',   // öğle - altın (sabah güneşi)
+  asr: '#ea580c',     // ikindi - turuncu (öğleden sonra)
+  maghrib: '#dc2626', // akşam - kırmızı (kerahat)
+  isha: '#1e1b2e',    // yatsı - mor/siyah (gece)
 }
 
 // Islam - Vakit bilgileri
@@ -1040,9 +1040,9 @@ function PrayerSunArc({
           opacity="0.25"
         />
 
-        {/* İlerleme yayı */}
+        {/* İlerleme yayı - large-arc her zaman 0 (üst yay ≤180°) */}
         <path
-          d={`M 18 58 A 52 52 0 ${dayProgress > 50 ? 1 : 0} 1 ${sunX} ${sunY}`}
+          d={`M 18 58 A 52 52 0 0 1 ${sunX} ${sunY}`}
           stroke="url(#prayerProgressGradient)"
           strokeWidth="2.5"
           strokeLinecap="round"
