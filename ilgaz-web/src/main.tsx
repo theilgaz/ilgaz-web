@@ -12,6 +12,8 @@ import { ProjectDetail } from './pages/ProjectDetail'
 import { Collections } from './pages/Collections'
 import { CollectionDetail } from './pages/CollectionDetail'
 import { Progress } from './pages/Progress'
+import { Tools } from './pages/Tools'
+import { Pomodoro } from './pages/Pomodoro'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -29,6 +31,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/koleksiyonlar" element={<Collections />} />
           <Route path="/koleksiyonlar/:slug" element={<CollectionDetail />} />
           <Route path="/progress" element={<Progress />} />
+          <Route path="/araclar" element={<Tools />} />
+          <Route path="/pomodoro" element={<Pomodoro />} />
         </Route>
       </Routes>
     </BrowserRouter>
