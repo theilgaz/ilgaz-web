@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Pomodoro, PomodoroHeatmap } from '../components/Pomodoro'
 import { JsonFormatter } from '../components/JsonFormatter'
@@ -7,6 +7,7 @@ import { ColorPalette } from '../components/ColorPalette'
 import { ColorShades } from '../components/ColorShades'
 import { GradientPreview } from '../components/GradientPreview'
 import { PixelArt } from '../components/PixelArt'
+import { FailureLessonPreview } from '../components/FailureLessonPreview'
 import apodPreview from '../assets/apod-preview.jpg'
 
 const cityTimezones: Record<string, number> = {
@@ -167,55 +168,6 @@ function NasaApod() {
   )
 }
 
-// Başarısız Startup Dersleri - Failory'den ilham
-const failedStartups = [
-  { name: "Vine", idea: "6 saniyelik video paylaşım platformu", raised: "$25M", year: 2016, reason: "Twitter satın aldı ama monetize edemedi" },
-  { name: "Google+", idea: "Google'ın sosyal ağ denemesi", raised: "Google", year: 2019, reason: "Kullanıcılar Facebook'tan geçmedi" },
-  { name: "Quibi", idea: "Mobil için kısa video içerikleri", raised: "$1.75B", year: 2020, reason: "TikTok ve YouTube zaten vardı" },
-  { name: "Mixer", idea: "Microsoft'un Twitch rakibi", raised: "Microsoft", year: 2020, reason: "Streamer'lar Twitch'i bırakmadı" },
-  { name: "Theranos", idea: "Bir damla kanla tüm testler", raised: "$700M", year: 2018, reason: "Teknoloji hiç çalışmadı, fraud" },
-  { name: "Jawbone", idea: "Akıllı fitness bilekliği", raised: "$930M", year: 2017, reason: "Fitbit ve Apple Watch rekabeti" },
-  { name: "Rdio", idea: "Spotify benzeri müzik servisi", raised: "$125M", year: 2015, reason: "Spotify çok hızlı büyüdü" },
-  { name: "Secret", idea: "Anonim sosyal ağ", raised: "$35M", year: 2015, reason: "Cyberbullying sorunu çözülemedi" },
-  { name: "Yik Yak", idea: "Lokasyon bazlı anonim mesajlaşma", raised: "$73M", year: 2017, reason: "Üniversite sonrası kullanım düştü" },
-  { name: "Homejoy", idea: "Ev temizliği için Uber", raised: "$64M", year: 2015, reason: "Temizlikçiler bağımsız çalışmayı tercih etti" },
-  { name: "Beepi", idea: "Peer-to-peer araba satışı", raised: "$150M", year: 2017, reason: "Unit economics negatifti" },
-  { name: "Juicero", idea: "700$'lık WiFi'lı meyve sıkacağı", raised: "$120M", year: 2017, reason: "Poşetler elle sıkılabiliyordu" },
-  { name: "Katerra", idea: "Teknoloji odaklı inşaat", raised: "$2B", year: 2021, reason: "İnşaat sektörü disrupt edilemedi" },
-  { name: "MoviePass", idea: "Sınırsız sinema aboneliği", raised: "$68M", year: 2019, reason: "Her bilet için para kaybediyorlardı" },
-  { name: "Essential", idea: "Android yaratıcısının telefonu", raised: "$330M", year: 2020, reason: "iPhone/Samsung duopolü kırılamadı" },
-  { name: "Shyp", idea: "On-demand kargo gönderimi", raised: "$62M", year: 2018, reason: "Marjlar çok düşüktü" },
-  { name: "Meerkat", idea: "Canlı video streaming öncüsü", raised: "$14M", year: 2016, reason: "Periscope ve Facebook Live ezdi" },
-  { name: "Fab", idea: "Flash-sale e-ticaret", raised: "$336M", year: 2015, reason: "Kontrolsüz büyüme, cash burn" },
-  { name: "Aereo", idea: "Online TV yayın servisi", raised: "$97M", year: 2014, reason: "Telif hakları davası kaybedildi" },
-]
-
-function FailureLesson() {
-  const [startup, setStartup] = useState(failedStartups[0])
-
-  const generate = useCallback(() => {
-    const random = failedStartups[Math.floor(Math.random() * failedStartups.length)]
-    setStartup(random)
-  }, [])
-
-  useEffect(() => { generate() }, [generate])
-
-  return (
-    <div className="failure-lesson">
-      <div className="failure-header">
-        <span className="failure-name">{startup.name}</span>
-        <span className="failure-raised">{startup.raised}</span>
-      </div>
-      <p className="failure-idea">{startup.idea}</p>
-      <div className="failure-reason">
-        <span className="failure-label">Neden battı?</span>
-        <p>{startup.reason}</p>
-      </div>
-      <button onClick={generate}>→</button>
-    </div>
-  )
-}
-
 type Category = 'all' | 'zaman' | 'gelistirici' | 'yaratici' | 'ilham'
 
 const categories: { id: Category; label: string }[] = [
@@ -314,7 +266,8 @@ export function Tools() {
       category: 'ilham',
       title: 'Başarısızlık Dersleri',
       desc: 'Milyonlar yatırım aldı, yine de battı. Neden? Ders çıkar.',
-      visual: <FailureLesson />,
+      detailLink: '/failure-lessons',
+      visual: <FailureLessonPreview />,
     },
   ]
 

@@ -156,8 +156,8 @@ const colorPalette = [
 ]
 
 export function PixelArtPage() {
-  const [gridSize, setGridSize] = useState<GridSize>(8)
-  const [grid, setGrid] = useState(() => Array(gridSize * gridSize).fill('#ffffff'))
+  const [gridSize, setGridSize] = useState<GridSize>(32)
+  const [grid, setGrid] = useState(() => Array(32 * 32).fill('#ffffff'))
   const [history, setHistory] = useState<string[][]>([])
   const [color, setColor] = useState('#000000')
   const [hexInput, setHexInput] = useState('#000000')
