@@ -60,7 +60,7 @@ function SunArc({ progress }: { progress: number }) {
   const isDay = progress >= 25 && progress <= 75
 
   return (
-    <svg className="sun-arc" viewBox="0 0 100 55" fill="none">
+    <svg className="sun-arc" viewBox="0 -5 100 60" fill="none">
       <line
         x1="8" y1="44" x2="92" y2="44"
         stroke="rgba(0,0,0,0.08)"
