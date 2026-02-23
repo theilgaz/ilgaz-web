@@ -62,9 +62,9 @@ function generateKonyaHS(size: number): { pixels: string[], colors: Record<strin
   const cx = size / 2
   const cy = size / 2
 
-  // 8-pointed star outline
-  const squareSize = size * 0.26
-  const diamondSize = size * 0.38
+  // 8-pointed star (same as Seljuk star)
+  const squareSize = size * 0.30
+  const diamondSize = size * 0.42
   const lineWidth = Math.max(2, size * 0.04)
 
   for (let y = 0; y < size; y++) {
@@ -72,64 +72,54 @@ function generateKonyaHS(size: number): { pixels: string[], colors: Record<strin
       const dx = x - cx
       const dy = y - cy
 
-      // Check if inside straight square
       const inSquare = Math.abs(dx) <= squareSize && Math.abs(dy) <= squareSize
-      // Check if inside rotated square (diamond)
       const diamondDist = Math.abs(dx) + Math.abs(dy)
       const inDiamond = diamondDist <= diamondSize
 
       const insideStar = inSquare || inDiamond
 
-      // Distance to square edges (perpendicular distance)
       const distToSquareEdgeX = Math.abs(Math.abs(dx) - squareSize)
       const distToSquareEdgeY = Math.abs(Math.abs(dy) - squareSize)
       const nearSquareEdge = (distToSquareEdgeX < lineWidth && Math.abs(dy) <= squareSize) ||
                              (distToSquareEdgeY < lineWidth && Math.abs(dx) <= squareSize)
 
-      // Distance to diamond edge (perpendicular distance = dist / sqrt(2))
       const distToDiamondEdge = Math.abs(diamondDist - diamondSize) / Math.sqrt(2)
       const nearDiamondEdge = distToDiamondEdge < lineWidth && inDiamond
 
-      // Draw edge with equal thickness
       const onOuterEdge = (nearSquareEdge && (!inDiamond || nearDiamondEdge)) ||
                           (nearDiamondEdge && (!inSquare || nearSquareEdge))
 
-      // Terminal prompt ">_" in center
-      const promptCy = cy
+      // ">_" prompt
+      const promptThickness = Math.max(1, size * 0.02)
 
-      // ">" character
+      // ">"
       const gtLeftX = cx - size * 0.12
       const gtRightX = cx + size * 0.02
-      const gtHeight = size * 0.14
-      const gtThickness = Math.max(2, size * 0.04)
-
-      const gtTopY = promptCy - gtHeight / 2
-      const gtMidY = promptCy
-      const gtBottomY = promptCy + gtHeight / 2
+      const gtTopY = cy - size * 0.10
+      const gtMidY = cy
+      const gtBottomY = cy + size * 0.10
 
       const inGtTop = y >= gtTopY && y <= gtMidY &&
-                      Math.abs(x - (gtLeftX + (gtRightX - gtLeftX) * (y - gtTopY) / (gtMidY - gtTopY))) < gtThickness
+                      Math.abs(x - (gtLeftX + (gtRightX - gtLeftX) * (y - gtTopY) / (gtMidY - gtTopY))) < promptThickness
 
       const inGtBottom = y >= gtMidY && y <= gtBottomY &&
-                         Math.abs(x - (gtRightX - (gtRightX - gtLeftX) * (y - gtMidY) / (gtBottomY - gtMidY))) < gtThickness
+                         Math.abs(x - (gtRightX - (gtRightX - gtLeftX) * (y - gtMidY) / (gtBottomY - gtMidY))) < promptThickness
 
-      // "_" character
+      // "_"
       const underscoreX = cx + size * 0.05
-      const underscoreWidth = size * 0.10
-      const underscoreY = promptCy + size * 0.04
-      const underscoreHeight = Math.max(2, size * 0.03)
+      const underscoreWidth = size * 0.12
+      const underscoreY = cy + size * 0.07
+      const underscoreHeight = Math.max(1, size * 0.02)
       const inUnderscore = x >= underscoreX && x <= underscoreX + underscoreWidth &&
                            y >= underscoreY && y <= underscoreY + underscoreHeight
 
       const inPrompt = inGtTop || inGtBottom || inUnderscore
 
       if (insideStar) {
-        if (onOuterEdge) {
-          pixels.push('b') // outer star outline with connections
-        } else if (inPrompt) {
-          pixels.push('b') // terminal text
+        if (onOuterEdge || inPrompt) {
+          pixels.push('b')
         } else {
-          pixels.push('w') // white interior
+          pixels.push('w')
         }
       } else {
         pixels.push('_')
