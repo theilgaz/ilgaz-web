@@ -16,6 +16,8 @@ import { Tools } from './pages/Tools'
 import { Pomodoro } from './pages/Pomodoro'
 import { JsonFormatterPage } from './pages/JsonFormatterPage'
 import { Base64Page } from './pages/Base64Page'
+import { ColorPalettePage } from './pages/ColorPalettePage'
+import { PixelArtPage } from './pages/PixelArtPage'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -37,6 +39,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/pomodoro" element={<Pomodoro />} />
           <Route path="/json-formatter" element={<JsonFormatterPage />} />
           <Route path="/base64" element={<Base64Page />} />
+          <Route path="/renk-paleti" element={<ColorPalettePage />} />
+          <Route path="/pixel-art" element={<PixelArtPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,8 +1,10 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { Pomodoro, PomodoroHeatmap } from '../components/Pomodoro'
 import { JsonFormatter } from '../components/JsonFormatter'
 import { Base64Tool } from '../components/Base64Tool'
+import { ColorPalette } from '../components/ColorPalette'
+import { PixelArt } from '../components/PixelArt'
 
 const cityTimezones: Record<string, number> = {
   konya: 3, istanbul: 3, ankara: 3, izmir: 3,
@@ -207,132 +209,6 @@ function NasaApod() {
   )
 }
 
-// Color Palette Generator
-function ColorPalette() {
-  const [colors, setColors] = useState<string[]>([])
-  const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
-
-  const generate = useCallback(() => {
-    const newColors = Array.from({ length: 5 }, () =>
-      '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')
-    )
-    setColors(newColors)
-    setCopiedIndex(null)
-  }, [])
-
-  useEffect(() => { generate() }, [generate])
-
-  const copy = (color: string, index: number) => {
-    navigator.clipboard.writeText(color)
-    setCopiedIndex(index)
-    setTimeout(() => setCopiedIndex(null), 1500)
-  }
-
-  return (
-    <div className="color-palette">
-      {colors.map((color, i) => (
-        <div
-          key={i}
-          className={`color-swatch ${copiedIndex === i ? 'copied' : ''}`}
-          style={{ background: color }}
-          onClick={() => copy(color, i)}
-        >
-          <span className="color-hex">{color}</span>
-          {copiedIndex === i && <span className="color-copied">✓</span>}
-        </div>
-      ))}
-      <button className="palette-refresh" onClick={generate}>↻</button>
-    </div>
-  )
-}
-
-// Pixel Art Grid
-function PixelArt() {
-  const [grid, setGrid] = useState(() => Array(64).fill('#ffffff'))
-  const [history, setHistory] = useState<string[][]>([])
-  const [color, setColor] = useState('#000000')
-  const [isDrawing, setIsDrawing] = useState(false)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  const saveHistory = () => {
-    setHistory(h => [...h.slice(-19), [...grid]])
-  }
-
-  const paint = (i: number) => {
-    const newGrid = [...grid]
-    newGrid[i] = color
-    setGrid(newGrid)
-  }
-
-  const handleMouseDown = (i: number) => {
-    saveHistory()
-    setIsDrawing(true)
-    paint(i)
-  }
-
-  const undo = () => {
-    if (history.length > 0) {
-      setGrid(history[history.length - 1])
-      setHistory(h => h.slice(0, -1))
-    }
-  }
-
-  const clear = () => {
-    saveHistory()
-    setGrid(Array(64).fill('#ffffff'))
-  }
-
-  const download = () => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const size = 8
-    canvas.width = 64
-    canvas.height = 64
-
-    grid.forEach((c, i) => {
-      const x = (i % 8) * size
-      const y = Math.floor(i / 8) * size
-      ctx.fillStyle = c
-      ctx.fillRect(x, y, size, size)
-    })
-
-    const link = document.createElement('a')
-    link.download = 'pixel-art.png'
-    link.href = canvas.toDataURL()
-    link.click()
-  }
-
-  return (
-    <div className="pixel-art">
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
-      <div
-        className="pixel-grid"
-        onMouseLeave={() => setIsDrawing(false)}
-      >
-        {grid.map((c, i) => (
-          <div
-            key={i}
-            className="pixel"
-            style={{ background: c }}
-            onMouseDown={() => handleMouseDown(i)}
-            onMouseUp={() => setIsDrawing(false)}
-            onMouseEnter={() => isDrawing && paint(i)}
-          />
-        ))}
-      </div>
-      <div className="pixel-controls">
-        <input type="color" value={color} onChange={e => setColor(e.target.value)} />
-        <button onClick={undo} disabled={history.length === 0} title="Geri al">↶</button>
-        <button onClick={clear} title="Temizle">🗑</button>
-        <button onClick={download} title="İndir">↓</button>
-      </div>
-    </div>
-  )
-}
-
 // Başarısız Startup Dersleri - Failory'den ilham
 const failedStartups = [
   { name: "Vine", idea: "6 saniyelik video paylaşım platformu", raised: "$25M", year: 2016, reason: "Twitter satın aldı ama monetize edemedi" },
@@ -402,7 +278,7 @@ export function Tools() {
       category: 'zaman',
       title: 'Günün Akışı',
       desc: 'Vakit su gibi akıyor. Bugünün ne kadarı avuçlarından kayıp gitti?',
-      link: '/progress',
+      detailLink: '/progress',
       visual: (
         <>
           <SunArc progress={dayProgress} />
@@ -440,13 +316,15 @@ export function Tools() {
       category: 'yaratici',
       title: 'Renk Paleti',
       desc: 'Rastgele renk kombinasyonları. Tıkla ve kopyala.',
+      detailLink: '/renk-paleti',
       visual: <ColorPalette />,
     },
     {
       id: 'pixel-art',
       category: 'yaratici',
       title: 'Pixel Art',
-      desc: '8x8 piksel grid. Nostalji ve yaratıcılık bir arada.',
+      desc: 'Piksel piksel çiz, sanatını indir.',
+      detailLink: '/pixel-art',
       visual: <PixelArt />,
     },
     {
@@ -490,30 +368,19 @@ export function Tools() {
 
       <div className="tools-list">
         {filteredTools.map(tool => (
-          tool.link ? (
-            <Link to={tool.link} className="tool-card" key={tool.id}>
-              <div className="tool-card-visual">{tool.visual}</div>
-              <div className="tool-card-info">
-                <h3 className="tool-card-title">{tool.title}</h3>
-                <p className="tool-card-desc">{tool.desc}</p>
-                {'extra' in tool && tool.extra}
-              </div>
-            </Link>
-          ) : (
-            <div className="tool-card" key={tool.id}>
-              {'detailLink' in tool && tool.detailLink && (
-                <Link to={tool.detailLink} className="tool-card-expand" title="Tam sayfa aç">
-                  <span>↗</span>
-                </Link>
-              )}
-              <div className="tool-card-visual">{tool.visual}</div>
-              <div className="tool-card-info">
-                <h3 className="tool-card-title">{tool.title}</h3>
-                <p className="tool-card-desc">{tool.desc}</p>
-                {'extra' in tool && tool.extra}
-              </div>
+          <div className="tool-card" key={tool.id}>
+            {'detailLink' in tool && tool.detailLink && (
+              <Link to={tool.detailLink} className="tool-card-expand" title="Tam sayfa aç">
+                <span>↗</span>
+              </Link>
+            )}
+            <div className="tool-card-visual">{tool.visual}</div>
+            <div className="tool-card-info">
+              <h3 className="tool-card-title">{tool.title}</h3>
+              <p className="tool-card-desc">{tool.desc}</p>
+              {'extra' in tool && tool.extra}
             </div>
-          )
+          </div>
         ))}
       </div>
     </>
