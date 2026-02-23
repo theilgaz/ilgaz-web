@@ -124,7 +124,7 @@ const categoryLabels = {
 
 export function FailureLessonPreview() {
   const [index, setIndex] = useState(0)
-  const [isFlipped, setIsFlipped] = useState(false)
+  const [isFlipped, setIsFlipped] = useState(true)
   const startup = failedStartups[index]
   const category = categoryLabels[startup.category]
 
@@ -178,11 +178,6 @@ export function FailureLessonPreview() {
           </div>
         </div>
 
-        {!isFlipped && (
-          <button className="failure-flip-btn" onClick={() => setIsFlipped(true)}>
-            Dersi Gör
-          </button>
-        )}
       </div>
 
       <div className="failure-nav">

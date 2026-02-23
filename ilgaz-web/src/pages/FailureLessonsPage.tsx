@@ -239,7 +239,7 @@ export function FailureLessonsPage() {
   const [sortBy, setSortBy] = useState<SortBy>('random')
   const [shuffledStartups, setShuffledStartups] = useState(failedStartups)
   const [isAutoPlay, setIsAutoPlay] = useState(false)
-  const [showLessons, setShowLessons] = useState(false)
+  const [showLessons, setShowLessons] = useState(true)
 
   const sortStartups = useCallback((sort: SortBy) => {
     let sorted = [...failedStartups]
@@ -369,12 +369,6 @@ export function FailureLessonsPage() {
               <p>{startup.dontDoThis}</p>
             </div>
           </div>
-
-          {!showLessons && (
-            <button className="failure-show-lesson-btn" onClick={() => setShowLessons(true)}>
-              Dersi Gör
-            </button>
-          )}
 
           <div className="failure-card-nav">
             <button onClick={prev} className="failure-nav-btn">←</button>
