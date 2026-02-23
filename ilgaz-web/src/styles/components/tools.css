@@ -1202,41 +1202,82 @@
   cursor: not-allowed;
 }
 
-/* Failure Lesson */
+/* Failure Lesson Preview */
 .failure-lesson {
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
+  padding: 16px;
+}
+
+.failure-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .failure-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.failure-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .failure-name {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
 }
 
-.failure-raised {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
+.failure-year {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.failure-category {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: white;
   padding: 3px 8px;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 
 .failure-idea {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.5);
   margin: 0;
-  font-style: italic;
+  line-height: 1.4;
+}
+
+.failure-raised {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.failure-raised-label {
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.failure-raised-value {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
 }
 
 .failure-reason {
@@ -1245,9 +1286,9 @@
   padding: 10px 12px;
 }
 
-.failure-label {
-  font-size: 0.7rem;
-  font-weight: 500;
+.failure-section-label {
+  font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: rgba(0, 0, 0, 0.4);
@@ -1256,27 +1297,120 @@
 }
 
 .failure-reason p {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.7);
   margin: 0;
   line-height: 1.4;
 }
 
-.failure-lesson button {
-  align-self: flex-end;
-  width: 32px;
-  height: 32px;
+.failure-lessons {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeIn 0.3s ease;
+}
+
+.failure-lessons.show {
+  display: flex;
+}
+
+.failure-do,
+.failure-dont {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  align-items: flex-start;
+}
+
+.failure-do {
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.failure-dont {
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.failure-do-icon,
+.failure-dont-icon {
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.failure-do-icon {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.failure-dont-icon {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.failure-do p,
+.failure-dont p {
+  font-size: 0.78rem;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.failure-flip-btn {
+  align-self: center;
+  padding: 6px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.failure-flip-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.failure-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.failure-nav-btn {
+  width: 28px;
+  height: 28px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   background: white;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.failure-lesson button:hover {
+.failure-nav-btn:hover {
   background: rgba(0, 0, 0, 0.05);
-  transform: translateX(4px);
+}
+
+.failure-counter {
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.4);
+  font-family: var(--font-mono);
 }
 
 /* Pomodoro Page */
