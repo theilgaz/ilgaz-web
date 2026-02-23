@@ -12,3 +12,18 @@ declare module '*.mdx' {
   const MDXComponent: ComponentType
   export default MDXComponent
 }
+
+declare module '*.jpg' {
+  const src: string
+  export default src
+}
+
+declare module '*.jpeg' {
+  const src: string
+  export default src
+}
+
+declare module '*.png' {
+  const src: string
+  export default src
+}

@@ -25,10 +25,19 @@ export function NasaApodPage() {
     setError(null)
     try {
       const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${date}`)
+      const data = await res.json()
+
+      if (data.error) {
+        if (data.error.code === 'OVER_RATE_LIMIT') {
+          throw new Error('API istek limiti aşıldı. Biraz bekleyip tekrar deneyin.')
+        }
+        throw new Error(data.error.message || 'Bir hata oluştu')
+      }
+
       if (!res.ok) {
         throw new Error('Fotoğraf yüklenemedi')
       }
-      const data = await res.json()
+
       setApod(data)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Bir hata oluştu')

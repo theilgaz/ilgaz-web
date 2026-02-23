@@ -5,6 +5,7 @@ import { JsonFormatter } from '../components/JsonFormatter'
 import { Base64Tool } from '../components/Base64Tool'
 import { ColorPalette } from '../components/ColorPalette'
 import { PixelArt } from '../components/PixelArt'
+import apodPreview from '../assets/apod-preview.jpg'
 
 const cityTimezones: Record<string, number> = {
   konya: 3, istanbul: 3, ankara: 3, izmir: 3,
@@ -153,8 +154,8 @@ function NasaApod() {
   return (
     <div className="apod-preview">
       <img
-        src="https://apod.nasa.gov/apod/image/2502/PillsarsDeep_Siwakorn_960.jpg"
-        alt="Pillars of Creation"
+        src={apodPreview}
+        alt="NASA Astronomy Picture of the Day"
       />
       <div className="apod-preview-overlay">
         <span className="apod-preview-icon">🔭</span>
