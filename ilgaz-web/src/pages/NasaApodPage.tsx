@@ -24,7 +24,8 @@ export function NasaApodPage() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${date}`)
+      const apiKey = import.meta.env.VITE_NASA_API_KEY || 'DEMO_KEY'
+      const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`)
       const data = await res.json()
 
       if (data.error) {
