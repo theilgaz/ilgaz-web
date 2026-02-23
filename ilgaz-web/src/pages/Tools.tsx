@@ -332,6 +332,7 @@ export function Tools() {
       category: 'ilham',
       title: 'Günün Uzay Fotoğrafı',
       desc: 'NASA\'nın her gün seçtiği astronomik görüntü. Evrenin büyüklüğünü hatırla.',
+      detailLink: '/nasa-apod',
       visual: <NasaApod />,
     },
     {

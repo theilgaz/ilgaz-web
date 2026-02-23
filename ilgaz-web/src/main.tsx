@@ -18,6 +18,7 @@ import { JsonFormatterPage } from './pages/JsonFormatterPage'
 import { Base64Page } from './pages/Base64Page'
 import { ColorPalettePage } from './pages/ColorPalettePage'
 import { PixelArtPage } from './pages/PixelArtPage'
+import { NasaApodPage } from './pages/NasaApodPage'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -41,6 +42,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/base64" element={<Base64Page />} />
           <Route path="/renk-paleti" element={<ColorPalettePage />} />
           <Route path="/pixel-art" element={<PixelArtPage />} />
+          <Route path="/nasa-apod" element={<NasaApodPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

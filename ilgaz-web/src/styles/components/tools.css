@@ -749,6 +749,236 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
+/* NASA APOD Page */
+.apod-page {
+  width: calc(100vw - 48px);
+  max-width: 900px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.apod-page h1 {
+  text-align: center;
+}
+
+.apod-page .lead {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.apod-page-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.apod-nav-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.apod-nav-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.apod-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.apod-nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.apod-date-input {
+  padding: 8px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+}
+
+.apod-date-input:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.apod-date-display {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.apod-page-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.apod-page-actions button {
+  padding: 8px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: white;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.apod-page-actions button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.apod-page-actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.apod-page-actions button.copied {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: white;
+}
+
+.apod-page-content {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 400px;
+}
+
+.apod-page-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 300px;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.9rem;
+}
+
+.apod-page-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 300px;
+  color: #ef4444;
+  font-size: 0.9rem;
+}
+
+.apod-page-error button {
+  padding: 8px 16px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  background: white;
+  color: #ef4444;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.apod-page-error button:hover {
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.apod-page-media {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.apod-page-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.apod-page-media iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+}
+
+.apod-page-info h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 12px 0;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.apod-page-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.apod-copyright {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.apod-hd-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  background: white;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.7);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.apod-hd-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.apod-explanation {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .apod-page-nav {
+    flex-wrap: wrap;
+  }
+
+  .apod-page-actions {
+    flex-wrap: wrap;
+  }
+}
+
 /* JSON Formatter */
 .json-formatter {
   display: flex;
