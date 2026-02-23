@@ -3837,12 +3837,15 @@
 
 .failure-card-raised {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #ef4444;
   background: rgba(239, 68, 68, 0.1);
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-feature-settings: normal;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
 }
 
 .failure-card-name {
