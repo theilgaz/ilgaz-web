@@ -672,6 +672,104 @@
   to { transform: rotate(360deg); }
 }
 
+/* Failure Lesson Preview */
+.failure-preview {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.failure-preview-visual {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.failure-preview:hover .failure-preview-visual {
+  transform: scale(1.05);
+  opacity: 0.5;
+}
+
+.failure-preview-tombstones {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.tombstone {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px 4px 0 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 4px;
+  padding-top: 6px;
+  overflow: hidden;
+}
+
+.tombstone-front {
+  width: 56px;
+  font-size: 8px;
+  padding-top: 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.failure-preview-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.failure-preview-amount {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ef4444;
+}
+
+.failure-preview-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.failure-preview-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.failure-preview:hover .failure-preview-overlay {
+  opacity: 1;
+}
+
+.failure-preview-icon {
+  font-size: 2rem;
+}
+
+.failure-preview-text {
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
 /* NASA APOD Page */
 .apod-page {
   width: calc(100vw - 48px);
