@@ -3283,3 +3283,309 @@
 .gradient-randomize:hover {
   background: rgba(0, 0, 0, 0.05);
 }
+
+/* Failure Lessons Page */
+.failure-page {
+  width: calc(100vw - 48px);
+  max-width: 900px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.failure-page h1 {
+  text-align: center;
+}
+
+.failure-page .lead {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.failure-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.failure-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.failure-stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.failure-stat-label {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.failure-page-content {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.failure-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.failure-sort {
+  display: flex;
+  gap: 4px;
+}
+
+.failure-sort button {
+  padding: 8px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background: white;
+  font-size: 0.8rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.failure-sort button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.failure-sort button.active {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: transparent;
+  color: white;
+}
+
+.failure-autoplay {
+  padding: 8px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: white;
+  font-size: 0.8rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.failure-autoplay:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.failure-autoplay.active {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+}
+
+.failure-card-large {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.failure-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.failure-card-meta {
+  display: flex;
+  gap: 8px;
+}
+
+.failure-card-category {
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.failure-card-year {
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.failure-card-raised {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.failure-card-name {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.failure-card-idea {
+  font-size: 1.1rem;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0 0 24px 0;
+  font-style: italic;
+}
+
+.failure-card-reason {
+  background: rgba(239, 68, 68, 0.05);
+  border-left: 3px solid #ef4444;
+  padding: 16px 20px;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 24px;
+}
+
+.failure-card-reason-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ef4444;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.failure-card-reason p {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.failure-card-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.failure-nav-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.failure-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.failure-card-counter {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.failure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.failure-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.failure-grid-item:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.failure-grid-item.active {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: transparent;
+}
+
+.failure-grid-item.active .failure-grid-name {
+  color: white;
+}
+
+.failure-grid-item.active .failure-grid-raised {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.failure-grid-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.failure-grid-raised {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #ef4444;
+}
+
+.failure-page-hint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: 24px;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .failure-stats {
+    gap: 20px;
+  }
+
+  .failure-stat-value {
+    font-size: 1.25rem;
+  }
+
+  .failure-card-name {
+    font-size: 1.5rem;
+  }
+
+  .failure-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .failure-sort {
+    justify-content: center;
+  }
+}

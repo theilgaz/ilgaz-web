@@ -21,6 +21,7 @@ import { ColorShadesPage } from './pages/ColorShadesPage'
 import { GradientGeneratorPage } from './pages/GradientGeneratorPage'
 import { PixelArtPage } from './pages/PixelArtPage'
 import { NasaApodPage } from './pages/NasaApodPage'
+import { FailureLessonsPage } from './pages/FailureLessonsPage'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -47,6 +48,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/gradient" element={<GradientGeneratorPage />} />
           <Route path="/pixel-art" element={<PixelArtPage />} />
           <Route path="/nasa-apod" element={<NasaApodPage />} />
+          <Route path="/failure-lessons" element={<FailureLessonsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
