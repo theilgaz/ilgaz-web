@@ -1,316 +1,154 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { Pomodoro, PomodoroHeatmap } from '../components/Pomodoro'
-import { JsonFormatter } from '../components/JsonFormatter'
-import { Base64Tool } from '../components/Base64Tool'
-import { ColorPalette } from '../components/ColorPalette'
-import { ColorShades } from '../components/ColorShades'
-import { GradientPreview } from '../components/GradientPreview'
-import { PixelArt } from '../components/PixelArt'
-import { FailureLessonPreview } from '../components/FailureLessonPreview'
-import apodPreview from '../assets/apod-preview.jpg'
 
-const cityTimezones: Record<string, number> = {
-  konya: 3, istanbul: 3, ankara: 3, izmir: 3,
-  losangeles: -8, newyork: -5, london: 0, paris: 1,
-  berlin: 1, dubai: 4, tokyo: 9, jerusalem: 2, medina: 3,
+interface Tool {
+  id: string
+  title: string
+  icon: string
+  link: string
+  gradient: string
 }
 
-function getCurrentTimeInTimezone(timezone: number) {
-  const now = new Date()
-  const utcHours = now.getUTCHours()
-  const utcMinutes = now.getUTCMinutes()
-  const offsetMinutes = timezone * 60
-  let totalMinutes = utcHours * 60 + utcMinutes + offsetMinutes
-  if (totalMinutes < 0) totalMinutes += 1440
-  if (totalMinutes >= 1440) totalMinutes -= 1440
-  return totalMinutes
-}
-
-function useDayProgress() {
-  const getProgress = () => {
-    const city = localStorage.getItem('progress-city') || 'konya'
-    const timezone = cityTimezones[city] ?? 3
-    const minutes = getCurrentTimeInTimezone(timezone)
-    return Math.round((minutes / 1440) * 100)
-  }
-
-  const [progress, setProgress] = useState(getProgress)
-
-  useEffect(() => {
-    const update = () => setProgress(getProgress())
-
-    const interval = setInterval(update, 60000)
-    window.addEventListener('city-changed', update)
-
-    return () => {
-      clearInterval(interval)
-      window.removeEventListener('city-changed', update)
-    }
-  }, [])
-
-  return progress
-}
-
-function SunArc({ progress }: { progress: number }) {
-  const angle = Math.PI - (progress / 100) * Math.PI
-  const radius = 38
-  const centerX = 50
-  const centerY = 44
-
-  const sunX = centerX + radius * Math.cos(angle)
-  const sunY = centerY - radius * Math.sin(angle)
-
-  const isDay = progress >= 25 && progress <= 75
-
-  return (
-    <svg className="sun-arc" viewBox="0 -5 100 60" fill="none">
-      <line
-        x1="8" y1="44" x2="92" y2="44"
-        stroke="rgba(0,0,0,0.08)"
-        strokeWidth="1"
-        strokeDasharray="2 2"
-      />
-
-      <path
-        d={`M 12 44 A 38 38 0 0 1 88 44`}
-        stroke="url(#arcGradient)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.4"
-      />
-
-      <path
-        d={`M 12 44 A 38 38 0 0 1 ${sunX} ${sunY}`}
-        stroke="url(#progressGradient)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.8"
-      />
-
-      <g className="celestial-body">
-        {isDay ? (
-          <>
-            <circle cx={sunX} cy={sunY} r="8" fill="url(#sunGlow)" opacity="0.5" />
-            <circle cx={sunX} cy={sunY} r="5" fill="url(#sunGradient)" />
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
-              const rad = (deg * Math.PI) / 180
-              const x1 = sunX + 7 * Math.cos(rad)
-              const y1 = sunY + 7 * Math.sin(rad)
-              const x2 = sunX + 9 * Math.cos(rad)
-              const y2 = sunY + 9 * Math.sin(rad)
-              return (
-                <line
-                  key={deg}
-                  x1={x1} y1={y1} x2={x2} y2={y2}
-                  stroke="#f59e0b"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  opacity="0.6"
-                />
-              )
-            })}
-          </>
-        ) : (
-          <>
-            <circle cx={sunX} cy={sunY} r="7" fill="url(#moonGlow)" opacity="0.4" />
-            <circle cx={sunX} cy={sunY} r="4.5" fill="#e2e8f0" />
-            <circle cx={sunX - 1.5} cy={sunY - 0.5} r="4" fill="rgba(0,0,0,0.08)" />
-          </>
-        )}
-      </g>
-
-      <defs>
-        <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#7c3aed" />
-          <stop offset="25%" stopColor="#f59e0b" />
-          <stop offset="50%" stopColor="#eab308" />
-          <stop offset="75%" stopColor="#f59e0b" />
-          <stop offset="100%" stopColor="#7c3aed" />
-        </linearGradient>
-        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#8b5cf6" />
-          <stop offset="50%" stopColor="#f59e0b" />
-          <stop offset="100%" stopColor="#ef4444" />
-        </linearGradient>
-        <radialGradient id="sunGradient">
-          <stop offset="0%" stopColor="#fcd34d" />
-          <stop offset="100%" stopColor="#f59e0b" />
-        </radialGradient>
-        <radialGradient id="sunGlow">
-          <stop offset="0%" stopColor="#fbbf24" />
-          <stop offset="100%" stopColor="transparent" />
-        </radialGradient>
-        <radialGradient id="moonGlow">
-          <stop offset="0%" stopColor="#a5b4fc" />
-          <stop offset="100%" stopColor="transparent" />
-        </radialGradient>
-      </defs>
-    </svg>
-  )
-}
-
-// NASA APOD Preview - Sabit görsel, detayda fetch edilir
-function NasaApod() {
-  return (
-    <div className="apod-preview">
-      <img
-        src={apodPreview}
-        alt="NASA Astronomy Picture of the Day"
-      />
-      <div className="apod-preview-overlay">
-        <span className="apod-preview-icon">🔭</span>
-        <span className="apod-preview-text">Günün Fotoğrafını Keşfet</span>
-      </div>
-    </div>
-  )
-}
-
-type Category = 'all' | 'zaman' | 'gelistirici' | 'yaratici' | 'ilham'
-
-const categories: { id: Category; label: string }[] = [
-  { id: 'all', label: 'Tümü' },
-  { id: 'zaman', label: 'Zaman' },
-  { id: 'gelistirici', label: 'Geliştirici' },
-  { id: 'yaratici', label: 'Tasarım' },
-  { id: 'ilham', label: 'İlham' },
+const tools: Tool[] = [
+  {
+    id: 'day-progress',
+    title: 'Günün Akışı',
+    icon: '☀️',
+    link: '/progress',
+    gradient: 'linear-gradient(145deg, #ffb347 0%, #ffcc33 100%)',
+  },
+  {
+    id: 'pomodoro',
+    title: 'Pomodoro',
+    icon: '🍅',
+    link: '/pomodoro',
+    gradient: 'linear-gradient(145deg, #ff6b6b 0%, #ee5a5a 100%)',
+  },
+  {
+    id: 'json-formatter',
+    title: 'JSON',
+    icon: '{ }',
+    link: '/json-formatter',
+    gradient: 'linear-gradient(145deg, #4ade80 0%, #22c55e 100%)',
+  },
+  {
+    id: 'base64',
+    title: 'Base64',
+    icon: '🔤',
+    link: '/base64',
+    gradient: 'linear-gradient(145deg, #38bdf8 0%, #0ea5e9 100%)',
+  },
+  {
+    id: 'color-palette',
+    title: 'Renk Paleti',
+    icon: '🎨',
+    link: '/color-palette',
+    gradient: 'linear-gradient(145deg, #c084fc 0%, #a855f7 100%)',
+  },
+  {
+    id: 'color-shades',
+    title: 'Tonlar',
+    icon: '🌈',
+    link: '/color-shades',
+    gradient: 'linear-gradient(145deg, #f472b6 0%, #ec4899 100%)',
+  },
+  {
+    id: 'gradient-generator',
+    title: 'Gradyan',
+    icon: '🎭',
+    link: '/gradient',
+    gradient: 'linear-gradient(145deg, #fb923c 0%, #f97316 100%)',
+  },
+  {
+    id: 'pixel-art',
+    title: 'Pixel Art',
+    icon: '🖼️',
+    link: '/pixel-art',
+    gradient: 'linear-gradient(145deg, #818cf8 0%, #6366f1 100%)',
+  },
+  {
+    id: 'nasa-apod',
+    title: 'NASA',
+    icon: '🔭',
+    link: '/nasa-apod',
+    gradient: 'linear-gradient(145deg, #1e3a5f 0%, #0f172a 100%)',
+  },
+  {
+    id: 'failure-lesson',
+    title: 'Dersler',
+    icon: '💡',
+    link: '/failure-lessons',
+    gradient: 'linear-gradient(145deg, #fbbf24 0%, #f59e0b 100%)',
+  },
 ]
 
+function AppIcon({ tool, index }: { tool: Tool; index: number }) {
+  return (
+    <Link
+      to={tool.link}
+      className="launchpad-item"
+      style={{ animationDelay: `${index * 0.05}s` }}
+    >
+      <div className="launchpad-icon" style={{ background: tool.gradient }}>
+        <span>{tool.icon}</span>
+      </div>
+      <span className="launchpad-title">{tool.title}</span>
+    </Link>
+  )
+}
+
 export function Tools() {
-  const dayProgress = useDayProgress()
-  const [activeCategory, setActiveCategory] = useState<Category>('all')
+  const [search, setSearch] = useState('')
 
-  const tools = [
-    {
-      id: 'day-progress',
-      category: 'zaman',
-      title: 'Günün Akışı',
-      desc: 'Vakit su gibi akıyor. Bugünün ne kadarı avuçlarından kayıp gitti?',
-      detailLink: '/progress',
-      visual: (
-        <>
-          <SunArc progress={dayProgress} />
-          <span className="sun-arc-label">{dayProgress}%</span>
-        </>
-      ),
-    },
-    {
-      id: 'pomodoro',
-      category: 'zaman',
-      title: 'Pomodoro',
-      desc: '25 dakika odaklan, 5 dakika nefes al. Basit ama etkili.',
-      detailLink: '/pomodoro',
-      visual: <Pomodoro />,
-      extra: <PomodoroHeatmap />,
-    },
-    {
-      id: 'json-formatter',
-      category: 'gelistirici',
-      title: 'JSON Formatter',
-      desc: 'Karmaşık JSON\'u okunabilir hale getir.',
-      detailLink: '/json-formatter',
-      visual: <JsonFormatter />,
-    },
-    {
-      id: 'base64',
-      category: 'gelistirici',
-      title: 'Base64',
-      desc: 'Encode ve decode işlemleri için hızlı araç.',
-      detailLink: '/base64',
-      visual: <Base64Tool />,
-    },
-    {
-      id: 'color-palette',
-      category: 'yaratici',
-      title: 'Renk Paleti',
-      desc: 'Harmoni modları ile renk kombinasyonları.',
-      detailLink: '/color-palette',
-      visual: <ColorPalette />,
-    },
-    {
-      id: 'color-shades',
-      category: 'yaratici',
-      title: 'Renk Tonları',
-      desc: 'Bir renkten açıktan koyuya ton skalası.',
-      detailLink: '/color-shades',
-      visual: <ColorShades />,
-    },
-    {
-      id: 'gradient-generator',
-      category: 'yaratici',
-      title: 'Gradyan Oluşturucu',
-      desc: 'Linear ve radial gradyanlar oluştur.',
-      detailLink: '/gradient',
-      visual: <GradientPreview />,
-    },
-    {
-      id: 'pixel-art',
-      category: 'yaratici',
-      title: 'Pixel Art',
-      desc: 'Piksel piksel çiz, sanatını indir.',
-      detailLink: '/pixel-art',
-      visual: <PixelArt />,
-    },
-    {
-      id: 'nasa-apod',
-      category: 'ilham',
-      title: 'Günün Uzay Fotoğrafı',
-      desc: 'NASA\'nın her gün seçtiği astronomik görüntü. Evrenin büyüklüğünü hatırla.',
-      detailLink: '/nasa-apod',
-      visual: <NasaApod />,
-    },
-    {
-      id: 'failure-lesson',
-      category: 'ilham',
-      title: 'Başarısızlık Dersleri',
-      desc: 'Milyonlar yatırım aldı, yine de battı. Neden? Ders çıkar.',
-      detailLink: '/failure-lessons',
-      visual: <FailureLessonPreview />,
-    },
-  ]
-
-  const filteredTools = activeCategory === 'all'
-    ? tools
-    : tools.filter(t => t.category === activeCategory)
+  const filtered = useMemo(() => {
+    if (!search.trim()) return tools
+    const q = search.toLowerCase()
+    return tools.filter(t =>
+      t.title.toLowerCase().includes(q) ||
+      t.id.toLowerCase().includes(q)
+    )
+  }, [search])
 
   return (
-    <>
-      <h1>Araçlar</h1>
-      <p className="lead">
-        Geliştirdiğim ve kullandığım faydalı araçlar.
-      </p>
+    <div className="launchpad">
+      <div className="launchpad-bg" />
 
-      <div className="tools-categories">
-        {categories.map(cat => (
-          <button
-            key={cat.id}
-            className={`tools-chip ${activeCategory === cat.id ? 'active' : ''}`}
-            onClick={() => setActiveCategory(cat.id)}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
+      <div className="launchpad-content">
+        <div className="spotlight">
+          <svg className="spotlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+          <input
+            type="text"
+            className="spotlight-input"
+            placeholder="Ara..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            autoFocus
+          />
+          {search && (
+            <button className="spotlight-clear" onClick={() => setSearch('')}>
+              ×
+            </button>
+          )}
+        </div>
 
-      <div className="tools-list">
-        {filteredTools.map(tool => (
-          <div className="tool-card" key={tool.id}>
-            {'detailLink' in tool && tool.detailLink && (
-              <Link to={tool.detailLink} className="tool-card-expand" title="Tam sayfa aç">
-                <span>↗</span>
-              </Link>
-            )}
-            <div className="tool-card-visual">{tool.visual}</div>
-            <div className="tool-card-info">
-              <h3 className="tool-card-title">{tool.title}</h3>
-              <p className="tool-card-desc">{tool.desc}</p>
-              {'extra' in tool && tool.extra}
-            </div>
-          </div>
-        ))}
+        <div className="launchpad-grid">
+          {filtered.map((tool, i) => (
+            <AppIcon key={tool.id} tool={tool} index={i} />
+          ))}
+        </div>
+
+        {filtered.length === 0 && (
+          <p className="launchpad-empty">Sonuç bulunamadı</p>
+        )}
+
+        <div className="launchpad-dots">
+          <span className="launchpad-dot active" />
+          <span className="launchpad-dot" />
+        </div>
       </div>
-    </>
+    </div>
   )
 }
