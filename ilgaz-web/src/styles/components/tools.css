@@ -3418,6 +3418,56 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
+/* Highlight Effect - Underline */
+.highlight {
+  position: relative;
+  display: inline;
+  background: linear-gradient(transparent 60%, #fef08a 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: highlight-underline 0.8s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes highlight-underline {
+  0% {
+    background-size: 0% 100%;
+  }
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
+/* Number Ticker */
+.number-ticker {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: rgba(0, 0, 0, 0.85);
+  display: block;
+}
+
+/* Hero Stats - Büyük toplam yatırım */
+.failure-stats-hero {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.failure-stats-hero .number-ticker {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.failure-stats-hero-label {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: 4px;
+}
+
 /* Failure Lessons Page */
 .failure-page {
   width: calc(100vw - 48px);
@@ -3461,6 +3511,64 @@
   color: rgba(0, 0, 0, 0.4);
 }
 
+/* Graveyard Filter */
+.failure-graveyard-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.failure-graveyard-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  background: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.failure-graveyard-btn:hover {
+  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.failure-graveyard-btn.active {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: transparent;
+  color: white;
+}
+
+.failure-graveyard-btn span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.failure-graveyard-btn.active span {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Category Filter */
+.failure-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.9rem;
+}
+
 .failure-page-content {
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: saturate(180%) blur(20px);
@@ -3502,6 +3610,69 @@
 .failure-sort button.active {
   background: rgba(0, 0, 0, 0.85);
   border-color: transparent;
+  color: white;
+}
+
+/* Category Chips - shown when "Sebebe Göre" is active */
+.failure-category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+  animation: chips-reveal 0.2s ease-out;
+}
+
+@keyframes chips-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.failure-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.failure-chip:hover {
+  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.failure-chip.active {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: transparent;
+  color: white;
+}
+
+.failure-chip span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.failure-chip.active span {
+  background: rgba(255, 255, 255, 0.2);
   color: white;
 }
 
@@ -3553,7 +3724,8 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: white;
+  background: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .failure-card-year {
@@ -3590,57 +3762,79 @@
   font-style: italic;
 }
 
-.failure-card-reason {
-  background: rgba(239, 68, 68, 0.05);
-  border-left: 3px solid #ef4444;
-  padding: 16px 20px;
-  border-radius: 0 12px 12px 0;
+.failure-card-insights {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-bottom: 24px;
 }
 
-.failure-card-reason-label {
-  font-size: 0.75rem;
-  font-weight: 600;
+/* Neden Battı - Ana sebep kutusu */
+.failure-card-reason {
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.failure-card-reason-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.failure-card-reason-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+}
+
+.failure-card-reason-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.7);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #ef4444;
-  display: block;
-  margin-bottom: 8px;
+  letter-spacing: 0.5px;
 }
 
 .failure-card-reason p {
   font-size: 1rem;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.8);
   margin: 0;
   line-height: 1.6;
+  font-weight: 500;
 }
 
-.failure-card-lessons {
-  display: none;
-  gap: 16px;
-  margin-bottom: 24px;
-  animation: fadeIn 0.3s ease;
-}
-
-.failure-card-lessons.show {
+/* Do & Don't Container - Yan yana */
+.failure-card-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .failure-card-actions {
+    grid-template-columns: 1fr;
+  }
 }
 
 .failure-card-do,
 .failure-card-dont {
   padding: 16px;
   border-radius: 12px;
-}
-
-.failure-card-do {
-  background: rgba(34, 197, 94, 0.08);
-  border: 1px solid rgba(34, 197, 94, 0.15);
-}
-
-.failure-card-dont {
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.15);
+  flex: 1;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .failure-card-do-header,
@@ -3659,36 +3853,41 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
 .failure-card-do-icon {
-  background: rgba(34, 197, 94, 0.2);
-  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
 }
 
 .failure-card-dont-icon {
-  background: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
 }
 
 .failure-card-do-title {
   font-size: 0.8rem;
   font-weight: 600;
   color: #16a34a;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .failure-card-dont-title {
   font-size: 0.8rem;
   font-weight: 600;
   color: #dc2626;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
+.failure-card-reason p,
 .failure-card-do p,
 .failure-card-dont p {
   font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.75);
   margin: 0;
   line-height: 1.5;
 }
@@ -3814,11 +4013,40 @@
 
 @media (max-width: 768px) {
   .failure-stats {
-    gap: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
   .failure-stat-value {
     font-size: 1.25rem;
+  }
+
+  .number-ticker {
+    font-size: 0.85rem;
+  }
+
+  .failure-stats-hero .number-ticker {
+    font-size: 1.8rem;
+  }
+
+  .highlight {
+    padding: 0 2px;
+    margin: 0 -1px;
+  }
+
+  .failure-category-chips {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .failure-chip {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .failure-chip span {
+    font-size: 0.65rem;
+    padding: 1px 5px;
   }
 
   .failure-card-name {
