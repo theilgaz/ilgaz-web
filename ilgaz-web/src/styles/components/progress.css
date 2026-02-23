@@ -408,16 +408,21 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: 145px;
+  min-height: 180px;
   margin-top: 8px;
   margin-bottom: -6px;
 }
 
 .prayer-sun-arc {
   width: 100%;
-  max-width: 500px;
-  height: 130px;
+  max-width: 620px;
+  height: 175px;
   flex-shrink: 0;
+}
+
+.prayer-arc-hover-text {
+  font-family: var(--font-sans);
+  font-size: 11px;
 }
 
 .prayer-dot-group .prayer-dot {
@@ -437,35 +442,6 @@
   transform: scale(1.1);
 }
 
-.prayer-arc-tooltip {
-  height: 20px;
-  min-width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  flex-shrink: 0;
-}
-
-.prayer-arc-tooltip.visible {
-  opacity: 1;
-}
-
-.prayer-arc-tooltip-label {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: lowercase;
-}
-
-.prayer-arc-tooltip-time {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.5);
-}
 
 .prayer-list {
   display: flex;

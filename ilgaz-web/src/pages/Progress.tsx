@@ -989,9 +989,9 @@ function PrayerSunArc({
 
   // Güneş yayı üzerindeki pozisyon
   const angle = Math.PI - (dayProgress / 100) * Math.PI
-  const radius = 52
-  const centerX = 70
-  const centerY = 58
+  const radius = 85
+  const centerX = 105
+  const centerY = 101
 
   const sunX = centerX + radius * Math.cos(angle)
   const sunY = centerY - radius * Math.sin(angle)
@@ -1022,17 +1022,31 @@ function PrayerSunArc({
 
   return (
     <div className="prayer-sun-arc-container">
-      <svg className="prayer-sun-arc" viewBox="0 0 140 72" fill="none">
+      <svg className="prayer-sun-arc" viewBox="0 0 210 118" fill="none">
         {/* Horizon çizgisi */}
         <line
-          x1="12" y1="58" x2="128" y2="58"
+          x1="10" y1="101" x2="200" y2="101"
           stroke="rgba(0,0,0,0.06)"
           strokeWidth="1"
         />
 
+        {/* Hover tooltip - arc ortasında */}
+        {hoveredPrayer && (
+          <text
+            x="105"
+            y="60"
+            textAnchor="middle"
+            className="prayer-arc-hover-text"
+            fill={hoveredPrayer.color}
+          >
+            <tspan fontWeight="600">{hoveredPrayer.label}</tspan>
+            <tspan dx="8" fill="rgba(0,0,0,0.5)">{hoveredPrayer.time}</tspan>
+          </text>
+        )}
+
         {/* Ana yay - güneşin yolu */}
         <path
-          d={`M 18 58 A 52 52 0 0 1 122 58`}
+          d={`M 20 101 A 85 85 0 0 1 190 101`}
           stroke="url(#prayerArcGradient)"
           strokeWidth="2"
           strokeLinecap="round"
@@ -1042,7 +1056,7 @@ function PrayerSunArc({
 
         {/* İlerleme yayı - large-arc her zaman 0 (üst yay ≤180°) */}
         <path
-          d={`M 18 58 A 52 52 0 0 1 ${sunX} ${sunY}`}
+          d={`M 20 101 A 85 85 0 0 1 ${sunX} ${sunY}`}
           stroke="url(#prayerProgressGradient)"
           strokeWidth="2.5"
           strokeLinecap="round"
@@ -1148,16 +1162,6 @@ function PrayerSunArc({
         </radialGradient>
       </defs>
     </svg>
-    <div className={`prayer-arc-tooltip ${hoveredPrayer ? 'visible' : ''}`}>
-      {hoveredPrayer && (
-        <>
-          <span className="prayer-arc-tooltip-label" style={{ color: hoveredPrayer.color }}>
-            {hoveredPrayer.label}
-          </span>
-          <span className="prayer-arc-tooltip-time">{hoveredPrayer.time}</span>
-        </>
-      )}
-    </div>
   </div>
   )
 }
