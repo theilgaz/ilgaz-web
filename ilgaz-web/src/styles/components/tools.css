@@ -3548,10 +3548,12 @@
 
 .failure-card-category {
   padding: 4px 10px;
-  background: rgba(0, 0, 0, 0.04);
   border-radius: 12px;
-  font-size: 0.75rem;
-  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: white;
 }
 
 .failure-card-year {
@@ -3613,6 +3615,103 @@
   line-height: 1.6;
 }
 
+.failure-card-lessons {
+  display: none;
+  gap: 16px;
+  margin-bottom: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+.failure-card-lessons.show {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.failure-card-do,
+.failure-card-dont {
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.failure-card-do {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+}
+
+.failure-card-dont {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.failure-card-do-header,
+.failure-card-dont-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.failure-card-do-icon,
+.failure-card-dont-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.failure-card-do-icon {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.failure-card-dont-icon {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.failure-card-do-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+.failure-card-dont-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.failure-card-do p,
+.failure-card-dont p {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.failure-show-lesson-btn {
+  display: block;
+  margin: 0 auto 24px;
+  padding: 10px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  background: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.failure-show-lesson-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.9);
+}
+
 .failure-card-nav {
   display: flex;
   justify-content: center;
@@ -3651,16 +3750,28 @@
 }
 
 .failure-grid-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   padding: 12px 8px;
+  padding-top: 16px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   background: white;
   cursor: pointer;
   transition: all 0.2s;
+}
+
+.failure-grid-category {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
 }
 
 .failure-grid-item:hover {
@@ -3721,5 +3832,13 @@
 
   .failure-sort {
     justify-content: center;
+  }
+
+  .failure-card-lessons.show {
+    grid-template-columns: 1fr;
+  }
+
+  .failure-card-large {
+    padding: 20px;
   }
 }
