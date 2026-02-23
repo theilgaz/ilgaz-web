@@ -148,64 +148,19 @@ function SunArc({ progress }: { progress: number }) {
   )
 }
 
-// NASA APOD
+// NASA APOD Preview - Sabit görsel, detayda fetch edilir
 function NasaApod() {
-  const [apod, setApod] = useState<{ url: string; title: string; explanation: string; mediaType: string } | null>(null)
-  const [expanded, setExpanded] = useState(false)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-      .then(r => r.json())
-      .then(data => {
-        setApod({
-          url: data.url,
-          title: data.title,
-          explanation: data.explanation,
-          mediaType: data.media_type
-        })
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="apod-loading">
-        <div className="apod-spinner" />
-        <span>Uzaydan veri alınıyor...</span>
-      </div>
-    )
-  }
-
-  if (!apod) return <div className="apod-loading">Yüklenemedi</div>
-
   return (
-    <>
-      <div className="apod" onClick={() => setExpanded(true)}>
-        {apod.mediaType === 'image' ? (
-          <img src={apod.url} alt={apod.title} />
-        ) : (
-          <iframe src={apod.url} title={apod.title} allowFullScreen />
-        )}
-        <div className="apod-title">{apod.title}</div>
-        <div className="apod-expand-hint">Büyütmek için tıkla</div>
+    <div className="apod-preview">
+      <img
+        src="https://apod.nasa.gov/apod/image/2502/PillsarsDeep_Siwakorn_960.jpg"
+        alt="Pillars of Creation"
+      />
+      <div className="apod-preview-overlay">
+        <span className="apod-preview-icon">🔭</span>
+        <span className="apod-preview-text">Günün Fotoğrafını Keşfet</span>
       </div>
-      {expanded && (
-        <div className="apod-modal" onClick={() => setExpanded(false)}>
-          <div className="apod-modal-content" onClick={e => e.stopPropagation()}>
-            {apod.mediaType === 'image' ? (
-              <img src={apod.url} alt={apod.title} />
-            ) : (
-              <iframe src={apod.url} title={apod.title} allowFullScreen />
-            )}
-            <h3>{apod.title}</h3>
-            <p>{apod.explanation}</p>
-            <button onClick={() => setExpanded(false)}>Kapat</button>
-          </div>
-        </div>
-      )}
-    </>
+    </div>
   )
 }
 
