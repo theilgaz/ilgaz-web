@@ -11,7 +11,7 @@ export function CollectionDetail() {
       <div>
         <h1>Koleksiyon bulunamadı</h1>
         <p>
-          <Link to="/koleksiyonlar">← Tüm koleksiyonlara dön</Link>
+          <Link to="/collections">← Tüm koleksiyonlara dön</Link>
         </p>
       </div>
     )
@@ -26,7 +26,7 @@ export function CollectionDetail() {
   return (
     <>
       <header className="collection-header">
-        <Link to="/koleksiyonlar" className="back-link-small">
+        <Link to="/collections" className="back-link-small">
           ← koleksiyonlar
         </Link>
         <h1>{collection.title}</h1>

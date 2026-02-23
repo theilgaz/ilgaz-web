@@ -81,7 +81,7 @@ export function Blog() {
                 return (
                   <Link
                     key={collection.slug}
-                    to={`/koleksiyonlar/${collection.slug}`}
+                    to={`/collections/${collection.slug}`}
                     className="collection-dropdown-item"
                   >
                     <div className="collection-dropdown-title">{collection.title}</div>

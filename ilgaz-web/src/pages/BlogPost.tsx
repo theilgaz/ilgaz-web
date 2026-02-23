@@ -33,7 +33,7 @@ export function BlogPost() {
         <div className="collection-indicator">
           <div className="collection-indicator-label">koleksiyon</div>
           <h3 className="collection-indicator-title">
-            <Link to={`/koleksiyonlar/${collection.slug}`}>{collection.title}</Link>
+            <Link to={`/collections/${collection.slug}`}>{collection.title}</Link>
           </h3>
           <div className="collection-indicator-position">
             {positionInCollection + 1} / {collection.posts.length}

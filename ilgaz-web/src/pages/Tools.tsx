@@ -4,6 +4,8 @@ import { Pomodoro, PomodoroHeatmap } from '../components/Pomodoro'
 import { JsonFormatter } from '../components/JsonFormatter'
 import { Base64Tool } from '../components/Base64Tool'
 import { ColorPalette } from '../components/ColorPalette'
+import { ColorShades } from '../components/ColorShades'
+import { GradientPreview } from '../components/GradientPreview'
 import { PixelArt } from '../components/PixelArt'
 import apodPreview from '../assets/apod-preview.jpg'
 
@@ -271,9 +273,25 @@ export function Tools() {
       id: 'color-palette',
       category: 'yaratici',
       title: 'Renk Paleti',
-      desc: 'Rastgele renk kombinasyonları. Tıkla ve kopyala.',
-      detailLink: '/renk-paleti',
+      desc: 'Harmoni modları ile renk kombinasyonları.',
+      detailLink: '/color-palette',
       visual: <ColorPalette />,
+    },
+    {
+      id: 'color-shades',
+      category: 'yaratici',
+      title: 'Renk Tonları',
+      desc: 'Bir renkten açıktan koyuya ton skalası.',
+      detailLink: '/color-shades',
+      visual: <ColorShades />,
+    },
+    {
+      id: 'gradient-generator',
+      category: 'yaratici',
+      title: 'Gradyan Oluşturucu',
+      desc: 'Linear ve radial gradyanlar oluştur.',
+      detailLink: '/gradient',
+      visual: <GradientPreview />,
     },
     {
       id: 'pixel-art',

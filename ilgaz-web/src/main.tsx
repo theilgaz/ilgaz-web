@@ -17,6 +17,8 @@ import { Pomodoro } from './pages/Pomodoro'
 import { JsonFormatterPage } from './pages/JsonFormatterPage'
 import { Base64Page } from './pages/Base64Page'
 import { ColorPalettePage } from './pages/ColorPalettePage'
+import { ColorShadesPage } from './pages/ColorShadesPage'
+import { GradientGeneratorPage } from './pages/GradientGeneratorPage'
 import { PixelArtPage } from './pages/PixelArtPage'
 import { NasaApodPage } from './pages/NasaApodPage'
 import './styles/index.css'
@@ -33,14 +35,16 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/now" element={<Now />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/koleksiyonlar" element={<Collections />} />
-          <Route path="/koleksiyonlar/:slug" element={<CollectionDetail />} />
+          <Route path="/collections" element={<Collections />} />
+          <Route path="/collections/:slug" element={<CollectionDetail />} />
           <Route path="/progress" element={<Progress />} />
-          <Route path="/araclar" element={<Tools />} />
+          <Route path="/tools" element={<Tools />} />
           <Route path="/pomodoro" element={<Pomodoro />} />
           <Route path="/json-formatter" element={<JsonFormatterPage />} />
           <Route path="/base64" element={<Base64Page />} />
-          <Route path="/renk-paleti" element={<ColorPalettePage />} />
+          <Route path="/color-palette" element={<ColorPalettePage />} />
+          <Route path="/color-shades" element={<ColorShadesPage />} />
+          <Route path="/gradient" element={<GradientGeneratorPage />} />
           <Route path="/pixel-art" element={<PixelArtPage />} />
           <Route path="/nasa-apod" element={<NasaApodPage />} />
         </Route>

@@ -24,7 +24,7 @@ export function Collections() {
           return (
             <Link
               key={collection.slug}
-              to={`/koleksiyonlar/${collection.slug}`}
+              to={`/collections/${collection.slug}`}
               className="collection-card"
             >
               <h2 className="collection-title">{collection.title}</h2>
