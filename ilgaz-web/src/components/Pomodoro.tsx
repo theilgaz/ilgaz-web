@@ -1,4 +1,25 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
+
+interface PomodoroTask {
+  id: string
+  title: string
+  estimatedPomos: number
+  completedPomos: number
+  done: boolean
+  createdAt: string
+}
+
+function getTasks(): PomodoroTask[] {
+  try {
+    return JSON.parse(localStorage.getItem('pomodoro-tasks') || '[]')
+  } catch {
+    return []
+  }
+}
+
+function saveTasks(tasks: PomodoroTask[]) {
+  localStorage.setItem('pomodoro-tasks', JSON.stringify(tasks))
+}
 
 const pomodoroPresets = [
   { label: '25dk', minutes: 25, desc: 'Klasik' },
@@ -119,9 +140,64 @@ export function Pomodoro() {
   const [customTime, setCustomTime] = useState('')
   const [showCustomInput, setShowCustomInput] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [tasks, setTasks] = useState<PomodoroTask[]>(getTasks)
+  const [activeTaskId, setActiveTaskId] = useState<string | null>(null)
+  const [newTaskTitle, setNewTaskTitle] = useState('')
+  const [newTaskPomos, setNewTaskPomos] = useState(4)
   const hasCompletedRef = useRef(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const originalTitle = useRef(document.title)
+
+  const updateTaskPomo = useCallback(() => {
+    if (!activeTaskId) return
+    setTasks(prev => {
+      const updated = prev.map(t =>
+        t.id === activeTaskId
+          ? { ...t, completedPomos: t.completedPomos + 1 }
+          : t
+      )
+      saveTasks(updated)
+      return updated
+    })
+  }, [activeTaskId])
+
+  const addTask = () => {
+    if (!newTaskTitle.trim()) return
+    const newTask: PomodoroTask = {
+      id: Date.now().toString(),
+      title: newTaskTitle.trim(),
+      estimatedPomos: newTaskPomos,
+      completedPomos: 0,
+      done: false,
+      createdAt: new Date().toISOString()
+    }
+    const updated = [...tasks, newTask]
+    setTasks(updated)
+    saveTasks(updated)
+    setNewTaskTitle('')
+    setNewTaskPomos(4)
+  }
+
+  const toggleTaskDone = (id: string) => {
+    setTasks(prev => {
+      const updated = prev.map(t =>
+        t.id === id ? { ...t, done: !t.done } : t
+      )
+      saveTasks(updated)
+      return updated
+    })
+  }
+
+  const deleteTask = (id: string) => {
+    setTasks(prev => {
+      const updated = prev.filter(t => t.id !== id)
+      saveTasks(updated)
+      return updated
+    })
+    if (activeTaskId === id) setActiveTaskId(null)
+  }
+
+  const activeTask = tasks.find(t => t.id === activeTaskId)
 
   useEffect(() => {
     if ('Notification' in window && Notification.permission === 'default') {
@@ -162,6 +238,7 @@ export function Pomodoro() {
             if (!hasCompletedRef.current && initialMinutes >= 15) {
               if (soundEnabled) playAlarm()
               savePomodoroComplete()
+              updateTaskPomo()
               window.dispatchEvent(new Event('pomodoro-complete'))
               hasCompletedRef.current = true
               setShowComplete(true)
@@ -171,7 +248,7 @@ export function Pomodoro() {
               setTimeout(() => setShowFlash(false), 500)
               if ('Notification' in window && Notification.permission === 'granted') {
                 new Notification('Pomodoro Tamamlandı! 🍅', {
-                  body: 'Harika iş! Mola zamanı.',
+                  body: activeTask ? `${activeTask.title} - ${activeTask.completedPomos + 1}/${activeTask.estimatedPomos}` : 'Harika iş! Mola zamanı.',
                   icon: '/favicon.png'
                 })
               }
@@ -186,7 +263,7 @@ export function Pomodoro() {
       }, 1000)
     }
     return () => clearInterval(interval)
-  }, [isRunning, minutes, seconds, initialMinutes, soundEnabled])
+  }, [isRunning, minutes, seconds, initialMinutes, soundEnabled, updateTaskPomo, activeTask])
 
   const reset = () => {
     setIsRunning(false)
@@ -258,27 +335,37 @@ export function Pomodoro() {
         </button>
       </div>
 
-      <svg className="pomodoro-ring" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="4" />
-        <circle
-          className="pomodoro-ring-progress"
-          cx="50" cy="50" r="45" fill="none"
-          stroke={initialMinutes <= 5 ? '#22c55e' : '#ef4444'}
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeDasharray={`${progress * 2.83} 283`}
-          transform="rotate(-90 50 50)"
-        />
-      </svg>
-
-      <div className="pomodoro-time">
-        {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+      <div className="pomodoro-ring-wrapper">
+        <svg className="pomodoro-ring" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="4" />
+          <circle
+            className="pomodoro-ring-progress"
+            cx="50" cy="50" r="45" fill="none"
+            stroke={initialMinutes <= 5 ? '#22c55e' : '#ef4444'}
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeDasharray={`${progress * 2.83} 283`}
+            transform="rotate(-90 50 50)"
+          />
+        </svg>
+        <div className="pomodoro-time">
+          {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+        </div>
       </div>
 
       <div className="pomodoro-meta">
         <span className="pomodoro-percent">{progressPercent}%</span>
         {isRunning && <span className="pomodoro-eta">Bitecek: {getCompletionTime()}</span>}
       </div>
+
+      {activeTask && (
+        <div className="pomodoro-active-task">
+          <span className="pomodoro-active-task-title">{activeTask.title}</span>
+          <span className="pomodoro-active-task-count">
+            {activeTask.completedPomos}/{activeTask.estimatedPomos} 🍅
+          </span>
+        </div>
+      )}
 
       <div className="pomodoro-today">Bugün: {todayCount} 🍅</div>
 
@@ -324,9 +411,70 @@ export function Pomodoro() {
         </div>
       )}
 
-      <div className="pomodoro-shortcuts">
-        <span>Space: Başlat/Duraklat</span>
-        <span>R: Sıfırla</span>
+      <div className="tool-hint">
+        <kbd>Space</kbd> <span>Başlat/Duraklat</span>
+        <span className="separator">·</span>
+        <kbd>R</kbd> <span>Sıfırla</span>
+      </div>
+
+      {/* Task List */}
+      <div className="pomodoro-tasks">
+        <div className="pomodoro-task-add">
+          <input
+            type="text"
+            placeholder="Yeni görev..."
+            value={newTaskTitle}
+            onChange={e => setNewTaskTitle(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && addTask()}
+          />
+          <div className="pomodoro-pomo-selector">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
+              <button
+                key={n}
+                className={newTaskPomos === n ? 'active' : ''}
+                onClick={() => setNewTaskPomos(n)}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+          <button className="pomodoro-task-add-btn" onClick={addTask}>Ekle</button>
+        </div>
+
+        <div className="pomodoro-task-list">
+          {tasks.map(task => (
+            <div
+              key={task.id}
+              className={`pomodoro-task ${task.done ? 'done' : ''} ${activeTaskId === task.id ? 'active' : ''}`}
+              onClick={() => !task.done && setActiveTaskId(task.id === activeTaskId ? null : task.id)}
+            >
+              <button
+                className="pomodoro-task-check"
+                onClick={e => { e.stopPropagation(); toggleTaskDone(task.id) }}
+              >
+                {task.done ? '✓' : '○'}
+              </button>
+              <span className="pomodoro-task-title">{task.title}</span>
+              <div className="pomodoro-pomo-dots">
+                {Array.from({ length: task.estimatedPomos }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={`pomodoro-pomo-dot ${i < task.completedPomos ? 'filled' : ''}`}
+                  />
+                ))}
+              </div>
+              <span className="pomodoro-task-count">
+                {task.completedPomos}/{task.estimatedPomos}
+              </span>
+              <button
+                className="pomodoro-task-delete"
+                onClick={e => { e.stopPropagation(); deleteTask(task.id) }}
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
