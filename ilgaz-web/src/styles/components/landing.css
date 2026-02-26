@@ -217,3 +217,41 @@
   color: rgba(0, 0, 0, 0.5);
   letter-spacing: -0.02em;
 }
+
+/* Today's posts - minimal */
+.landing-today {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.landing-today-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.3);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.landing-today-posts {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.landing-today-posts a {
+  color: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.landing-today-posts a:hover {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.landing-today-posts .dot {
+  color: rgba(0, 0, 0, 0.2);
+  margin: 0 8px;
+}
