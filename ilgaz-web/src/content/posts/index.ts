@@ -6,6 +6,7 @@ import Post5, { frontmatter as meta5 } from './suphe-den-yakine.mdx'
 import Post6, { frontmatter as meta6 } from './varolusun-agirligi.mdx'
 import Post7, { frontmatter as meta7 } from './hakikatin-bedeli.mdx'
 import Post8, { frontmatter as meta8 } from './uc-arayisci.mdx'
+import Post9, { frontmatter as meta9 } from './yarin-kilarim.mdx'
 
 export interface PostMeta {
   slug: string
@@ -21,6 +22,7 @@ export interface Post {
 }
 
 export const posts: Post[] = [
+  { meta: meta9, Content: Post9 },
   { meta: meta8, Content: Post8 },
   { meta: meta7, Content: Post7 },
   { meta: meta6, Content: Post6 },
