@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../content/projects'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function Projects() {
+  useDocumentTitle('projeler')
   return (
     <>
       <h1>Projeler</h1>

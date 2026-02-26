@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 function highlightJson(json: string): JSX.Element[] {
   const elements: JSX.Element[] = []
@@ -91,6 +92,7 @@ function highlightJson(json: string): JSX.Element[] {
 }
 
 export function JsonFormatterPage() {
+  useDocumentTitle('json formatter')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -242,6 +244,14 @@ export function JsonFormatterPage() {
               </pre>
             )}
           </div>
+        </div>
+
+        <div className="tool-hint">
+          <span>JSON yapıştır</span>
+          <span className="separator">→</span>
+          <kbd>Format</kbd> <span>veya</span> <kbd>Minify</kbd>
+          <span className="separator">·</span>
+          <span>Syntax highlighting</span>
         </div>
       </div>
     </div>

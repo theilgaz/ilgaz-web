@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 function CopyIcon() {
   return (
@@ -18,6 +19,7 @@ function CheckIcon() {
 }
 
 export function GradientGeneratorPage() {
+  useDocumentTitle('gradyan')
   const [gradientColors, setGradientColors] = useState<string[]>(['#667eea', '#764ba2'])
   const [gradientInputs, setGradientInputs] = useState<string[]>(['#667EEA', '#764BA2'])
   const [gradientType, setGradientType] = useState<'linear' | 'radial'>('linear')
@@ -177,6 +179,14 @@ export function GradientGeneratorPage() {
 
         <div className="gradient-output">
           <code>{`background: ${gradientCSS};`}</code>
+        </div>
+
+        <div className="tool-hint">
+          <span>Renk ekle/çıkar</span>
+          <span className="separator">·</span>
+          <span>Açı ve tip ayarla</span>
+          <span className="separator">·</span>
+          <kbd>CSS Kopyala</kbd>
         </div>
       </div>
     </div>

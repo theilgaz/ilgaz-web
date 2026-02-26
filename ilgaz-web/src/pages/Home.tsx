@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function Home() {
+  useDocumentTitle('ana sayfa')
   const [showPhoto, setShowPhoto] = useState(false)
 
   return (

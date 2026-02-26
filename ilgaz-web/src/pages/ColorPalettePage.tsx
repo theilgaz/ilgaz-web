@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 function CopyIcon() {
   return (
@@ -172,13 +173,13 @@ interface ColorState {
 }
 
 export function ColorPalettePage() {
+  useDocumentTitle('renk paleti')
   const [colors, setColors] = useState<ColorState[]>(() =>
     generateHarmonyColors('random').map(hex => ({ hex, locked: false }))
   )
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
   const [history, setHistory] = useState<ColorState[][]>([])
   const [harmony, setHarmony] = useState<HarmonyType>('random')
-  const [showPresets, setShowPresets] = useState(false)
 
   const generate = useCallback(() => {
     setHistory(h => [...h.slice(-9), colors])
@@ -205,7 +206,6 @@ export function ColorPalettePage() {
     if (palette) {
       setHistory(h => [...h.slice(-9), colors])
       setColors(palette.map(hex => ({ hex, locked: false })))
-      setShowPresets(false)
     }
   }
 
@@ -270,9 +270,6 @@ export function ColorPalettePage() {
           <button onClick={undo} disabled={history.length === 0}>
             Geri al
           </button>
-          <button onClick={() => setShowPresets(!showPresets)} className={showPresets ? 'active' : ''}>
-            Hazır Paletler
-          </button>
           <div className="palette-page-spacer" />
           <button onClick={copyAll}>
             {copiedIndex === -1 ? '✓' : 'Tümünü kopyala'}
@@ -281,25 +278,6 @@ export function ColorPalettePage() {
             {copiedIndex === -2 ? '✓' : 'CSS'}
           </button>
         </div>
-
-        {showPresets && (
-          <div className="palette-presets">
-            {Object.entries(presetPalettes).map(([name, palette]) => (
-              <button
-                key={name}
-                className="palette-preset"
-                onClick={() => applyPreset(name)}
-              >
-                <div className="palette-preset-colors">
-                  {palette.map((color, i) => (
-                    <div key={i} style={{ background: color }} />
-                  ))}
-                </div>
-                <span className="palette-preset-name">{name}</span>
-              </button>
-            ))}
-          </div>
-        )}
 
         <div className="palette-page-colors">
           {colors.map((color, i) => {
@@ -339,8 +317,30 @@ export function ColorPalettePage() {
           })}
         </div>
 
-        <div className="palette-page-hint">
-          <kbd>Space</kbd> Yenile &nbsp;·&nbsp; Kilitle ile renkleri koru
+        <div className="tool-hint">
+          <kbd>Space</kbd> <span>Yenile</span>
+          <span className="separator">·</span>
+          <span>Kilitle ile renkleri koru</span>
+        </div>
+
+        <div className="palette-presets-section">
+          <h3 className="palette-presets-title">Hazır Paletler</h3>
+          <div className="palette-presets">
+            {Object.entries(presetPalettes).map(([name, palette]) => (
+              <button
+                key={name}
+                className="palette-preset"
+                onClick={() => applyPreset(name)}
+              >
+                <div className="palette-preset-colors">
+                  {palette.map((color, i) => (
+                    <div key={i} style={{ background: color }} />
+                  ))}
+                </div>
+                <span className="palette-preset-name">{name}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

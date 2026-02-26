@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 function CopyIcon() {
   return (
@@ -18,6 +19,7 @@ function CheckIcon() {
 }
 
 export function Base64Page() {
+  useDocumentTitle('base64')
   // Encode state
   const [encodeInput, setEncodeInput] = useState('')
   const [encodeOutput, setEncodeOutput] = useState('')
@@ -138,6 +140,14 @@ export function Base64Page() {
               )}
             </div>
           </div>
+        </div>
+
+        <div className="tool-hint">
+          <span>Metin yaz</span>
+          <span className="separator">→</span>
+          <span>Otomatik dönüştür</span>
+          <span className="separator">·</span>
+          <span>Kopyala butonu ile al</span>
         </div>
       </div>
     </div>

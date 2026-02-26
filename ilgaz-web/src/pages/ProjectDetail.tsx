@@ -1,10 +1,12 @@
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { useState } from 'react'
 import { projectsBySlug } from '../content/projects'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>()
   const project = slug ? projectsBySlug[slug] : null
+  useDocumentTitle(project?.meta.name || 'proje bulunamadı')
   const [lightboxImage, setLightboxImage] = useState<string | null>(null)
 
   if (!project) {

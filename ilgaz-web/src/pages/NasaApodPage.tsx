@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 interface ApodData {
   url: string
@@ -11,6 +12,7 @@ interface ApodData {
 }
 
 export function NasaApodPage() {
+  useDocumentTitle('nasa günün fotoğrafı')
   const [apod, setApod] = useState<ApodData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

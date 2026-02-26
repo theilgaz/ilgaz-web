@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 function CopyIcon() {
   return (
@@ -13,15 +14,6 @@ function CheckIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12"/>
-    </svg>
-  )
-}
-
-function PasteIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
     </svg>
   )
 }
@@ -115,10 +107,10 @@ function generateShades(baseHex: string, settings: ShadeSettings): string[] {
 }
 
 export function ColorShadesPage() {
+  useDocumentTitle('renk tonları')
   const [shadesBaseColor, setShadesBaseColor] = useState('#3b82f6')
   const [shadesHexInput, setShadesHexInput] = useState('#3B82F6')
   const [copiedShadeIndex, setCopiedShadeIndex] = useState<number | null>(null)
-  const [hasEverCopiedShade, setHasEverCopiedShade] = useState(false)
   const [shadeSettings, setShadeSettings] = useState<ShadeSettings>({
     lightMax: 95,
     lightMin: 5,
@@ -150,24 +142,7 @@ export function ColorShadesPage() {
   const copyShade = (shade: string, index: number) => {
     navigator.clipboard.writeText(shade)
     setCopiedShadeIndex(index)
-    setHasEverCopiedShade(true)
     setTimeout(() => setCopiedShadeIndex(null), 1500)
-  }
-
-  const pasteToShades = async () => {
-    try {
-      const text = await navigator.clipboard.readText()
-      let val = text.trim().toUpperCase()
-      val = val.replace(/^#+/, '')
-      val = '#' + val.replace(/[^0-9A-F]/gi, '').slice(0, 6)
-
-      if (/^#[0-9A-Fa-f]{6}$/i.test(val)) {
-        setShadesBaseColor(val.toLowerCase())
-        setShadesHexInput(val)
-      }
-    } catch {
-      // Clipboard access denied
-    }
   }
 
   const copyAllShades = () => {
@@ -220,15 +195,6 @@ export function ColorShadesPage() {
                 className="shades-hex-input"
                 maxLength={7}
               />
-              {hasEverCopiedShade && (
-                <button
-                  onClick={pasteToShades}
-                  className="shades-paste-btn"
-                  title="Yapıştır"
-                >
-                  <PasteIcon />
-                </button>
-              )}
             </div>
           </div>
 
@@ -290,6 +256,12 @@ export function ColorShadesPage() {
               </div>
             )
           })}
+        </div>
+
+        <div className="tool-hint">
+          <span>Tona tıkla</span>
+          <span className="separator">→</span>
+          <span>Kopyala</span>
         </div>
       </div>
     </div>

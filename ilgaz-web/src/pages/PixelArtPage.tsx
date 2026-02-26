@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 type GridSize = 8 | 16 | 32 | 64 | 128
 
@@ -156,6 +157,7 @@ const colorPalette = [
 ]
 
 export function PixelArtPage() {
+  useDocumentTitle('pixel art')
   const [gridSize, setGridSize] = useState<GridSize>(32)
   const [grid, setGrid] = useState(() => Array(32 * 32).fill('#ffffff'))
   const [history, setHistory] = useState<string[][]>([])
@@ -485,8 +487,10 @@ export function PixelArtPage() {
               />
             ))}
           </div>
-          <div className="pixel-page-hint">
-            Sol tık: Çiz · Sağ tık: Doldur
+          <div className="tool-hint">
+            <kbd>Sol tık</kbd> <span>Çiz</span>
+            <span className="separator">·</span>
+            <kbd>Sağ tık</kbd> <span>Doldur</span>
           </div>
 
           {/* Canvas Size Selector */}

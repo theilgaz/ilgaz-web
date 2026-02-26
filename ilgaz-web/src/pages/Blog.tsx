@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { posts, postsBySlug } from '../content/posts'
 import { collections } from '../content/collections'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function Blog() {
+  useDocumentTitle('yazılar')
   const [activeTag, setActiveTag] = useState<string | null>(null)
   const [showCollections, setShowCollections] = useState(false)
 

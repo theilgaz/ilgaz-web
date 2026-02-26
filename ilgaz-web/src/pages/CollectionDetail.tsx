@@ -1,10 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
 import { collectionsBySlug } from '../content/collections'
 import { postsBySlug } from '../content/posts'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function CollectionDetail() {
   const { slug } = useParams()
   const collection = collectionsBySlug[slug || '']
+  useDocumentTitle(collection?.title || 'koleksiyon bulunamadı')
 
   if (!collection) {
     return (

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const DIYANET_API = 'https://ezanvakti.emushaf.net'
 
@@ -1318,6 +1319,7 @@ function ProgressCard({
 }
 
 export function Progress() {
+  useDocumentTitle('günün akışı')
   const [city, setCity] = useState(() => {
     return localStorage.getItem('progress-city') || 'konya'
   })

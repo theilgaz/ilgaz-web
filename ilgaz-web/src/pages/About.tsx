@@ -1,4 +1,7 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
+
 export function About() {
+  useDocumentTitle('hakkımda')
   return (
     <>
       <h1>Hakkımda</h1>

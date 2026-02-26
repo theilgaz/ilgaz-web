@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 interface FailedStartup {
   name: string
@@ -1554,6 +1555,7 @@ function StartupLogo({ startup, size = 48 }: { startup: FailedStartup; size?: nu
 }
 
 export function FailureLessonsPage() {
+  useDocumentTitle('başarısızlık dersleri')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [sortBy, setSortBy] = useState<SortBy>('random')
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all')

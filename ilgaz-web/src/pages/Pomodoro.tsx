@@ -1,6 +1,8 @@
 import { Pomodoro as PomodoroTimer, PomodoroHeatmap } from '../components/Pomodoro'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function Pomodoro() {
+  useDocumentTitle('pomodoro')
   return (
     <div className="pomodoro-page">
       <h1>Pomodoro</h1>

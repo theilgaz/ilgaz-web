@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { collections } from '../content/collections'
 import { postsBySlug } from '../content/posts'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function Collections() {
+  useDocumentTitle('koleksiyonlar')
   return (
     <>
       <blockquote className="page-quote">

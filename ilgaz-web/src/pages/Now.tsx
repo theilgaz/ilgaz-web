@@ -1,4 +1,7 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
+
 export function Now() {
+  useDocumentTitle('şimdi')
   return (
     <>
       <h1>Şimdi</h1>

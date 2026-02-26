@@ -1,10 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
 import { postsBySlug } from '../content/posts'
 import { getCollectionForPost, getPostPositionInCollection } from '../content/collections'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function BlogPost() {
   const { slug } = useParams()
   const post = postsBySlug[slug || '']
+  useDocumentTitle(post?.meta.title || 'yazı bulunamadı')
 
   if (!post) {
     return (

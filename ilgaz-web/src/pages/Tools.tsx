@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 interface Tool {
   id: string
@@ -98,6 +99,7 @@ function AppIcon({ tool, index }: { tool: Tool; index: number }) {
 }
 
 export function Tools() {
+  useDocumentTitle('araçlar')
   const [search, setSearch] = useState('')
 
   const filtered = useMemo(() => {
