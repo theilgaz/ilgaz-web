@@ -16,28 +16,199 @@
   margin: 0;
 }
 
-/* Category sections */
-.category-sections {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+/* Blog search */
+.blog-search {
+  position: relative;
+  margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-  .category-sections {
-    grid-template-columns: 1fr;
-    gap: 32px;
+.blog-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.blog-search-input {
+  width: 100%;
+  padding: 10px 14px 10px 40px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.85);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.blog-search-input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.blog-search-input:focus {
+  border-color: #007AFF;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* Blog stats */
+.blog-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .blog-stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.category-section {
-
-}
-
-.category-section {
+.blog-stat-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 14px 10px;
+  background: rgba(255, 255, 255, 0.9);
+  gap: 2px;
 }
+
+.blog-stat-value {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.blog-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: lowercase;
+}
+
+/* Blog filter chips */
+.blog-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.blog-filter-chip {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid transparent;
+  padding: 5px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.blog-filter-chip:hover {
+  background: rgba(0, 0, 0, 0.07);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.blog-filter-chip.active {
+  background: #007AFF;
+  color: #fff;
+  border-color: #007AFF;
+}
+
+/* Blog results info */
+.blog-results-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.blog-results-clear {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: #007AFF;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.blog-results-clear:hover {
+  text-decoration: underline;
+}
+
+/* Blog empty state */
+.blog-empty {
+  text-align: center;
+  padding: 48px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.blog-empty p {
+  margin: 0;
+}
+
+/* Post card tag */
+.post-card-tag {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* Post card right section */
+.post-card-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.post-card-date {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+}
+
+/* Post card new badge */
+.post-card-new {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: #007AFF;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+  line-height: 1.6;
+}
+
+/* Category sections (kept for backwards compat with Category page) */
 
 .category-header {
   display: flex;

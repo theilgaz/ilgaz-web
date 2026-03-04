@@ -1,3 +1,7 @@
+declare module 'virtual:search-index' {
+  export const searchIndex: Record<string, string>
+}
+
 declare module '*.mdx' {
   import type { ComponentType } from 'react'
 
