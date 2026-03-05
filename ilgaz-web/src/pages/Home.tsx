@@ -30,6 +30,12 @@ export function Home() {
         </p>
       </div>
 
+      <a href="https://mahfuz.ilg.az" target="_blank" rel="noopener noreferrer" className="landing-promo">
+        <span className="landing-promo-name">mahfuz</span>
+        <span className="landing-promo-desc">Kur'an ezber takip uygulaması.</span>
+        <span className="landing-promo-link">mahfuz.ilg.az →</span>
+      </a>
+
       {showPhoto && (
         <div className="photo-modal" onClick={() => setShowPhoto(false)}>
           <img src="/photo.jpg" alt="Abdullah Ilgaz" />

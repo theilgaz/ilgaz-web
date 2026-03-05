@@ -62,6 +62,26 @@
     gap: 32px;
   }
 
+  .landing-promo {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .landing-promo-desc {
+    width: 100%;
+    order: 3;
+  }
+
+  .project-featured-card {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .project-featured-desc {
+    width: 100%;
+    order: 3;
+  }
+
   .project-gallery {
     grid-template-columns: 1fr;
   }

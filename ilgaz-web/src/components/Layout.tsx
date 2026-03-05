@@ -270,6 +270,7 @@ export function Layout() {
         <div className="container">
           <div className="footer-content footer-centered">
             <span className="footer-arabic" title="Allah'tan başka galip yoktur">لا غالب إلا الله</span>
+            <a href="https://mahfuz.ilg.az" target="_blank" rel="noopener noreferrer" className="footer-promo">mahfuz.ilg.az</a>
           </div>
         </div>
       </footer>

@@ -140,7 +140,10 @@ main {
 }
 
 .footer-content.footer-centered {
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 6px;
 }
 
 .footer a {
@@ -172,6 +175,18 @@ main {
 
 .footer-arabic:hover::after {
   opacity: 1;
+}
+
+.footer-promo {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-promo:hover {
+  color: #007AFF;
 }
 
 /* Section titles */
