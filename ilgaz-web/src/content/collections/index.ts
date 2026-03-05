@@ -17,6 +17,20 @@ export const collections: Collection[] = [
       'uc-arayisci',
     ],
   },
+  {
+    slug: 'ummetten-portreler',
+    title: 'ümmetten portreler',
+    description: 'İslam dünyasının fikir adamları, liderleri ve direniş önderleri. Hayatları, mücadeleleri ve bıraktıkları miras.',
+    posts: [
+      'aliya-izzetbegovic',
+      'seyyid-kutup',
+      'hasan-el-benna',
+      'ali-seriati',
+      'omer-muhtar',
+      'necmettin-erbakan',
+      'seyh-samil',
+    ],
+  },
 ]
 
 export const collectionsBySlug = Object.fromEntries(

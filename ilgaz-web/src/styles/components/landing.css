@@ -218,40 +218,49 @@
   letter-spacing: -0.02em;
 }
 
-/* Today's posts - minimal */
-.landing-today {
-  text-align: center;
-  margin-top: 8px;
+/* Today banner - sits below navbar */
+.today-banner {
+  position: fixed;
+  top: 48px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: 99;
 }
 
-.landing-today-label {
+.today-banner-content {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 16px;
+}
+
+.today-banner-label,
+.today-banner-dot,
+.today-banner-link {
   font-family: var(--font-sans);
   font-size: 0.65rem;
-  font-weight: 500;
+  line-height: 1;
+}
+
+.today-banner-label {
+  font-weight: 600;
   text-transform: lowercase;
-  letter-spacing: 0.1em;
-  color: rgba(0, 0, 0, 0.3);
-  display: block;
-  margin-bottom: 6px;
+  color: rgba(0, 0, 0, 0.35);
 }
 
-.landing-today-posts {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.5);
+.today-banner-dot {
+  color: rgba(0, 0, 0, 0.4);
 }
 
-.landing-today-posts a {
+.today-banner-link {
   color: rgba(0, 0, 0, 0.6);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.landing-today-posts a:hover {
+.today-banner-link:hover {
   color: rgba(0, 0, 0, 0.9);
-}
-
-.landing-today-posts .dot {
-  color: rgba(0, 0, 0, 0.2);
-  margin: 0 8px;
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Outlet, NavLink, Link } from 'react-router-dom'
+import { Outlet, NavLink, Link, useLocation } from 'react-router-dom'
+import { posts } from '../content/posts'
 
 // Şehir verileri (Progress.tsx ile senkron)
 const cities: Record<string, { lat: number; lng: number; timezone: number; cityId?: string }> = {
@@ -190,8 +191,19 @@ function useNextPrayer() {
   return prayerInfo
 }
 
+function getTodayFormatted(): string {
+  const months = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara']
+  const now = new Date()
+  return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
+}
+
 export function Layout() {
   const nextPrayer = useNextPrayer()
+  const location = useLocation()
+  const isHome = location.pathname === '/'
+
+  const today = getTodayFormatted()
+  const todaysPosts = posts.filter(p => p.meta.date === today)
 
   return (
     <>
@@ -232,6 +244,21 @@ export function Layout() {
           )}
         </div>
       </nav>
+
+      {isHome && todaysPosts.length > 0 && (
+        <div className="today-banner">
+          <div className="today-banner-content">
+            <span className="today-banner-label">bugün</span>
+            <span className="today-banner-dot">·</span>
+            {todaysPosts.map((post, i) => (
+              <span key={post.meta.slug}>
+                <Link to={`/blog/${post.meta.slug}`} className="today-banner-link">{post.meta.title}</Link>
+                {i < todaysPosts.length - 1 && <span className="today-banner-dot">·</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       <main>
         <div className="container">
