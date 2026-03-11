@@ -7,7 +7,15 @@ interface Tool {
   title: string
   icon: string
   link: string
-  gradient: string
+  description: string
+  category: string
+}
+
+const categoryLabels: Record<string, string> = {
+  verimlilik: 'verimlilik',
+  gelistirici: 'geliştirici',
+  tasarim: 'tasarım',
+  ilham: 'ilham',
 }
 
 const tools: Tool[] = [
@@ -16,141 +24,230 @@ const tools: Tool[] = [
     title: 'Günün Akışı',
     icon: '☀️',
     link: '/progress',
-    gradient: 'linear-gradient(145deg, #ffb347 0%, #ffcc33 100%)',
+    description: 'Günün ilerleyişini takip et',
+    category: 'verimlilik',
+  },
+  {
+    id: 'time',
+    title: 'Zaman',
+    icon: '⏳',
+    link: '/time',
+    description: 'Dakikadan yıla, zamanın neresindeyiz',
+    category: 'verimlilik',
   },
   {
     id: 'pomodoro',
     title: 'Pomodoro',
     icon: '🍅',
     link: '/pomodoro',
-    gradient: 'linear-gradient(145deg, #ff6b6b 0%, #ee5a5a 100%)',
+    description: 'Odaklan, mola ver, tekrarla',
+    category: 'verimlilik',
   },
   {
-    id: 'json-formatter',
-    title: 'JSON',
+    id: 'text-formatter',
+    title: 'Formatter',
     icon: '{ }',
-    link: '/json-formatter',
-    gradient: 'linear-gradient(145deg, #4ade80 0%, #22c55e 100%)',
+    link: '/text-formatter',
+    description: 'JSON, XML, YAML, SQL biçimlendirici',
+    category: 'gelistirici',
   },
   {
     id: 'base64',
     title: 'Base64',
     icon: '🔤',
     link: '/base64',
-    gradient: 'linear-gradient(145deg, #38bdf8 0%, #0ea5e9 100%)',
+    description: 'Metni encode ve decode et',
+    category: 'gelistirici',
   },
   {
     id: 'color-palette',
     title: 'Renk Paleti',
     icon: '🎨',
     link: '/color-palette',
-    gradient: 'linear-gradient(145deg, #c084fc 0%, #a855f7 100%)',
+    description: 'Uyumlu renk paletleri oluştur',
+    category: 'tasarim',
   },
   {
     id: 'color-shades',
     title: 'Tonlar',
     icon: '🌈',
     link: '/color-shades',
-    gradient: 'linear-gradient(145deg, #f472b6 0%, #ec4899 100%)',
+    description: 'Bir rengin açık ve koyu tonlarını keşfet',
+    category: 'tasarim',
   },
   {
     id: 'gradient-generator',
     title: 'Gradyan',
     icon: '🎭',
     link: '/gradient',
-    gradient: 'linear-gradient(145deg, #fb923c 0%, #f97316 100%)',
+    description: 'CSS gradyan oluşturucu',
+    category: 'tasarim',
   },
   {
     id: 'pixel-art',
     title: 'Pixel Art',
     icon: '🖼️',
     link: '/pixel-art',
-    gradient: 'linear-gradient(145deg, #818cf8 0%, #6366f1 100%)',
+    description: 'Piksel piksel çiz',
+    category: 'tasarim',
   },
   {
     id: 'nasa-apod',
     title: 'NASA',
     icon: '🔭',
     link: '/nasa-apod',
-    gradient: 'linear-gradient(145deg, #1e3a5f 0%, #0f172a 100%)',
+    description: 'Günün astronomi fotoğrafı',
+    category: 'ilham',
   },
   {
     id: 'failure-lesson',
     title: 'Dersler',
     icon: '💡',
     link: '/failure-lessons',
-    gradient: 'linear-gradient(145deg, #fbbf24 0%, #f59e0b 100%)',
+    description: 'Başarısızlıklardan çıkan dersler',
+    category: 'ilham',
   },
 ]
-
-function AppIcon({ tool, index }: { tool: Tool; index: number }) {
-  return (
-    <Link
-      to={tool.link}
-      className="launchpad-item"
-      style={{ animationDelay: `${index * 0.05}s` }}
-    >
-      <div className="launchpad-icon" style={{ background: tool.gradient }}>
-        <span>{tool.icon}</span>
-      </div>
-      <span className="launchpad-title">{tool.title}</span>
-    </Link>
-  )
-}
 
 export function Tools() {
   useDocumentTitle('araçlar')
   const [search, setSearch] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+
+  const categories = useMemo(() => {
+    const counts: Record<string, number> = {}
+    tools.forEach(t => {
+      counts[t.category] = (counts[t.category] || 0) + 1
+    })
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([cat, count]) => ({ cat, count }))
+  }, [])
 
   const filtered = useMemo(() => {
-    if (!search.trim()) return tools
-    const q = search.toLowerCase()
-    return tools.filter(t =>
-      t.title.toLowerCase().includes(q) ||
-      t.id.toLowerCase().includes(q)
-    )
-  }, [search])
+    let result = tools
+
+    if (selectedCategory) {
+      result = result.filter(t => t.category === selectedCategory)
+    }
+
+    if (search.trim()) {
+      const q = search.toLowerCase()
+      result = result.filter(t =>
+        t.title.toLowerCase().includes(q) ||
+        t.id.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q)
+      )
+    }
+
+    return result
+  }, [search, selectedCategory])
+
+  const isFiltering = selectedCategory !== null || search.trim().length > 0
+
+  const stats = useMemo(() => {
+    const total = tools.length
+    const categoryCount = new Set(tools.map(t => t.category)).size
+    const biggest = categories[0]
+    return {
+      total,
+      categoryCount,
+      biggestName: categoryLabels[biggest.cat] || biggest.cat,
+      biggestCount: biggest.count,
+    }
+  }, [categories])
+
+  function clearFilters() {
+    setSelectedCategory(null)
+    setSearch('')
+  }
 
   return (
-    <div className="launchpad">
-      <div className="launchpad-bg" />
+    <div className="tools-page">
+      <div className="tools-header">
+        <h1>Araçlar</h1>
+        <p className="tools-lead">Günlük iş akışını hızlandıran küçük araçlar.</p>
+      </div>
 
-      <div className="launchpad-content">
-        <div className="spotlight">
-          <svg className="spotlight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="8" />
-            <path d="M21 21l-4.35-4.35" />
-          </svg>
-          <input
-            type="text"
-            className="spotlight-input"
-            placeholder="Ara..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            autoFocus
-          />
-          {search && (
-            <button className="spotlight-clear" onClick={() => setSearch('')}>
-              ×
-            </button>
-          )}
-        </div>
-
-        <div className="launchpad-grid">
-          {filtered.map((tool, i) => (
-            <AppIcon key={tool.id} tool={tool} index={i} />
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
-          <p className="launchpad-empty">Sonuç bulunamadı</p>
+      <div className="tools-search">
+        <svg className="tools-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          className="tools-search-input"
+          placeholder="araç veya açıklama ara..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+        {search && (
+          <button className="tools-search-clear" onClick={() => setSearch('')}>
+            ×
+          </button>
         )}
+      </div>
 
-        <div className="launchpad-dots">
-          <span className="launchpad-dot active" />
-          <span className="launchpad-dot" />
+      <div className="tools-stats">
+        <div className="tools-stat-card">
+          <span className="tools-stat-value">{stats.total}</span>
+          <span className="tools-stat-label">araç</span>
+        </div>
+        <div className="tools-stat-card">
+          <span className="tools-stat-value">{stats.categoryCount}</span>
+          <span className="tools-stat-label">kategori</span>
+        </div>
+        <div className="tools-stat-card">
+          <span className="tools-stat-value">{stats.biggestCount}</span>
+          <span className="tools-stat-label">{stats.biggestName}</span>
         </div>
       </div>
+
+      <div className="tools-filter-chips">
+        <button
+          className={`tools-filter-chip ${selectedCategory === null ? 'active' : ''}`}
+          onClick={clearFilters}
+        >
+          tümü ({tools.length})
+        </button>
+        {categories.map(({ cat, count }) => (
+          <button
+            key={cat}
+            className={`tools-filter-chip ${selectedCategory === cat ? 'active' : ''}`}
+            onClick={() => setSelectedCategory(selectedCategory === cat ? null : cat)}
+          >
+            {categoryLabels[cat] || cat} ({count})
+          </button>
+        ))}
+      </div>
+
+      {isFiltering && (
+        <div className="tools-results-info">
+          <span>{filtered.length} sonuç</span>
+          <button className="tools-results-clear" onClick={clearFilters}>temizle</button>
+        </div>
+      )}
+
+      {filtered.length === 0 ? (
+        <p className="tools-empty">Aramanızla eşleşen araç bulunamadı.</p>
+      ) : (
+        <div className="tools-grid">
+          {filtered.map((tool, i) => (
+            <Link
+              key={tool.id}
+              to={tool.link}
+              className="tool-card"
+              style={{ animationDelay: `${i * 0.05}s` }}
+            >
+              <span className="tool-card-icon">{tool.icon}</span>
+              <div className="tool-card-body">
+                <span className="tool-card-title">{tool.title}</span>
+                <span className="tool-card-desc">{tool.description}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
