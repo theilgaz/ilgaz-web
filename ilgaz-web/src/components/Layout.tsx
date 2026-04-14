@@ -202,6 +202,11 @@ export function Layout() {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
+  // Sayfa değiştiğinde başa sar
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+
   const today = getTodayFormatted()
   const todaysPosts = posts.filter(p => p.meta.date === today)
 

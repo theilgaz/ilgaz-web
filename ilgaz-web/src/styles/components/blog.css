@@ -580,6 +580,7 @@
 }
 
 .article-content {
+  font-family: var(--font-article);
   font-size: 1rem;
   line-height: 1.8;
   color: rgba(0, 0, 0, 0.75);

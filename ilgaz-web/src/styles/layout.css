@@ -101,6 +101,7 @@ main {
   padding-top: 80px;
   padding-bottom: 96px;
   animation: fadeIn 0.4s ease-out;
+  flex: 1;
 }
 
 /* Mobile responsive */
@@ -126,7 +127,7 @@ main {
 .footer {
   padding: 48px 0;
   border-top: 1px solid var(--border);
-  margin-top: 48px;
+  margin-top: auto;
 }
 
 .footer-content {

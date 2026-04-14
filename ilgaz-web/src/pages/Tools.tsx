@@ -232,12 +232,11 @@ export function Tools() {
         <p className="tools-empty">Aramanızla eşleşen araç bulunamadı.</p>
       ) : (
         <div className="tools-grid">
-          {filtered.map((tool, i) => (
+          {filtered.map((tool) => (
             <Link
               key={tool.id}
               to={tool.link}
               className="tool-card"
-              style={{ animationDelay: `${i * 0.05}s` }}
             >
               <span className="tool-card-icon">{tool.icon}</span>
               <div className="tool-card-body">
