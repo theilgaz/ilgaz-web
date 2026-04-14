@@ -32,7 +32,7 @@ export function Home() {
 
       <a href="https://mahfuz.ilg.az" target="_blank" rel="noopener noreferrer" className="landing-promo">
         <span className="landing-promo-name">mahfuz</span>
-        <span className="landing-promo-desc">Kur'an ezber takip uygulaması.</span>
+        <span className="landing-promo-desc">Islamic learning with authentic sources.</span>
         <span className="landing-promo-link">mahfuz.ilg.az →</span>
       </a>
 

@@ -39,7 +39,7 @@ export function About() {
       </p>
 
       <div className="signature">
-        <p>— Servant of God, Craftsman of Code</p>
+        <p>Servant of God, Craftsman of Code</p>
         <p className="signature-name">Abdullah</p>
         <p className="signature-arabic">عبدالله</p>
       </div>

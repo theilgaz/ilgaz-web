@@ -17,7 +17,7 @@ Kendi bilgisayarını kendin yapabilirsin. Bu proje, bunun mümkün olduğunu ka
     'Tek parça taşınabilir sistem',
     '3D baskı özel kasa (FDM, PLA)',
     'Temiz kablo yönetimi',
-    'Hızlı kurulum — 1 dakikadan kısa',
+    'Hızlı kurulum, 1 dakikadan kısa',
     'Cyberpunk estetiği',
     'Gençlere ilham: kendi bilgisayarını kendin tasarla',
     'Hackerspace ve maker kültürünü yaymak',
@@ -35,7 +35,7 @@ Kendi bilgisayarını kendin yapabilirsin. Bu proje, bunun mümkün olduğunu ka
     { label: 'Trackpad', value: 'Magic Trackpad 2' },
     { label: 'Kasa', value: '3D Baskı PLA (FDM)' },
   ],
-  heroImage: { src: '/nomad42_blueprint.png', caption: 'Teknik çizim — CD-001-REV-A' },
+  heroImage: { src: '/nomad42_blueprint.png', caption: 'Teknik çizim, CD-001-REV-A' },
   gallery: [
     { src: '/nomad42_topview.png', caption: 'Üstten görünüm' },
     { src: '/nomad42_overview.png', caption: 'Genel görünüm' },

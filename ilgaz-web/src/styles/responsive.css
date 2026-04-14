@@ -10,6 +10,10 @@
   .post-title { font-size: 1.0625rem; }
   .post-date { font-size: 0.8125rem; }
   .post-reading-time { font-size: 0.8125rem; }
+  .post-card-date-col { display: none; }
+  .post-card-excerpt { -webkit-line-clamp: 1; }
+  .blog-header-stats { flex-wrap: wrap; justify-content: center; }
+  .blog-header-title { font-size: 1.5rem; }
   .landing-links a { font-size: 0.9375rem; }
   .landing-bio p { font-size: 1.0625rem; }
   .landing-tagline { font-size: 1.125rem; }

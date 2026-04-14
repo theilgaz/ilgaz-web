@@ -8,13 +8,18 @@ import { parseDate, sortByDateDesc } from '../utils/dateUtils'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const monthNames: Record<number, string> = {
+  0: 'Ocak', 1: 'Şubat', 2: 'Mart', 3: 'Nisan', 4: 'Mayıs', 5: 'Haziran',
+  6: 'Temmuz', 7: 'Ağustos', 8: 'Eylül', 9: 'Ekim', 10: 'Kasım', 11: 'Aralık'
+}
+
+const shortMonthNames: Record<number, string> = {
   0: 'Oca', 1: 'Şub', 2: 'Mar', 3: 'Nis', 4: 'May', 5: 'Haz',
   6: 'Tem', 7: 'Ağu', 8: 'Eyl', 9: 'Eki', 10: 'Kas', 11: 'Ara'
 }
 
 function formatShortDate(dateStr: string): string {
   const d = parseDate(dateStr)
-  return `${d.getDate()} ${monthNames[d.getMonth()]} ${d.getFullYear()}`
+  return `${d.getDate()} ${shortMonthNames[d.getMonth()]} ${d.getFullYear()}`
 }
 
 function normalize(text: string): string {
@@ -25,6 +30,23 @@ const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000
 
 function isNew(dateStr: string): boolean {
   return Date.now() - parseDate(dateStr).getTime() < THREE_DAYS_MS
+}
+
+function getExcerpt(slug: string): string {
+  const body = searchIndex[slug] || ''
+  const clean = body.replace(/\s+/g, ' ').trim()
+  if (clean.length <= 120) return clean
+  return clean.slice(0, 120).replace(/\s+\S*$/, '') + '…'
+}
+
+function getMonthKey(dateStr: string): string {
+  const d = parseDate(dateStr)
+  return `${d.getFullYear()}-${d.getMonth()}`
+}
+
+function getMonthLabel(dateStr: string): string {
+  const d = parseDate(dateStr)
+  return `${monthNames[d.getMonth()]} ${d.getFullYear()}`
 }
 
 export function Blog() {
@@ -71,6 +93,22 @@ export function Blog() {
 
   const isFiltering = selectedTags.length > 0 || searchQuery.trim().length > 0
 
+  const groupedPosts = useMemo(() => {
+    const groups: { key: string; label: string; posts: typeof filteredPosts }[] = []
+    let currentKey = ''
+
+    for (const post of filteredPosts) {
+      const key = getMonthKey(post.meta.date)
+      if (key !== currentKey) {
+        currentKey = key
+        groups.push({ key, label: getMonthLabel(post.meta.date), posts: [] })
+      }
+      groups[groups.length - 1].posts.push(post)
+    }
+
+    return groups
+  }, [filteredPosts])
+
   const stats = useMemo(() => {
     const total = posts.length
     const totalReadingTime = posts.reduce((sum, p) => sum + p.meta.readingTime, 0)
@@ -107,13 +145,20 @@ export function Blog() {
     setSearchQuery('')
   }
 
+  let globalIndex = 0
+
   return (
     <>
       <header className="blog-header">
-        <h1>Yazılar</h1>
-        <p className="blog-subtitle">
-          Yazılım, teknoloji ve hayat üzerine düşünceler.
-        </p>
+        <p className="blog-header-label">yazılar</p>
+        <h1 className="blog-header-title">Düşünceler, gözlemler, izler.</h1>
+        <div className="blog-header-stats">
+          <span>{stats.total} yazı</span>
+          <span className="blog-header-dot">·</span>
+          <span>{stats.totalReadingTime} dk okuma</span>
+          <span className="blog-header-dot">·</span>
+          <span>{stats.frequency} yazı/ay</span>
+        </div>
       </header>
 
       <div className="blog-search">
@@ -130,31 +175,12 @@ export function Blog() {
         />
       </div>
 
-      <div className="blog-stats">
-        <div className="blog-stat-card">
-          <span className="blog-stat-value">{stats.total}</span>
-          <span className="blog-stat-label">yazı</span>
-        </div>
-        <div className="blog-stat-card">
-          <span className="blog-stat-value">{stats.totalReadingTime}</span>
-          <span className="blog-stat-label">dk toplam</span>
-        </div>
-        <div className="blog-stat-card">
-          <span className="blog-stat-value">{stats.frequency}</span>
-          <span className="blog-stat-label">yazı/ay</span>
-        </div>
-        <div className="blog-stat-card">
-          <span className="blog-stat-value">{stats.latestDate}</span>
-          <span className="blog-stat-label">son yazı</span>
-        </div>
-      </div>
-
       <div className="blog-filter-chips">
         <button
           className={`blog-filter-chip ${selectedTags.length === 0 ? 'active' : ''}`}
           onClick={clearFilters}
         >
-          tümü ({posts.length})
+          tümü
         </button>
         {allTags.map(({ tag, count }) => (
           <button
@@ -162,7 +188,7 @@ export function Blog() {
             className={`blog-filter-chip ${selectedTags.includes(tag) ? 'active' : ''}`}
             onClick={() => toggleTag(tag)}
           >
-            {categoryInfo[tag]?.title || tag} ({count})
+            {categoryInfo[tag]?.title || tag} <span className="chip-count">{count}</span>
           </button>
         ))}
       </div>
@@ -179,34 +205,49 @@ export function Blog() {
           <p>Aramanızla eşleşen yazı bulunamadı.</p>
         </div>
       ) : (
-        <div className="posts-grid full-width">
-          {filteredPosts.map((post, i) => (
-            <Link
-              key={post.meta.slug}
-              to={`/blog/${post.meta.slug}`}
-              className="post-card stagger-in"
-              style={{ animationDelay: `${i * 0.04}s` }}
-            >
-              <div className="post-card-content">
-                <h3 className="post-card-title">
-                  {post.meta.title}
-                  {isNew(post.meta.date) && <span className="post-card-new">yeni</span>}
-                </h3>
-                <div className="post-card-meta">
-                  <span className="post-card-tag">{post.meta.tags[0]}</span>
-                  <span className="meta-dot">·</span>
-                  <span>{post.meta.readingTime} dk</span>
-                </div>
+        <div className="blog-timeline">
+          {groupedPosts.map((group) => (
+            <div key={group.key} className="blog-month-group">
+              <div className="blog-month-header">
+                <span className="blog-month-label">{group.label}</span>
+                <span className="blog-month-count">{group.posts.length}</span>
               </div>
-              <div className="post-card-right">
-                <span className="post-card-date">{post.meta.date}</span>
-                <div className="post-card-arrow">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
+              <div className="posts-grid">
+                {group.posts.map((post) => {
+                  const i = globalIndex++
+                  const d = parseDate(post.meta.date)
+                  return (
+                    <Link
+                      key={post.meta.slug}
+                      to={`/blog/${post.meta.slug}`}
+                      className="post-card stagger-in"
+                      style={{ animationDelay: `${i * 0.04}s` }}
+                    >
+                      <div className="post-card-date-col">
+                        <span className="post-card-day">{d.getDate()}</span>
+                      </div>
+                      <div className="post-card-content">
+                        <h3 className="post-card-title">
+                          {post.meta.title}
+                          {isNew(post.meta.date) && <span className="post-card-new">yeni</span>}
+                        </h3>
+                        <p className="post-card-excerpt">{getExcerpt(post.meta.slug)}</p>
+                        <div className="post-card-meta">
+                          <span className="post-card-tag">{post.meta.tags[0]}</span>
+                          <span className="meta-dot">·</span>
+                          <span>{post.meta.readingTime} dk</span>
+                        </div>
+                      </div>
+                      <div className="post-card-arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       )}
