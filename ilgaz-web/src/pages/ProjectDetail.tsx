@@ -14,6 +14,7 @@ export function ProjectDetail() {
   }
 
   const { data } = project
+  const hasSidebar = (data.gallery && data.gallery.length > 0) || (data.specs && data.specs.length > 0)
 
   return (
     <article className="newspaper">
@@ -28,6 +29,9 @@ export function ProjectDetail() {
         <p className="newspaper-subhead">{data.tagline}</p>
         <div className="newspaper-byline">
           <span className="newspaper-status">{data.status}</span>
+          {project.meta.award && (
+            <a href="https://www.ramadanhacks.com/" target="_blank" rel="noopener noreferrer" className="newspaper-award">🏆 {project.meta.award}</a>
+          )}
         </div>
         <div className="newspaper-rule" />
       </header>
@@ -39,7 +43,7 @@ export function ProjectDetail() {
         </figure>
       )}
 
-      <div className="newspaper-body">
+      <div className={`newspaper-body ${hasSidebar ? '' : 'newspaper-body-single'}`}>
         <div className="newspaper-column newspaper-column-main">
           {data.motivation.split('\n\n').map((para, i) => (
             <p key={i} className={i === 0 ? 'newspaper-dropcap' : ''}>{para}</p>
@@ -64,32 +68,34 @@ export function ProjectDetail() {
           </ul>
         </div>
 
-        <aside className="newspaper-column newspaper-column-side">
-          {data.gallery && data.gallery.length > 0 && (
-            <div className="newspaper-gallery">
-              {data.gallery.map((img, i) => (
-                <figure key={i} onClick={() => setLightboxImage(img.src)}>
-                  <img src={img.src} alt={img.caption} />
-                  <figcaption>{img.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-          )}
-
-          {data.specs && (
-            <div className="newspaper-specs">
-              <h3 className="newspaper-specs-title">Donanım</h3>
-              <dl className="newspaper-specs-list">
-                {data.specs.map((spec, i) => (
-                  <div key={i} className="newspaper-spec-item">
-                    <dt>{spec.label}</dt>
-                    <dd>{spec.value}</dd>
-                  </div>
+        {hasSidebar && (
+          <aside className="newspaper-column newspaper-column-side">
+            {data.gallery && data.gallery.length > 0 && (
+              <div className="newspaper-gallery">
+                {data.gallery.map((img, i) => (
+                  <figure key={i} onClick={() => setLightboxImage(img.src)}>
+                    <img src={img.src} alt={img.caption} />
+                    <figcaption>{img.caption}</figcaption>
+                  </figure>
                 ))}
-              </dl>
-            </div>
-          )}
-        </aside>
+              </div>
+            )}
+
+            {data.specs && (
+              <div className="newspaper-specs">
+                <h3 className="newspaper-specs-title">Donanım</h3>
+                <dl className="newspaper-specs-list">
+                  {data.specs.map((spec, i) => (
+                    <div key={i} className="newspaper-spec-item">
+                      <dt>{spec.label}</dt>
+                      <dd>{spec.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+          </aside>
+        )}
       </div>
 
       <footer className="newspaper-footer">

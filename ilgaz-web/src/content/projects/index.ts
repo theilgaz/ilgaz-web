@@ -1,11 +1,14 @@
 import { meta as seyyar42Meta, data as seyyar42Data } from './seyyar-42'
 import { meta as istanbulMeta, data as istanbulData } from './istanbul'
+import { meta as mahfuzMeta, data as mahfuzData } from './mahfuz'
 
 export interface ProjectMeta {
   slug: string
   name: string
   description: string
   url?: string
+  featured?: boolean
+  award?: string
 }
 
 export interface ProjectData {
@@ -28,6 +31,7 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  { meta: mahfuzMeta, data: mahfuzData },
   { meta: istanbulMeta, data: istanbulData },
   { meta: seyyar42Meta, data: seyyar42Data },
 ]

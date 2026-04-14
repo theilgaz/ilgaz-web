@@ -7,7 +7,7 @@ export const meta = {
 
 export const data = {
   tagline: 'Surların ötesinde İstanbul.',
-  issue: '02',
+  issue: '03',
   date: 'Nisan 2026',
   status: 'Yayında',
   pullQuote: 'Yürüyerek keşfet, tarihle yürü.',

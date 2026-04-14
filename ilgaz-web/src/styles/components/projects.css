@@ -189,12 +189,33 @@
   transition: color 0.15s ease;
 }
 
+.project-card-award {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #92400e;
+  background: rgba(217, 169, 56, 0.12);
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.01em;
+}
+
 .project-card-desc {
   font-family: var(--font-body);
   font-size: 0.78rem;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.4);
   margin: 3px 0 0;
+}
+
+.project-card-star {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: #d4a017;
+  align-self: center;
 }
 
 .project-card-arrow {
@@ -328,6 +349,10 @@
 }
 
 .newspaper-byline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 500;
@@ -344,11 +369,32 @@
   font-size: 0.7rem;
 }
 
+.newspaper-award {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #92400e;
+  background: rgba(217, 169, 56, 0.12);
+  padding: 4px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.newspaper-award:hover {
+  background: rgba(217, 169, 56, 0.22);
+}
+
 .newspaper-body {
   display: grid;
   grid-template-columns: 1fr 200px;
   gap: 32px;
   margin-bottom: 48px;
+}
+
+.newspaper-body.newspaper-body-single {
+  grid-template-columns: 1fr;
 }
 
 .newspaper-column-main {
