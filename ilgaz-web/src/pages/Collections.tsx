@@ -17,7 +17,7 @@ export function Collections() {
       </p>
 
       <div className="collections-grid">
-        {collections.map((collection) => {
+        {collections.map((collection, i) => {
           const totalReadingTime = collection.posts.reduce((acc, slug) => {
             const post = postsBySlug[slug]
             return acc + (post?.meta.readingTime || 0)
@@ -27,7 +27,8 @@ export function Collections() {
             <Link
               key={collection.slug}
               to={`/collections/${collection.slug}`}
-              className="collection-card"
+              className="collection-card stagger-in"
+              style={{ animationDelay: `${i * 0.05}s` }}
             >
               <h2 className="collection-title">{collection.title}</h2>
               <p className="collection-description">{collection.description}</p>

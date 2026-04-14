@@ -180,11 +180,12 @@ export function Blog() {
         </div>
       ) : (
         <div className="posts-grid full-width">
-          {filteredPosts.map((post) => (
+          {filteredPosts.map((post, i) => (
             <Link
               key={post.meta.slug}
               to={`/blog/${post.meta.slug}`}
-              className="post-card"
+              className="post-card stagger-in"
+              style={{ animationDelay: `${i * 0.04}s` }}
             >
               <div className="post-card-content">
                 <h3 className="post-card-title">
@@ -218,7 +219,7 @@ export function Blog() {
           </div>
 
           <div className="collections-grid">
-            {collections.map((collection) => {
+            {collections.map((collection, i) => {
               const totalReadingTime = collection.posts.reduce((acc, slug) => {
                 const post = postsBySlug[slug]
                 return acc + (post?.meta.readingTime || 0)
@@ -228,7 +229,8 @@ export function Blog() {
                 <Link
                   key={collection.slug}
                   to={`/collections/${collection.slug}`}
-                  className="collection-card"
+                  className="collection-card stagger-in"
+                  style={{ animationDelay: `${i * 0.05}s` }}
                 >
                   <div className="collection-card-content">
                     <div className="collection-card-title">{collection.title}</div>

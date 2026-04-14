@@ -42,7 +42,7 @@ export function CollectionDetail() {
 
       <ol className="collection-posts">
         {posts.map((post, index) => (
-          <li key={post.meta.slug} className="collection-post-item">
+          <li key={post.meta.slug} className="collection-post-item stagger-in" style={{ animationDelay: `${index * 0.05}s` }}>
             <span className="collection-post-number">{index + 1}</span>
             <div className="collection-post-content">
               <h3 className="collection-post-title">

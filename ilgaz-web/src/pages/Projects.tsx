@@ -21,8 +21,8 @@ export function Projects() {
       </div>
 
       <ul className="project-list">
-        {projects.map((project) => (
-          <li key={project.meta.slug} className="project-item">
+        {projects.map((project, i) => (
+          <li key={project.meta.slug} className="project-item stagger-in" style={{ animationDelay: `${i * 0.05}s` }}>
             <Link to={`/projects/${project.meta.slug}`} className="project-item-link">
               <span className="project-item-name">{project.meta.name}</span>
               <span className="project-item-desc">{project.meta.description}</span>
