@@ -310,16 +310,17 @@ export function PixelArtPage() {
 
   return (
     <div className="pixel-page">
-      <h1>Pixel Art</h1>
-      <p className="lead">
-        Piksel piksel çiz, sanatını indir.
-      </p>
+      <div className="pixel-page-header">
+        <h1>Pixel Art</h1>
+        <p className="lead">
+          Piksel piksel çiz, sanatını indir.
+        </p>
+      </div>
 
       <div className="pixel-page-content">
         <div className="pixel-page-sidebar">
           {/* Color Picker */}
-          <div className="pixel-section">
-            <label className="pixel-section-title" htmlFor="pixel-color-picker">Renk</label>
+          <div className="pixel-section pixel-section-color">
             <div className="pixel-color-picker">
               <input
                 type="color"
@@ -333,10 +334,11 @@ export function PixelArtPage() {
                 value={hexInput}
                 onChange={e => handleHexInputChange(e.target.value)}
                 className="pixel-hex-input"
-                placeholder="#FF5733…"
+                placeholder="#000000"
                 aria-label="Hex renk kodu"
                 autoComplete="off"
                 spellCheck={false}
+                maxLength={7}
               />
             </div>
           </div>
@@ -410,39 +412,51 @@ export function PixelArtPage() {
               </div>
             </div>
           )}
-
-          {/* Actions */}
-          <div className="pixel-section">
-            <span className="pixel-section-title">İşlemler</span>
-            <div className="pixel-actions">
-              <button
-                type="button"
-                onClick={undo}
-                disabled={history.length === 0}
-                aria-label="Geri al"
-              >
-                ↶ Geri Al
-              </button>
-              <button type="button" onClick={clear} aria-label="Çizimi temizle">
-                Temizle
-              </button>
-            </div>
-          </div>
-
-          {/* Download */}
-          <div className="pixel-section">
-            <span className="pixel-section-title" id="download-label">İndir</span>
-            <div className="pixel-download-buttons" role="group" aria-labelledby="download-label">
-              <button type="button" onClick={() => download(1)} aria-label="1x ölçekte indir">1x</button>
-              <button type="button" onClick={() => download(2)} aria-label="2x ölçekte indir">2x</button>
-              <button type="button" onClick={() => download(4)} aria-label="4x ölçekte indir">4x</button>
-              <button type="button" onClick={() => download(8)} aria-label="8x ölçekte indir">8x</button>
-            </div>
-          </div>
         </div>
 
         <div className="pixel-page-canvas">
           <canvas ref={canvasRef} style={{ display: 'none' }} />
+
+          {/* Toolbar */}
+          <div className="pixel-toolbar">
+            <div className="pixel-toolbar-group">
+              <div className="pixel-size-track" role="group" aria-label="Kanvas boyutu">
+                {([8, 16, 32, 64, 128] as GridSize[]).map(size => (
+                  <button
+                    key={size}
+                    type="button"
+                    className={`pixel-size-option ${gridSize === size ? 'active' : ''}`}
+                    onClick={() => changeGridSize(size)}
+                    aria-pressed={gridSize === size}
+                    aria-label={`${size}×${size} piksel`}
+                  >
+                    {size}×{size}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="pixel-toolbar-group">
+              <button
+                type="button"
+                className="pixel-toolbar-btn"
+                onClick={undo}
+                disabled={history.length === 0}
+                aria-label="Geri al"
+              >
+                ↶
+              </button>
+              <button
+                type="button"
+                className="pixel-toolbar-btn"
+                onClick={clear}
+                aria-label="Temizle"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+
+          {/* Canvas */}
           <div
             className={`pixel-grid-large size-${gridSize}`}
             role="grid"
@@ -487,27 +501,20 @@ export function PixelArtPage() {
               />
             ))}
           </div>
-          <div className="tool-hint">
-            <kbd>Sol tık</kbd> <span>Çiz</span>
-            <span className="separator">·</span>
-            <kbd>Sağ tık</kbd> <span>Doldur</span>
-          </div>
 
-          {/* Canvas Size Selector */}
-          <div className="pixel-size-scroll">
-            <div className="pixel-size-track" role="group" aria-label="Kanvas boyutu">
-              {([8, 16, 32, 64, 128] as GridSize[]).map(size => (
-                <button
-                  key={size}
-                  type="button"
-                  className={`pixel-size-option ${gridSize === size ? 'active' : ''}`}
-                  onClick={() => changeGridSize(size)}
-                  aria-pressed={gridSize === size}
-                  aria-label={`${size}×${size} piksel`}
-                >
-                  {size}×{size}
-                </button>
-              ))}
+          {/* Below canvas: hint + download */}
+          <div className="pixel-canvas-footer">
+            <div className="tool-hint">
+              <kbd>Sol tık</kbd> <span>Çiz</span>
+              <span className="separator">·</span>
+              <kbd>Sağ tık</kbd> <span>Doldur</span>
+            </div>
+            <div className="pixel-download-row" role="group" aria-label="İndir">
+              <span className="pixel-download-label">PNG</span>
+              <button type="button" onClick={() => download(1)} aria-label="1x ölçekte indir">1x</button>
+              <button type="button" onClick={() => download(2)} aria-label="2x ölçekte indir">2x</button>
+              <button type="button" onClick={() => download(4)} aria-label="4x ölçekte indir">4x</button>
+              <button type="button" onClick={() => download(8)} aria-label="8x ölçekte indir">8x</button>
             </div>
           </div>
         </div>
@@ -515,10 +522,9 @@ export function PixelArtPage() {
 
       {/* Templates Section */}
       <section className="pixel-templates-section" aria-labelledby="templates-heading">
-        <h2 id="templates-heading">Örnek Çizimler</h2>
-        <p className="pixel-templates-desc">Tıklayarak yükle ve üzerinde değişiklik yap</p>
+        <h2 id="templates-heading">Şablonlar</h2>
+        <p className="pixel-templates-desc">Tıklayarak yükle, üzerinde değişiklik yap</p>
         <div className="pixel-templates-grid" role="group" aria-label="Örnek şablonlar">
-          {/* Example Art */}
           {exampleArt.map((art, i) => (
             <button
               key={`example-${i}`}
