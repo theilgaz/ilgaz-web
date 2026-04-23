@@ -1,0 +1,730 @@
+/* ============================================
+   TERMINAL / DOS THEME
+   ============================================ */
+
+/* ─── Theme Variables ─── */
+:root[data-theme="terminal"] {
+  --bg: #000000;
+  --bg-alt: #111111;
+  --text: #33ff33;
+  --text-secondary: #88ff88;
+  --text-muted: #448844;
+  --accent: #ffff33;
+  --accent-soft: #333300;
+  --accent-hover: #ffffff;
+  --border: #33ff33;
+
+  --font-serif: 'VT323', 'JetBrains Mono', monospace;
+  --font-sans: 'VT323', 'JetBrains Mono', monospace;
+  --font-mono: 'VT323', 'JetBrains Mono', monospace;
+  --font-body: 'VT323', 'JetBrains Mono', monospace;
+  --font-heading: 'VT323', 'JetBrains Mono', monospace;
+}
+
+/* ─── Hide editorial layout when terminal is active ─── */
+:root[data-theme="terminal"] .nav-header,
+:root[data-theme="terminal"] .site-footer,
+:root[data-theme="terminal"] .today-banner,
+:root[data-theme="terminal"] .theme-switch {
+  display: none !important;
+}
+
+:root[data-theme="terminal"] main {
+  padding: 0;
+  margin: 0;
+}
+
+:root[data-theme="terminal"] main .container {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+:root[data-theme="terminal"] body {
+  background: #000;
+  overflow: hidden;
+}
+
+/* ─── Desktop (full-screen CRT) ─── */
+.term-desktop {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  color: #33ff33;
+  font-family: 'VT323', 'JetBrains Mono', monospace;
+  font-size: 18px;
+  line-height: 1.25;
+  overflow: hidden;
+}
+
+/* ─── CRT container — scrollable content area ─── */
+.term-crt {
+  position: absolute;
+  inset: 0;
+  bottom: 24px; /* leave room for status bar */
+  padding: 20px 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-shadow: 0 0 2px #33ff33;
+}
+
+/* Scanline overlay (motion-gated) */
+@media (prefers-reduced-motion: no-preference) {
+  .term-crt::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.25) 3px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+/* Custom scrollbar for terminal */
+.term-crt::-webkit-scrollbar {
+  width: 6px;
+}
+
+.term-crt::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.term-crt::-webkit-scrollbar-thumb {
+  background: #33ff33;
+  border-radius: 0;
+}
+
+/* ─── ASCII art header ─── */
+.term-ascii {
+  white-space: pre;
+  font-size: 16px;
+  line-height: 1;
+  color: #33ff33;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/* ─── Text blocks ─── */
+.term-block {
+  margin-bottom: 12px;
+}
+
+.term-prompt {
+  color: #33ff33;
+}
+
+.term-output {
+  color: #88ff88;
+  margin: 4px 0 0;
+}
+
+/* ─── Blinking cursor ─── */
+.term-cursor {
+  animation: term-blink 1s steps(2) infinite;
+}
+
+@keyframes term-blink {
+  50% { opacity: 0; }
+}
+
+/* ─── Menu items ─── */
+.term-menu {
+  margin-top: 4px;
+  padding-left: 2ch;
+}
+
+.term-menu-item {
+  padding: 2px 4px;
+  cursor: pointer;
+  display: block;
+}
+
+.term-menu-item:hover {
+  background: #33ff33;
+  color: #000;
+  text-shadow: none;
+}
+
+.term-menu-key {
+  color: #ffff33;
+  text-shadow: 0 0 2px #ffff33;
+}
+
+.term-menu-item:hover .term-menu-key {
+  color: #000;
+  text-shadow: none;
+}
+
+/* ─── Hint text ─── */
+.term-hint-inline {
+  color: #448844;
+  font-size: 16px;
+}
+
+.term-hint {
+  color: #448844;
+  margin: 16px 0 12px;
+  padding-left: 2ch;
+  font-size: 16px;
+}
+
+/* ─── Home layout ─── */
+.term-home {
+  max-width: 700px;
+}
+
+/* ─── Nav bar (sub-pages) ─── */
+.term-nav {
+  border-bottom: 1px solid #33ff33;
+  padding: 8px 0;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.term-nav-back {
+  color: #ffff33;
+  cursor: pointer;
+  text-shadow: 0 0 2px #ffff33;
+}
+
+.term-nav-back:hover {
+  color: #ffffff;
+  text-shadow: 0 0 4px #ffffff;
+}
+
+.term-nav-path {
+  color: #448844;
+}
+
+/* ─── Status bar ─── */
+.term-statusbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: #33ff33;
+  color: #000;
+  padding: 2px 10px;
+  font-family: 'VT323', 'JetBrains Mono', monospace;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  text-shadow: none;
+}
+
+/* ─── Easter egg ─── */
+.term-easter-egg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  background: #000;
+  z-index: 50;
+  padding: 40px 24px;
+  color: #33ff33;
+  font-family: 'VT323', 'JetBrains Mono', monospace;
+  font-size: 18px;
+  text-shadow: 0 0 2px #33ff33;
+}
+
+.term-easter-egg p {
+  margin: 4px 0;
+}
+
+/* ─── Content area — readability overrides ─── */
+.term-content {
+  color: #33ff33;
+
+  /* Override CSS variables so editorial components get terminal-appropriate values */
+  --bg: #000000;
+  --bg-alt: #111111;
+  --paper: #000000;
+  --paper-2: #111111;
+  --ink: #33ff33;
+  --ink-2: #88ff88;
+  --text: #33ff33;
+  --text-secondary: #88ff88;
+  --text-muted: #448844;
+  --mute: #448844;
+  --rule: #33ff33;
+  --accent: #ffff33;
+  --accent-soft: #333300;
+  --accent-hover: #ffffff;
+  --border: #33ff33;
+  --font-serif: 'VT323', 'JetBrains Mono', monospace;
+  --font-sans: 'VT323', 'JetBrains Mono', monospace;
+  --font-mono: 'VT323', 'JetBrains Mono', monospace;
+  --font-body: 'VT323', 'JetBrains Mono', monospace;
+  --font-heading: 'VT323', 'JetBrains Mono', monospace;
+}
+
+/* Force all child elements to inherit terminal style */
+.term-content *,
+.term-content a {
+  color: inherit;
+  font-family: 'VT323', 'JetBrains Mono', monospace !important;
+}
+
+/* Links */
+.term-content a {
+  color: #ffff33;
+  text-decoration: underline;
+  text-shadow: 0 0 2px #ffff33;
+}
+
+.term-content a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 4px #ffffff;
+}
+
+/* Headings */
+.term-content h1,
+.term-content h2,
+.term-content h3,
+.term-content h4,
+.term-content h5,
+.term-content h6 {
+  color: #33ff33;
+  font-family: 'VT323', 'JetBrains Mono', monospace !important;
+  letter-spacing: 0;
+  text-shadow: 0 0 2px #33ff33;
+}
+
+.term-content h1 { font-size: 22px; margin: 0 0 10px; }
+.term-content h2 { font-size: 20px; margin: 14px 0 8px; }
+.term-content h3 { font-size: 18px; margin: 12px 0 6px; }
+.term-content h4 { font-size: 18px; margin: 10px 0 4px; }
+
+.term-content h2 em,
+.term-content h1 em {
+  color: #ffff33;
+  font-style: normal;
+}
+
+/* Paragraphs */
+.term-content p {
+  color: #33ff33;
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0 0 10px;
+}
+
+/* Lists */
+.term-content ul,
+.term-content ol {
+  color: #33ff33;
+  padding-left: 2ch;
+}
+
+.term-content li {
+  color: #33ff33;
+  margin-bottom: 4px;
+}
+
+.term-content li::marker {
+  color: #ffff33;
+}
+
+/* Images — dim with border */
+.term-content img {
+  border: 1px solid #33ff33;
+  filter: grayscale(100%) brightness(0.6) contrast(1.5);
+  max-width: 100%;
+}
+
+/* All editorial backgrounds forced to transparent/black */
+.term-content .container,
+.term-content .section-head,
+.term-content .about-page,
+.term-content .about-grid,
+.term-content .blog-post-header,
+.term-content .blog-post-content,
+.term-content .tools-page,
+.term-content .projects-page,
+.term-content .collections-page,
+.term-content .progress-page {
+  background: transparent !important;
+  color: #33ff33 !important;
+}
+
+/* Section head */
+.term-content .section-head {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.term-content .section-head .idx {
+  font-size: 16px;
+  color: #ffff33;
+  margin-bottom: 2px;
+}
+
+.term-content .section-head .sub {
+  font-size: 16px;
+  color: #448844;
+}
+
+/* Writing/blog list entries */
+.term-content .writing-entry {
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 4px 4px;
+  border-color: #1a3a1a;
+  background: transparent;
+  color: #33ff33;
+}
+
+.term-content .writing-entry .title {
+  font-size: 18px;
+  font-family: 'VT323', 'JetBrains Mono', monospace !important;
+  color: #33ff33;
+}
+
+.term-content .writing-entry .date {
+  font-size: 16px;
+  color: #448844;
+}
+
+.term-content .writing-entry .read {
+  font-size: 16px;
+  color: #448844;
+}
+
+.term-content .writing-entry:hover {
+  background: #33ff33;
+  color: #000;
+  margin: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-shadow: none;
+}
+
+.term-content .writing-entry:hover .title,
+.term-content .writing-entry:hover .date,
+.term-content .writing-entry:hover .read,
+.term-content .writing-entry:hover * {
+  color: #000 !important;
+  text-shadow: none;
+}
+
+/* Hide read arrow on hover */
+.term-content .writing-entry:hover .read::after {
+  content: none;
+}
+
+/* Tools entries */
+.term-content .tools-entry {
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 4px 4px;
+  border-color: #1a3a1a;
+  background: transparent;
+  color: #33ff33;
+}
+
+.term-content .tools-entry-title {
+  font-size: 18px;
+  color: #33ff33;
+}
+
+.term-content .tools-entry-desc {
+  font-size: 16px;
+  color: #448844;
+}
+
+.term-content .tools-entry:hover {
+  background: #33ff33;
+  color: #000;
+  text-shadow: none;
+}
+
+.term-content .tools-entry:hover .tools-entry-title,
+.term-content .tools-entry:hover .tools-entry-desc,
+.term-content .tools-entry:hover * {
+  color: #000 !important;
+  text-shadow: none;
+}
+
+/* Tools chips */
+.term-content .tools-chip {
+  background: transparent;
+  border: 1px solid #33ff33;
+  border-radius: 0;
+  font-size: 16px;
+  padding: 2px 8px;
+  color: #33ff33;
+}
+
+.term-content .tools-chip.active {
+  background: #33ff33;
+  color: #000;
+  text-shadow: none;
+}
+
+.term-content .tools-group-head {
+  border-color: #1a3a1a;
+}
+
+.term-content .tools-group-label {
+  color: #ffff33;
+}
+
+/* Project entries / cards */
+.term-content .project-entry {
+  border-color: #1a3a1a;
+  background: transparent;
+  color: #33ff33;
+}
+
+.term-content .project-entry:hover {
+  background: #33ff33;
+  color: #000;
+  text-shadow: none;
+}
+
+.term-content .project-entry:hover * {
+  color: #000 !important;
+  text-shadow: none;
+}
+
+/* Blog post content */
+.term-content .blog-post-header {
+  margin-bottom: 12px;
+}
+
+.term-content .blog-post-meta {
+  font-size: 16px;
+  color: #448844;
+}
+
+.term-content .blog-post-content {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #33ff33;
+}
+
+/* Blockquotes */
+.term-content blockquote {
+  border-left: 2px solid #ffff33;
+  padding-left: 12px;
+  color: #88ff88;
+  margin: 10px 0;
+}
+
+/* Code */
+.term-content code {
+  background: #111;
+  border: 1px solid #33ff33;
+  font-size: 16px;
+  padding: 1px 4px;
+  color: #33ff33;
+}
+
+.term-content pre {
+  background: #0a0a0a;
+  border: 1px solid #33ff33;
+  padding: 10px;
+  font-size: 16px;
+  overflow: auto;
+  color: #33ff33;
+}
+
+.term-content pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Buttons */
+.term-content button,
+.term-content .btn {
+  background: transparent;
+  border: 1px solid #33ff33;
+  color: #33ff33;
+  font-family: 'VT323', 'JetBrains Mono', monospace !important;
+  font-size: 16px;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 0;
+  text-shadow: 0 0 2px #33ff33;
+}
+
+.term-content button:hover,
+.term-content .btn:hover {
+  background: #33ff33;
+  color: #000;
+  text-shadow: none;
+}
+
+/* Inputs */
+.term-content input,
+.term-content textarea,
+.term-content select {
+  background: #000;
+  border: 1px solid #33ff33;
+  font-family: 'VT323', 'JetBrains Mono', monospace !important;
+  font-size: 18px;
+  color: #33ff33;
+  padding: 4px 6px;
+  border-radius: 0;
+  caret-color: #33ff33;
+}
+
+.term-content input:focus,
+.term-content textarea:focus,
+.term-content select:focus {
+  outline: 1px solid #ffff33;
+  box-shadow: 0 0 4px rgba(51, 255, 51, 0.3);
+}
+
+.term-content input::placeholder,
+.term-content textarea::placeholder {
+  color: #448844;
+}
+
+/* About page reset */
+.term-content .about-page,
+.term-content .about-grid {
+  display: block;
+}
+
+.term-content .portrait {
+  width: 120px;
+  height: auto;
+  aspect-ratio: auto;
+  float: left;
+  margin: 0 16px 10px 0;
+  background: none;
+  border: 1px solid #33ff33;
+}
+
+.term-content .portrait img {
+  filter: grayscale(100%) brightness(0.5) contrast(1.5) sepia(100%) hue-rotate(70deg) saturate(3);
+}
+
+.term-content .about-copy p {
+  font-size: 18px;
+  color: #33ff33;
+}
+
+.term-content .about-copy p:first-child::first-letter {
+  font-size: inherit;
+  float: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Formatter page inside terminal */
+.term-content .formatter-page-content {
+  width: auto;
+  margin-left: 0;
+  transform: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.term-content .formatter-page-layout {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.term-content .formatter-page-panel {
+  min-height: 150px;
+  background: #000;
+  border: 1px solid #33ff33;
+}
+
+/* Collections */
+.term-content .collection-entry {
+  border-color: #1a3a1a;
+  background: transparent;
+}
+
+.term-content .collection-entry:hover {
+  background: #33ff33;
+  color: #000;
+  text-shadow: none;
+}
+
+.term-content .collection-entry:hover * {
+  color: #000 !important;
+  text-shadow: none;
+}
+
+/* Progress page */
+.term-content .progress-ring,
+.term-content .progress-stat {
+  color: #33ff33;
+}
+
+/* Tables */
+.term-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.term-content th,
+.term-content td {
+  border: 1px solid #33ff33;
+  padding: 4px 8px;
+  color: #33ff33;
+}
+
+.term-content th {
+  color: #ffff33;
+  background: #111;
+}
+
+/* Badges / tags */
+.term-content .badge,
+.term-content .tag,
+.term-content .chip {
+  background: transparent;
+  border: 1px solid #33ff33;
+  color: #33ff33;
+  border-radius: 0;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .term-desktop {
+    font-size: 16px;
+  }
+
+  .term-crt {
+    padding: 10px 12px;
+  }
+
+  .term-ascii {
+    font-size: 12px;
+    overflow-x: auto;
+  }
+
+  .term-content p {
+    font-size: 16px;
+  }
+
+  .term-content h1 { font-size: 20px; }
+  .term-content h2 { font-size: 18px; }
+  .term-content h3 { font-size: 16px; }
+
+  .term-statusbar {
+    font-size: 14px;
+  }
+}

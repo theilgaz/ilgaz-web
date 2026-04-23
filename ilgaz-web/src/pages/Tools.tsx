@@ -21,6 +21,7 @@ const tools: Tool[] = [
   { id: 'day-progress', title: 'Günün Akışı', link: '/progress', description: 'Günün ilerleyişini takip et', category: 'verimlilik' },
   { id: 'pomodoro', title: 'Pomodoro', link: '/pomodoro', description: 'Odaklan, mola ver, tekrarla', category: 'verimlilik' },
   { id: 'text-formatter', title: 'Formatter', link: '/text-formatter', description: 'JSON, XML, YAML, SQL biçimlendirici', category: 'gelistirici' },
+  { id: 'antivibe', title: 'Antivibeürüs', link: '/antivibe', description: 'AI çıktısındaki em dash ve fazla boşluk virüslerini temizle', category: 'gelistirici' },
   { id: 'base64', title: 'Base64', link: '/base64', description: 'Metni encode ve decode et', category: 'gelistirici' },
   { id: 'color-palette', title: 'Renk Paleti', link: '/color-palette', description: 'Uyumlu renk paletleri oluştur', category: 'tasarim' },
   { id: 'color-shades', title: 'Tonlar', link: '/color-shades', description: 'Bir rengin açık ve koyu tonlarını keşfet', category: 'tasarim' },

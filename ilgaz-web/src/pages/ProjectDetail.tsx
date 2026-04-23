@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { projectsBySlug } from '../content/projects'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
-export function ProjectDetail() {
-  const { slug } = useParams<{ slug: string }>()
+export function ProjectDetail({ slug: slugProp }: { slug?: string }) {
+  const params = useParams<{ slug: string }>()
+  const slug = slugProp || params.slug
   const project = slug ? projectsBySlug[slug] : null
   useDocumentTitle(project?.meta.name || 'proje bulunamadı')
   const [lightboxImage, setLightboxImage] = useState<string | null>(null)

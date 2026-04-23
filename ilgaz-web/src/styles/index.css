@@ -15,4 +15,7 @@
 @import './components/nasa-apod.css';
 @import './components/theme-switch.css';
 @import './components/color-converter.css';
+@import './components/win98.css';
+@import './components/winxp.css';
+@import './components/terminal.css';
 @import './responsive.css';

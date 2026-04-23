@@ -24,6 +24,7 @@ import { PixelArtPage } from './pages/PixelArtPage'
 import { NasaApodPage } from './pages/NasaApodPage'
 import { FailureLessonsPage } from './pages/FailureLessonsPage'
 import { ColorConverterPage } from './pages/ColorConverterPage'
+import { AntiVibePage } from './pages/AntiVibePage'
 import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -54,6 +55,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/nasa-apod" element={<NasaApodPage />} />
           <Route path="/failure-lessons" element={<FailureLessonsPage />} />
           <Route path="/color-converter" element={<ColorConverterPage />} />
+          <Route path="/antivibe" element={<AntiVibePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

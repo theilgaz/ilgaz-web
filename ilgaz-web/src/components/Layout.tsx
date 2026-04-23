@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { Outlet, NavLink, Link, useLocation } from 'react-router-dom'
 import { posts } from '../content/posts'
 import { ThemeSwitch } from './ThemeSwitch'
+import { Win98Desktop } from './win98/Win98Desktop'
+import { WinXPDesktop } from './winxp/WinXPDesktop'
+import { TerminalDesktop } from './terminal/TerminalDesktop'
 
 // Şehir verileri (Progress.tsx ile senkron)
 const cities: Record<string, { lat: number; lng: number; timezone: number; cityId?: string }> = {
@@ -181,10 +184,28 @@ function getTodayFormatted(): string {
   return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
 }
 
+function useCurrentTheme() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('ilgaz-theme') || 'editorial'
+  })
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const current = document.documentElement.getAttribute('data-theme') || 'editorial'
+      setTheme(current)
+    })
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    return () => observer.disconnect()
+  }, [])
+
+  return theme
+}
+
 export function Layout() {
-  const nextPrayer = useNextPrayer()
+  useNextPrayer()
   const location = useLocation()
   const isHome = location.pathname === '/'
+  const theme = useCurrentTheme()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -193,6 +214,22 @@ export function Layout() {
   const today = getTodayFormatted()
   const todaysPosts = posts.filter(p => p.meta.date === today)
 
+  // Win98 theme — completely different layout, manages its own content
+  if (theme === 'win98') {
+    return <Win98Desktop />
+  }
+
+  // WinXP Luna theme — IE6-style windowing
+  if (theme === 'winxp') {
+    return <WinXPDesktop />
+  }
+
+  // Terminal theme — CRT-style single-screen output
+  if (theme === 'terminal') {
+    return <TerminalDesktop />
+  }
+
+  // Editorial theme (default)
   return (
     <>
       {/* ─── Header ─── */}
@@ -203,7 +240,7 @@ export function Layout() {
         </Link>
         <nav className="menu">
           <ul>
-            <li><NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>Index</NavLink></li>
+            <li><NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>Başlangıç</NavLink></li>
             <li><NavLink to="/blog" className={({ isActive }) => isActive ? 'active' : ''}>Yazı</NavLink></li>
             <li><NavLink to="/projects" className={({ isActive }) => isActive ? 'active' : ''}>Proje</NavLink></li>
             <li><NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>Hakkında</NavLink></li>

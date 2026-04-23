@@ -2711,6 +2711,168 @@
 }
 
 /* ============================================
+   ANTIVIBEURUS PAGE STYLES
+   ============================================ */
+
+.antivibe-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.antivibe-page .lead {
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.antivibe-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.antivibe-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.antivibe-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.antivibe-panel-info {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.antivibe-panel textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0 0 10px 10px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+
+.antivibe-panel textarea:focus {
+  border-color: var(--text-muted);
+}
+
+.antivibe-panel textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.antivibe-panel textarea[readonly] {
+  background: var(--bg-alt);
+  cursor: default;
+}
+
+/* Actions */
+.antivibe-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.antivibe-actions button {
+  padding: 8px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.antivibe-actions button:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.antivibe-actions button.primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.antivibe-actions button.primary:hover {
+  opacity: 0.9;
+}
+
+/* Stats */
+.antivibe-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.antivibe-stats-total {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.antivibe-stats-sep {
+  color: var(--text-muted);
+}
+
+.antivibe-stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.antivibe-stats-clean {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .antivibe-stats {
+    font-size: 0.65rem;
+    gap: 4px;
+    padding: 8px 12px;
+  }
+}
+
+/* ============================================
    FAILURE LESSONS PAGE STYLES
    ============================================ */
 

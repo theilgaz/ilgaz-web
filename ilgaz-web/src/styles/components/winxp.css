@@ -1,0 +1,1204 @@
+/* ============================================
+   WINDOWS XP LUNA THEME
+   ============================================ */
+
+/* --- Theme Variables --- */
+:root[data-theme="winxp"] {
+  --bg: #3a6ea5;
+  --bg-alt: #ece9d8;
+  --text: #000000;
+  --text-secondary: #333;
+  --text-muted: #808080;
+  --accent: #0058ee;
+  --accent-soft: #d6dff7;
+  --accent-hover: #003cb1;
+  --border: #aca899;
+
+  --font-serif: 'Trebuchet MS', 'Tahoma', sans-serif;
+  --font-sans: 'Tahoma', 'Trebuchet MS', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Tahoma', sans-serif;
+  --font-heading: 'Trebuchet MS', sans-serif;
+}
+
+/* --- Hide editorial layout --- */
+:root[data-theme="winxp"] .nav-header,
+:root[data-theme="winxp"] .site-footer,
+:root[data-theme="winxp"] .today-banner,
+:root[data-theme="winxp"] .theme-switch {
+  display: none !important;
+}
+
+:root[data-theme="winxp"] main {
+  padding: 0;
+  margin: 0;
+}
+
+:root[data-theme="winxp"] main .container {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+:root[data-theme="winxp"] body {
+  background: #3a6ea5;
+  overflow: hidden;
+}
+
+/* ============================================
+   DESKTOP
+   ============================================ */
+.xp-desktop {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, #9fcf6f 0%, #6fa83f 40%, transparent 70%),
+    linear-gradient(180deg, #8fc5e8 0%, #5a9bd4 60%, #7bb563 60%, #4a8f3d 100%);
+  overflow: hidden;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 12px;
+  color: #000;
+  cursor: default;
+}
+
+/* ============================================
+   DESKTOP ICONS
+   ============================================ */
+.xp-desktop-icons {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1;
+}
+
+.xp-desktop-icon {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.xp-desktop-icon:hover {
+  background: rgba(60, 130, 200, 0.25);
+  border-color: rgba(60, 130, 200, 0.5);
+}
+
+.xp-desktop-icon:focus {
+  background: rgba(60, 130, 200, 0.35);
+  border-color: rgba(60, 130, 200, 0.7);
+  outline: none;
+}
+
+.xp-desktop-icon-img {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+.xp-desktop-icon-label {
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  word-break: break-word;
+  line-height: 1.2;
+  max-width: 80px;
+}
+
+/* ============================================
+   WINDOW (IE6 STYLE)
+   ============================================ */
+.xp-window {
+  position: absolute;
+  background: #ece9d8;
+  border: 1.5px solid #0054e3;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- Titlebar --- */
+.xp-titlebar {
+  background: linear-gradient(180deg, #0058ee 0%, #3a93ff 8%, #0054e3 90%, #002cb1 100%);
+  color: #fff;
+  padding: 4px 6px 4px 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: move;
+  user-select: none;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  border-radius: 6px 6px 0 0;
+  min-height: 26px;
+}
+
+.xp-titlebar-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.xp-titlebar-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.xp-titlebar-btns {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.xp-btn {
+  width: 21px;
+  height: 21px;
+  border: none;
+  border-radius: 3px;
+  font-size: 13px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.xp-btn-min,
+.xp-btn-max {
+  background: linear-gradient(180deg, #3e7cda 0%, #2a5db0 50%, #1a4490 100%);
+}
+
+.xp-btn-min:hover,
+.xp-btn-max:hover {
+  background: linear-gradient(180deg, #5a9ae8 0%, #3e7cda 50%, #2a5db0 100%);
+}
+
+.xp-btn-close {
+  background: linear-gradient(180deg, #e87961 0%, #c9503a 50%, #ab3520 100%);
+}
+
+.xp-btn-close:hover {
+  background: linear-gradient(180deg, #ff9580 0%, #e87961 50%, #c9503a 100%);
+}
+
+.xp-btn:active {
+  filter: brightness(0.85);
+}
+
+/* --- Menu bar --- */
+.xp-menubar {
+  background: #ece9d8;
+  border-bottom: 1px solid #aca899;
+  padding: 2px 4px;
+  display: flex;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.xp-menu-item {
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.xp-menu-item:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+/* --- Toolbar (IE6 nav + address bar) --- */
+.xp-toolbar {
+  background: #ece9d8;
+  border-bottom: 1px solid #aca899;
+  padding: 2px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.xp-toolbar-buttons {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.xp-nav-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: 'Tahoma', sans-serif;
+  cursor: pointer;
+  color: #000;
+}
+
+.xp-nav-btn:hover {
+  border-color: #bbb;
+  background: #f0ede3;
+}
+
+.xp-nav-btn:active {
+  background: #ddd;
+}
+
+.xp-address-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.xp-address-label {
+  font-size: 11px;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.xp-address-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid #7f9db9;
+  padding: 1px 4px;
+  font-size: 12px;
+  border-radius: 0;
+  min-height: 20px;
+}
+
+.xp-address-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.xp-address-text {
+  color: #000;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 12px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.xp-address-go {
+  background: linear-gradient(180deg, #f5f4ef 0%, #dddacd 100%);
+  border: 1px solid #aca899;
+  border-radius: 0;
+  padding: 1px 10px;
+  font-size: 11px;
+  font-family: 'Tahoma', sans-serif;
+  cursor: pointer;
+  color: #000;
+}
+
+.xp-address-go:hover {
+  background: linear-gradient(180deg, #fff 0%, #e8e5d8 100%);
+}
+
+/* --- Window body --- */
+.xp-body {
+  background: #fff;
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  flex: 1;
+  font-size: 13px;
+  max-height: 65vh;
+  border-top: 1px solid #aca899;
+}
+
+/* ============================================
+   TASKBAR
+   ============================================ */
+.xp-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(180deg, #1e5ac8 0%, #2f75d6 10%, #1e5ac8 90%, #0f3b9e 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  z-index: 9999;
+  font-size: 12px;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Start button --- */
+.xp-start-btn {
+  background: linear-gradient(180deg, #3cb43c 0%, #389b38 40%, #1e7a1e 100%);
+  border: none;
+  border-radius: 0 14px 14px 0;
+  padding: 2px 14px 2px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  height: 30px;
+  color: #fff;
+  font-family: 'Tahoma', sans-serif;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.xp-start-btn:hover {
+  background: linear-gradient(180deg, #4ec94e 0%, #42ae42 40%, #238a23 100%);
+}
+
+.xp-start-btn.active {
+  background: linear-gradient(180deg, #2a9a2a 0%, #1e7a1e 40%, #0e5a0e 100%);
+}
+
+.xp-start-btn-icon {
+  font-size: 16px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.xp-start-btn-text {
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.5px;
+}
+
+/* --- Taskbar items --- */
+.xp-taskbar-items {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+  overflow: hidden;
+  padding: 0 4px;
+}
+
+.xp-taskbar-item {
+  background: linear-gradient(180deg, #3d7bce 0%, #2a63b0 100%);
+  border: none;
+  border-radius: 3px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-family: 'Tahoma', sans-serif;
+  cursor: pointer;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 24px;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.xp-taskbar-item:hover {
+  background: linear-gradient(180deg, #4a8ee0 0%, #3574c4 100%);
+}
+
+.xp-taskbar-item.active {
+  background: linear-gradient(180deg, #2b5fa6 0%, #1a4a8a 100%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.xp-taskbar-item-icon {
+  font-size: 12px;
+}
+
+/* --- System tray --- */
+.xp-tray {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(180deg, #0f4daa 0%, #0c3f8e 100%);
+  padding: 2px 10px;
+  height: 30px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.xp-tray-icon {
+  font-size: 12px;
+}
+
+.xp-tray-clock {
+  font-size: 11px;
+  font-family: 'Tahoma', sans-serif;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   START MENU
+   ============================================ */
+.xp-start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+}
+
+.xp-start-menu {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #0054e3;
+  border-radius: 8px 8px 0 0;
+  min-width: 260px;
+  z-index: 9999;
+  box-shadow: 3px -3px 12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.xp-start-header {
+  background: linear-gradient(180deg, #0058ee 0%, #3a93ff 30%, #0054e3 100%);
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 7px 7px 0 0;
+}
+
+.xp-start-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: 2px solid #fff;
+  object-fit: cover;
+}
+
+.xp-start-username {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.xp-start-body {
+  padding: 4px 0;
+  background: #fff;
+}
+
+.xp-start-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.xp-start-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 13px;
+  text-align: left;
+  width: 100%;
+  color: #000;
+}
+
+.xp-start-item:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+.xp-start-item-icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+.xp-start-divider {
+  height: 1px;
+  background: #d6d2c2;
+  margin: 3px 10px;
+}
+
+.xp-start-footer {
+  background: #d6dff7;
+  border-top: 1px solid #aca899;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.xp-start-footer-btn {
+  background: none;
+  border: none;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 3px;
+  color: #000;
+}
+
+.xp-start-footer-btn:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+/* ============================================
+   BALLOON TIP (Easter egg)
+   ============================================ */
+.xp-balloon {
+  position: fixed;
+  bottom: 40px;
+  right: 12px;
+  background: #ffffe1;
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 10px 28px 10px 10px;
+  max-width: 260px;
+  z-index: 99999;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  font-family: 'Tahoma', sans-serif;
+  font-size: 12px;
+  animation: xp-balloon-in 0.3s ease-out;
+}
+
+.xp-balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 28px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #ffffe1;
+}
+
+.xp-balloon-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.xp-balloon-text {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.xp-balloon-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  line-height: 1;
+}
+
+.xp-balloon-close:hover {
+  color: #000;
+}
+
+@keyframes xp-balloon-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   WELCOME CONTENT
+   ============================================ */
+.xp-welcome-header {
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d6d2c2;
+}
+
+.xp-welcome-header h1 {
+  font-family: 'Trebuchet MS', 'Tahoma', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #003399;
+  margin: 0 0 2px;
+}
+
+.xp-welcome-subtitle {
+  font-size: 12px;
+  color: #808080;
+  margin: 0;
+}
+
+.xp-welcome-grid {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.xp-welcome-photo {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #7f9db9;
+  border-radius: 4px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.xp-welcome-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.xp-welcome-text {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.xp-welcome-text p {
+  margin: 0 0 6px;
+}
+
+.xp-welcome-links {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.xp-link-btn {
+  background: linear-gradient(180deg, #f5f4ef 0%, #dddacd 100%);
+  border: 1px solid #aca899;
+  border-radius: 3px;
+  padding: 4px 12px;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  color: #000;
+}
+
+.xp-link-btn:hover {
+  background: linear-gradient(180deg, #fff 0%, #e8e5d8 100%);
+  border-color: #316ac5;
+}
+
+.xp-link-btn:active {
+  background: #ddd;
+}
+
+/* --- Sections --- */
+.xp-welcome-section {
+  margin-top: 12px;
+}
+
+.xp-welcome-section h2 {
+  font-family: 'Trebuchet MS', 'Tahoma', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #003399;
+  border-bottom: 1px solid #d6d2c2;
+  padding-bottom: 3px;
+  margin: 0 0 6px;
+}
+
+/* --- File entries --- */
+.xp-file-entry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 2px;
+}
+
+.xp-file-entry:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+.xp-file-icon {
+  font-size: 14px;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.xp-file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.xp-file-meta {
+  font-size: 11px;
+  color: #808080;
+  flex-shrink: 0;
+}
+
+.xp-file-entry:hover .xp-file-meta {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================
+   CONTENT OVERRIDES INSIDE XP WINDOW BODY
+   ============================================ */
+
+/* Reset all editorial styles inside xp-body */
+.xp-body {
+  background: #fff !important;
+  color: #000 !important;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+
+  /* Override ALL CSS variables so editorial components using var(--bg) etc. get readable values */
+  --bg: #ffffff;
+  --bg-alt: #f0ede3;
+  --paper: #ffffff;
+  --paper-2: #f0ede3;
+  --ink: #000000;
+  --ink-2: #333333;
+  --text: #000000;
+  --text-secondary: #333333;
+  --text-muted: #808080;
+  --mute: #808080;
+  --rule: #d6d2c2;
+  --accent: #003399;
+  --accent-soft: #d6dff7;
+  --accent-hover: #002266;
+  --border: #d6d2c2;
+  --font-serif: 'Tahoma', sans-serif;
+  --font-sans: 'Tahoma', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Tahoma', sans-serif;
+  --font-heading: 'Trebuchet MS', 'Tahoma', sans-serif;
+}
+
+.xp-body *,
+.xp-body a {
+  color: inherit;
+  font-family: inherit;
+}
+
+.xp-body a {
+  color: #0000ff;
+  text-decoration: underline;
+}
+
+.xp-body a:hover {
+  color: #0000cc;
+}
+
+.xp-body h1, .xp-body h2, .xp-body h3, .xp-body h4 {
+  font-family: 'Trebuchet MS', 'Tahoma', sans-serif;
+  color: #000;
+  letter-spacing: 0;
+}
+
+.xp-body h1 { font-size: 18px; margin: 0 0 8px; }
+.xp-body h2 { font-size: 16px; margin: 12px 0 6px; }
+.xp-body h3 { font-size: 14px; margin: 10px 0 4px; }
+
+.xp-body h2 em, .xp-body h1 em {
+  color: #003399;
+  font-style: normal;
+}
+
+.xp-body p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Section head */
+.xp-body .section-head {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.xp-body .section-head .idx {
+  font-size: 11px;
+  color: #003399;
+  margin-bottom: 2px;
+}
+
+.xp-body .section-head .sub {
+  font-size: 11px;
+  color: #808080;
+}
+
+/* Writing/blog list entries */
+.xp-body .writing-entry {
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 3px 4px;
+  border-color: #d6d2c2;
+  border-radius: 2px;
+}
+
+.xp-body .writing-entry .title {
+  font-size: 13px;
+  font-family: 'Tahoma', sans-serif;
+}
+
+.xp-body .writing-entry .date {
+  font-size: 11px;
+  color: #808080;
+}
+
+.xp-body .writing-entry .read {
+  font-size: 11px;
+  color: #808080;
+}
+
+.xp-body .writing-entry:hover {
+  background: #316ac5;
+  color: #fff;
+  margin: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.xp-body .writing-entry:hover .title,
+.xp-body .writing-entry:hover .date,
+.xp-body .writing-entry:hover .read {
+  color: #fff;
+}
+
+/* Hide editorial hover effects */
+.xp-body .writing-entry:hover .read::after {
+  content: none;
+}
+
+/* Tools entries */
+.xp-body .tools-entry {
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 3px 4px;
+  border-color: #d6d2c2;
+  border-radius: 2px;
+}
+
+.xp-body .tools-entry-title {
+  font-size: 13px;
+}
+
+.xp-body .tools-entry-desc {
+  font-size: 11px;
+  color: #808080;
+}
+
+.xp-body .tools-entry:hover {
+  background: #316ac5;
+  color: #fff;
+  margin: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.xp-body .tools-entry:hover .tools-entry-title,
+.xp-body .tools-entry:hover .tools-entry-desc {
+  color: #fff;
+}
+
+/* Tools chips */
+.xp-body .tools-chip {
+  background: linear-gradient(180deg, #f5f4ef 0%, #dddacd 100%);
+  border: 1px solid #aca899;
+  border-radius: 3px;
+  font-size: 11px;
+  padding: 2px 8px;
+  color: #000;
+}
+
+.xp-body .tools-chip.active {
+  background: #316ac5;
+  border-color: #003399;
+  color: #fff;
+}
+
+.xp-body .tools-group-head {
+  border-color: #d6d2c2;
+}
+
+.xp-body .tools-group-label {
+  color: #003399;
+}
+
+/* Project cards */
+.xp-body .project-entry {
+  border-color: #d6d2c2;
+  border-radius: 2px;
+}
+
+.xp-body .project-entry:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+/* Blog post content */
+.xp-body .blog-post-header {
+  margin-bottom: 12px;
+}
+
+.xp-body .blog-post-meta {
+  font-size: 11px;
+  color: #808080;
+}
+
+.xp-body .blog-post-content {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.xp-body .blog-post-content blockquote {
+  border-left: 3px solid #316ac5;
+  padding-left: 10px;
+  color: #333;
+  margin: 8px 0;
+}
+
+.xp-body .blog-post-content code {
+  background: #ece9d8;
+  font-size: 12px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.xp-body .blog-post-content pre {
+  background: #1e1e2e;
+  color: #c0c0c0;
+  padding: 10px;
+  font-size: 12px;
+  overflow: auto;
+  border-radius: 3px;
+  border: 1px solid #aca899;
+}
+
+.xp-body .blog-post-content pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Buttons inside windows */
+.xp-body button,
+.xp-body .btn {
+  background: linear-gradient(180deg, #f5f4ef 0%, #dddacd 100%);
+  border: 1px solid #aca899;
+  color: #000;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  padding: 3px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.xp-body button:hover,
+.xp-body .btn:hover {
+  background: linear-gradient(180deg, #fff 0%, #e8e5d8 100%);
+  border-color: #316ac5;
+}
+
+.xp-body button:active,
+.xp-body .btn:active {
+  background: #ddd;
+}
+
+/* Inputs inside windows */
+.xp-body input,
+.xp-body textarea,
+.xp-body select {
+  background: #fff;
+  border: 1px solid #7f9db9;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 12px;
+  color: #000;
+  padding: 3px 4px;
+  border-radius: 0;
+}
+
+.xp-body input:focus,
+.xp-body textarea:focus,
+.xp-body select:focus {
+  border-color: #316ac5;
+  outline: none;
+}
+
+/* About page reset */
+.xp-body .about-page,
+.xp-body .about-grid {
+  display: block;
+}
+
+.xp-body .portrait {
+  width: 120px;
+  height: auto;
+  aspect-ratio: auto;
+  float: left;
+  margin: 0 12px 8px 0;
+  background: none;
+  border: 2px solid #7f9db9;
+  border-radius: 3px;
+}
+
+.xp-body .portrait img {
+  filter: none;
+}
+
+.xp-body .about-copy p {
+  font-size: 13px;
+  color: #000;
+}
+
+.xp-body .about-copy p:first-child::first-letter {
+  font-size: inherit;
+  float: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Formatter page inside windows */
+.xp-body .formatter-page-content {
+  width: auto;
+  margin-left: 0;
+  transform: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.xp-body .formatter-page-layout {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.xp-body .formatter-page-panel {
+  min-height: 150px;
+}
+
+/* Collections */
+.xp-body .collection-entry {
+  border-color: #d6d2c2;
+  border-radius: 2px;
+}
+
+.xp-body .collection-entry:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+/* Progress page */
+.xp-body .progress-section {
+  border-color: #d6d2c2;
+}
+
+/* Image handling */
+.xp-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Lists */
+.xp-body ul, .xp-body ol {
+  padding-left: 20px;
+  margin: 4px 0 8px;
+}
+
+.xp-body li {
+  margin-bottom: 2px;
+  font-size: 13px;
+}
+
+/* Tables */
+.xp-body table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+
+.xp-body th, .xp-body td {
+  border: 1px solid #d6d2c2;
+  padding: 4px 8px;
+  text-align: left;
+}
+
+.xp-body th {
+  background: #ece9d8;
+  font-weight: bold;
+}
+
+.xp-body tr:hover {
+  background: #e8e8f0;
+}
+
+/* HR */
+.xp-body hr {
+  border: none;
+  border-top: 1px solid #d6d2c2;
+  margin: 12px 0;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .xp-desktop-icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .xp-window {
+    left: 5px !important;
+    top: 5px !important;
+    width: calc(100% - 10px) !important;
+  }
+
+  .xp-start-menu {
+    width: 80vw;
+  }
+
+  .xp-toolbar-buttons {
+    flex-wrap: wrap;
+  }
+
+  .xp-address-bar {
+    flex-wrap: nowrap;
+  }
+
+  .xp-address-label {
+    display: none;
+  }
+
+  .xp-welcome-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}

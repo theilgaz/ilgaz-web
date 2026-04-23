@@ -3,8 +3,9 @@ import { collectionsBySlug } from '../content/collections'
 import { postsBySlug } from '../content/posts'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
-export function CollectionDetail() {
-  const { slug } = useParams()
+export function CollectionDetail({ slug: slugProp }: { slug?: string }) {
+  const params = useParams()
+  const slug = slugProp || params.slug
   const collection = collectionsBySlug[slug || '']
   useDocumentTitle(collection?.title || 'koleksiyon bulunamadı')
 

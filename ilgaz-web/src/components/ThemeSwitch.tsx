@@ -13,28 +13,18 @@ const themes = [
     name: 'Windows 98',
     desc: 'Teal, gray chrome, nostalgia',
     colors: ['#008080', '#c0c0c0', '#000080'],
-    disabled: true,
   },
   {
     id: 'winxp',
     name: 'Windows XP',
     desc: 'Bliss wallpaper, Luna blue',
     colors: ['#0a1628', '#3a93ff', '#7bb563'],
-    disabled: true,
   },
   {
     id: 'terminal',
     name: 'Terminal',
     desc: 'Phosphor green, keyboard-first',
     colors: ['#000', '#33ff33', '#000'],
-    disabled: true,
-  },
-  {
-    id: 'geocities',
-    name: 'GeoCities',
-    desc: 'Marquees, WordArt, chaos',
-    colors: ['#000080', '#ffff00', '#ff00ff'],
-    disabled: true,
   },
 ]
 
@@ -79,8 +69,8 @@ export function ThemeSwitch() {
           {themes.map(t => (
             <div
               key={t.id}
-              className={`ts-opt ${t.id === active ? 'active' : ''} ${t.disabled ? 'disabled' : ''}`}
-              onClick={() => !t.disabled && selectTheme(t.id)}
+              className={`ts-opt ${t.id === active ? 'active' : ''}`}
+              onClick={() => selectTheme(t.id)}
             >
               <div className="ts-preview">
                 {t.colors.map((c, i) => (
@@ -91,7 +81,6 @@ export function ThemeSwitch() {
                 <div className="ts-name">
                   {t.name}
                   {t.default && <em> (default)</em>}
-                  {t.disabled && <span className="ts-soon">soon</span>}
                 </div>
                 <div className="ts-desc">{t.desc}</div>
               </div>

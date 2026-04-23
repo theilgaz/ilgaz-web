@@ -3,8 +3,9 @@ import { postsBySlug } from '../content/posts'
 import { getCollectionForPost, getPostPositionInCollection } from '../content/collections'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
-export function BlogPost() {
-  const { slug } = useParams()
+export function BlogPost({ slug: slugProp }: { slug?: string }) {
+  const params = useParams()
+  const slug = slugProp || params.slug
   const post = postsBySlug[slug || '']
   useDocumentTitle(post?.meta.title || 'yazı bulunamadı')
 

@@ -34,7 +34,7 @@ export function Home() {
         <div className="now-panel">
           <div>
             <div className="k">Okuyorum</div>
-            <div className="v"><em>Fihi Ma Fih</em>, Mevlana. Her gece bir fasıl.</div>
+            <div className="v"><em>Kur'an-ı Kerim</em>.</div>
           </div>
           <div>
             <div className="k">İnşa ediyorum</div>
