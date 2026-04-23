@@ -1,0 +1,253 @@
+/* ============================================
+   NASA APOD — Editorial Style
+   ============================================ */
+
+.apod-editorial {
+  /* inherits container width */
+}
+
+/* ─── Navigation ─── */
+.apod-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.apod-nav-arrow {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+
+.apod-nav-arrow:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.apod-nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.apod-nav-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.apod-date-input {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.apod-date-label {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+/* ─── Actions ─── */
+.apod-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.apod-actions button {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.apod-actions button:hover:not(:disabled) {
+  color: var(--text-secondary);
+  border-color: var(--text-muted);
+}
+
+.apod-actions button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.apod-actions button.copied {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+/* ─── Loading ─── */
+.apod-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.apod-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: apod-spin 0.8s linear infinite;
+}
+
+@keyframes apod-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Error ─── */
+.apod-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 60px 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.apod-error button {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.apod-error button:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ─── Content ─── */
+.apod-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ─── Media ─── */
+.apod-media {
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+
+.apod-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.apod-media iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  display: block;
+}
+
+/* ─── Info ─── */
+.apod-info h3 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.apod-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.apod-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.apod-hd {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color .15s;
+}
+
+.apod-hd:hover {
+  color: var(--text);
+}
+
+.apod-explanation {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 600px) {
+  .apod-nav {
+    gap: 10px;
+  }
+
+  .apod-date-label {
+    font-size: 14px;
+  }
+
+  .apod-info h3 {
+    font-size: 22px;
+  }
+
+  .apod-explanation {
+    font-size: 15px;
+  }
+
+  .apod-actions {
+    flex-wrap: wrap;
+  }
+}

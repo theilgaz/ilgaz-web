@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>ilg.az</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f2e9;
+    --paper-2: #efe9dc;
+    --ink: #1a1714;
+    --ink-2: #3d362d;
+    --mute: #7a6f5f;
+    --rule: #d9d0bd;
+    --accent: #a23a26;        /* oxblood */
+    --accent-soft: #e8d5cd;
+    --serif: 'Fraunces', 'Iowan Old Style', 'Georgia', serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); }
+  body {
+    font-size: 18px; line-height: 1.55;
+    background-image:
+      radial-gradient(ellipse 800px 400px at 15% -5%, rgba(162,58,38,0.04), transparent 60%),
+      radial-gradient(ellipse 600px 300px at 110% 15%, rgba(122,111,95,0.05), transparent 55%);
+    min-height: 100vh;
+  }
+  ::selection { background: var(--accent); color: var(--paper); }
+  a { color: inherit; text-decoration: none; }
+  a.link { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 4px; text-decoration-thickness: 1px; transition: text-decoration-color .15s, color .15s; }
+  a.link:hover { text-decoration-color: var(--accent); color: var(--accent); }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+
+  /* ───── Header ───── */
+  header.nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 48px; max-width: 1100px; margin: 0 auto;
+    font-family: var(--sans); font-size: 14px;
+  }
+  .brand { font-family: var(--serif); font-weight: 500; font-size: 20px; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px; }
+  .brand .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; transform: translateY(-2px); }
+  .brand em { font-style: italic; color: var(--mute); font-weight: 400; font-size: 14px; }
+  nav.menu ul { display: flex; gap: 28px; list-style: none; padding: 0; margin: 0; }
+  nav.menu a { color: var(--ink-2); transition: color .15s; position: relative; }
+  nav.menu a:hover { color: var(--accent); }
+  nav.menu a.active { color: var(--ink); }
+  nav.menu a.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 20px; font-family: var(--sans); font-size: 13px; color: var(--mute); }
+  .lang { display: flex; gap: 4px; align-items: center; }
+  .lang button { background: none; border: none; font: inherit; color: var(--mute); cursor: pointer; padding: 2px 4px; }
+  .lang button.on { color: var(--ink); font-weight: 600; }
+  .lang span { color: var(--rule); }
+
+  /* ───── Hero ───── */
+  .hero { padding: 80px 0 100px; position: relative; }
+  .hero .eyebrow { font-family: var(--sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+  .hero .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--mute); display: inline-block; }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    margin: 0 0 28px; max-width: 920px;
+    text-wrap: balance;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .hero .lede { font-size: 20px; line-height: 1.55; color: var(--ink-2); max-width: 620px; margin: 0 0 32px; text-wrap: pretty; }
+  .hero .meta { display: flex; gap: 32px; font-family: var(--sans); font-size: 13px; color: var(--mute); padding-top: 24px; border-top: 1px solid var(--rule); max-width: 620px; }
+  .hero .meta b { color: var(--ink-2); font-weight: 500; display: block; margin-bottom: 2px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+  /* corner glyph */
+  .hero .glyph { position: absolute; right: 0; top: 90px; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 220px; line-height: 1; color: var(--accent); opacity: 0.08; user-select: none; pointer-events: none; }
+
+  /* ───── Section heading pattern ───── */
+  .section { padding: 60px 0; border-top: 1px solid var(--rule); }
+  .section-head { display: grid; grid-template-columns: 180px 1fr; gap: 40px; align-items: baseline; margin-bottom: 40px; }
+  .section-head .idx { font-family: var(--sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); }
+  .section-head h2 { font-family: var(--serif); font-weight: 400; font-size: 34px; letter-spacing: -0.01em; margin: 0; }
+  .section-head h2 em { font-style: italic; color: var(--accent); }
+  .section-head .sub { font-family: var(--sans); font-size: 13px; color: var(--mute); margin-top: 6px; max-width: 420px; }
+
+  /* ───── Writing list ───── */
+  .writing { display: flex; flex-direction: column; }
+  .entry {
+    display: grid; grid-template-columns: 180px 1fr auto; gap: 40px;
+    padding: 22px 0; border-top: 1px solid var(--rule);
+    align-items: baseline; transition: background .2s;
+  }
+  .entry:first-child { border-top: none; }
+  .entry:hover { background: rgba(162,58,38,0.03); margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
+  .entry .date { font-family: var(--sans); font-size: 12px; color: var(--mute); letter-spacing: 0.06em; }
+  .entry .title { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.3; }
+  .entry .title em { font-style: italic; }
+  .entry .dek { font-family: var(--sans); font-size: 13px; color: var(--mute); margin-top: 4px; text-wrap: pretty; max-width: 520px; }
+  .entry .read { font-family: var(--sans); font-size: 12px; color: var(--mute); white-space: nowrap; }
+  .entry:hover .title { color: var(--accent); }
+  .entry:hover .read::after { content: ' →'; }
+
+  /* ───── Work grid ───── */
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .work-card {
+    background: var(--paper-2); border: 1px solid var(--rule); border-radius: 2px;
+    padding: 24px; display: flex; flex-direction: column; gap: 12px;
+    transition: transform .2s, border-color .2s;
+    position: relative; overflow: hidden;
+  }
+  .work-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .work-card .thumb { height: 180px; background:
+      repeating-linear-gradient(135deg, rgba(0,0,0,0.02) 0 10px, transparent 10px 20px),
+      var(--paper);
+      border: 1px solid var(--rule); border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-style: italic; color: var(--mute); font-size: 14px;
+  }
+  .work-card h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; margin: 4px 0 0; letter-spacing: -0.005em; }
+  .work-card .tagline { font-family: var(--sans); font-size: 13px; color: var(--mute); line-height: 1.5; }
+  .work-card .tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+  .work-card .tag { font-family: var(--sans); font-size: 11px; color: var(--mute); border: 1px solid var(--rule); padding: 2px 8px; border-radius: 99px; }
+  .work-card .year { position: absolute; top: 18px; right: 20px; font-family: var(--mono); font-size: 11px; color: var(--mute); }
+
+  /* ───── Now panel ───── */
+  .now {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule);
+  }
+  .now > div { background: var(--paper); padding: 22px 24px; }
+  .now .k { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); margin-bottom: 10px; }
+  .now .v { font-family: var(--serif); font-size: 18px; line-height: 1.4; font-weight: 400; }
+  .now .v em { font-style: italic; color: var(--accent); }
+
+  /* ───── About ───── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: start; }
+  .portrait {
+    aspect-ratio: 4/5; background:
+      repeating-linear-gradient(135deg, rgba(162,58,38,0.06) 0 2px, transparent 2px 8px),
+      linear-gradient(180deg, var(--paper-2), #e5dcc8);
+    border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-style: italic; color: var(--mute); position: relative;
+  }
+  .portrait::after { content: 'portrait'; font-size: 14px; }
+  .portrait-caption { font-family: var(--sans); font-size: 11px; color: var(--mute); letter-spacing: 0.06em; margin-top: 10px; }
+  .about-copy p { margin: 0 0 18px; font-size: 19px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+  .about-copy p:first-child::first-letter {
+    font-family: var(--serif); font-weight: 300; font-size: 68px; float: left;
+    line-height: 0.85; padding: 6px 10px 0 0; color: var(--accent);
+  }
+
+  /* ───── Footer ───── */
+  footer {
+    margin-top: 80px; padding: 60px 0 40px; border-top: 1px solid var(--rule);
+    background: linear-gradient(180deg, transparent, rgba(217,208,189,0.2));
+  }
+  footer .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  footer h4 { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); margin: 0 0 14px; font-weight: 500; }
+  footer ul { list-style: none; padding: 0; margin: 0; font-family: var(--sans); font-size: 14px; }
+  footer li { margin: 6px 0; }
+  footer li a { color: var(--ink-2); transition: color .15s; }
+  footer li a:hover { color: var(--accent); }
+  footer .signoff { font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.3; color: var(--ink); max-width: 360px; }
+  footer .signoff b { font-weight: 500; font-style: normal; color: var(--accent); }
+  footer .meta-row { display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 11px; color: var(--mute); }
+
+  /* ───── Theme switcher (corner) ───── */
+  .theme-switch {
+    position: fixed; right: 24px; bottom: 24px; z-index: 100;
+    font-family: var(--sans); font-size: 13px;
+  }
+  .theme-switch .trigger {
+    background: var(--ink); color: var(--paper); border: none;
+    padding: 10px 14px; border-radius: 99px; cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(26,23,20,0.2);
+    font-family: var(--sans); font-size: 13px;
+    transition: transform .15s;
+  }
+  .theme-switch .trigger:hover { transform: translateY(-1px); }
+  .theme-switch .trigger .swatch { width: 14px; height: 14px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--paper) 50%, var(--accent) 50%);
+      border: 1.5px solid var(--paper);
+  }
+  .theme-switch .panel {
+    position: absolute; bottom: calc(100% + 10px); right: 0;
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 6px;
+    box-shadow: 0 20px 60px rgba(26,23,20,0.15);
+    width: 280px; padding: 14px; display: none;
+  }
+  .theme-switch[data-open="true"] .panel { display: block; }
+  .theme-switch .panel h5 { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); margin: 0 0 12px; font-weight: 500; }
+  .theme-switch .opt {
+    display: flex; gap: 12px; align-items: center; padding: 10px; border-radius: 4px; cursor: pointer;
+    transition: background .12s;
+  }
+  .theme-switch .opt:hover { background: var(--paper-2); }
+  .theme-switch .opt.active { background: var(--accent-soft); }
+  .theme-switch .opt .preview {
+    width: 40px; height: 30px; border-radius: 3px; border: 1px solid var(--rule); flex-shrink: 0;
+    display: flex; overflow: hidden;
+  }
+  .theme-switch .opt .preview > span { flex: 1; }
+  .theme-switch .opt .name { font-family: var(--serif); font-size: 15px; font-weight: 500; }
+  .theme-switch .opt .desc { font-size: 11px; color: var(--mute); margin-top: 1px; }
+  .theme-switch .opt .check { margin-left: auto; color: var(--accent); font-size: 14px; display: none; }
+  .theme-switch .opt.active .check { display: inline; }
+  .theme-switch .panel-foot { padding: 10px 10px 2px; font-size: 11px; color: var(--mute); border-top: 1px solid var(--rule); margin-top: 8px; font-family: var(--sans); }
+
+  /* ───── Tiny marginalia ───── */
+  .margin-note {
+    font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--mute);
+    display: block; margin-top: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .wrap, header.nav { padding-left: 24px; padding-right: 24px; }
+    .section-head, .work-grid, .about-grid, .now { grid-template-columns: 1fr; }
+    .now > div { border-top: 1px solid var(--rule); }
+    .entry { grid-template-columns: 1fr; gap: 4px; }
+    .hero .glyph { display: none; }
+    footer .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────────── HEADER ─────────── -->
+<header class="nav">
+  <div class="brand">
+    <span class="dot"></span>
+    ilg.az <em>est. 2018</em>
+  </div>
+  <nav class="menu">
+    <ul>
+      <li><a href="#" class="active">Index</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <div class="lang">
+      <button class="on">EN</button><span>/</span><button>AZ</button>
+    </div>
+  </div>
+</header>
+
+<!-- ─────────── HERO ─────────── -->
+<section class="hero wrap">
+  <div class="glyph">ı</div>
+  <div class="eyebrow">Baku, Azerbaijan · A personal website</div>
+  <h1>Writing, building, and <em>thinking out loud</em> from the Caspian coast.</h1>
+  <p class="lede">I'm [Name] — an engineer and writer documenting small experiments, slow reading, and the software I wish existed. This is the quiet corner where the drafts live.</p>
+  <div class="meta">
+    <div><b>Now</b>Reading Calvino</div>
+    <div><b>Lately</b>Building a map tool</div>
+    <div><b>Weather</b>19°C, clear</div>
+  </div>
+</section>
+
+<!-- ─────────── NOW ─────────── -->
+<section class="section wrap" id="now">
+  <div class="section-head">
+    <div class="idx">§ 01 — Now</div>
+    <div>
+      <h2>What I'm <em>up to</em>, this week.</h2>
+      <div class="sub">A live cross-section. Updated on Sundays, mostly.</div>
+    </div>
+  </div>
+  <div class="now">
+    <div>
+      <div class="k">Reading</div>
+      <div class="v"><em>Invisible Cities</em>, Italo Calvino. Slowly, one city per night.</div>
+    </div>
+    <div>
+      <div class="k">Building</div>
+      <div class="v">A <em>notebook</em> for annotating photographs of Baku's old facades.</div>
+    </div>
+    <div>
+      <div class="k">Listening</div>
+      <div class="v">Alim Qasımov, and the hum of the air conditioner.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── WRITING ─────────── -->
+<section class="section wrap" id="writing">
+  <div class="section-head">
+    <div class="idx">§ 02 — Writing</div>
+    <div>
+      <h2>Recent <em>dispatches</em>.</h2>
+      <div class="sub">Essays, field notes, and small technical pieces. No newsletter — just RSS and the occasional email.</div>
+    </div>
+  </div>
+  <div class="writing">
+    <a href="#" class="entry">
+      <div class="date">Apr 14, 2026</div>
+      <div>
+        <div class="title">Notes on the <em>slow web</em></div>
+        <div class="dek">Why I stopped auto-posting and started handwriting the index page again.</div>
+      </div>
+      <div class="read">6 min</div>
+    </a>
+    <a href="#" class="entry">
+      <div class="date">Mar 28, 2026</div>
+      <div>
+        <div class="title">A map tool for the courtyards of İçərişəhər</div>
+        <div class="dek">Mapping 43 hidden passages in the Old City, one drifting afternoon at a time.</div>
+      </div>
+      <div class="read">11 min</div>
+    </a>
+    <a href="#" class="entry">
+      <div class="date">Mar 02, 2026</div>
+      <div>
+        <div class="title">The small, correct program</div>
+        <div class="dek">On choosing dull tools, short files, and leaving the codebase quieter than you found it.</div>
+      </div>
+      <div class="read">8 min</div>
+    </a>
+    <a href="#" class="entry">
+      <div class="date">Feb 11, 2026</div>
+      <div>
+        <div class="title">Seven coffeehouses, ranked by how well they tolerate a laptop</div>
+        <div class="dek">An unscientific survey of Nəsimi district, conducted over three caffeinated weekends.</div>
+      </div>
+      <div class="read">5 min</div>
+    </a>
+    <a href="#" class="entry">
+      <div class="date">Jan 22, 2026</div>
+      <div>
+        <div class="title">Why I keep a paper commonplace book</div>
+        <div class="dek">The one tool I've never managed to replace with software, and I've tried hard.</div>
+      </div>
+      <div class="read">7 min</div>
+    </a>
+  </div>
+  <div style="margin-top:28px; font-family: var(--sans); font-size:13px;">
+    <a href="#" class="link">Full archive (142 posts) →</a>
+  </div>
+</section>
+
+<!-- ─────────── WORK ─────────── -->
+<section class="section wrap" id="work">
+  <div class="section-head">
+    <div class="idx">§ 03 — Work</div>
+    <div>
+      <h2>Things I've <em>made</em>.</h2>
+      <div class="sub">Small, finished, and still online — which is not always a given.</div>
+    </div>
+  </div>
+  <div class="work-grid">
+    <a href="#" class="work-card">
+      <div class="year">2025</div>
+      <div class="thumb">— screen —</div>
+      <h3>Kitab</h3>
+      <div class="tagline">A reading tracker that counts pages, not streaks. Currently used by me and roughly forty strangers.</div>
+      <div class="tags"><span class="tag">Side project</span><span class="tag">Swift</span><span class="tag">Shipped</span></div>
+    </a>
+    <a href="#" class="work-card">
+      <div class="year">2024</div>
+      <div class="thumb">— screen —</div>
+      <h3>Həyət</h3>
+      <div class="tagline">A visual index of Baku's interior courtyards, documented on foot with a Ricoh GR.</div>
+      <div class="tags"><span class="tag">Ongoing</span><span class="tag">Photography</span></div>
+    </a>
+    <a href="#" class="work-card">
+      <div class="year">2023</div>
+      <div class="thumb">— screen —</div>
+      <h3>Onsite</h3>
+      <div class="tagline">Lead engineer on a team tool at [company]. Helped take it from demo to 900-person rollout.</div>
+      <div class="tags"><span class="tag">Full-time</span><span class="tag">TypeScript</span></div>
+    </a>
+    <a href="#" class="work-card">
+      <div class="year">2022</div>
+      <div class="thumb">— screen —</div>
+      <h3>Zərrə</h3>
+      <div class="tagline">A tiny font for Azerbaijani Latin, with proper ə and ş. Free and imperfect.</div>
+      <div class="tags"><span class="tag">Type</span><span class="tag">Open source</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ─────────── ABOUT ─────────── -->
+<section class="section wrap" id="about">
+  <div class="section-head">
+    <div class="idx">§ 04 — About</div>
+    <div>
+      <h2>Short <em>biography</em>.</h2>
+      <div class="sub">Edited annually. Occasionally honest.</div>
+    </div>
+  </div>
+  <div class="about-grid">
+    <div>
+      <div class="portrait"></div>
+      <div class="portrait-caption">Somewhere off Fountain Square, 2025</div>
+    </div>
+    <div class="about-copy">
+      <p>I grew up between Baku and a grandmother's garden in Quba, which is probably why I like software that feels lived-in. I studied computer science, drifted through a few companies, and now I make small things on the side and write about the process in public.</p>
+      <p>This website is the <a href="#" class="link">commonplace book</a> — a slow, hand-maintained index of what I'm reading, building, and trying to figure out. It has no newsletter, no analytics that matter, and no opinions it isn't willing to walk back.</p>
+      <p>If you want to get in touch, I <a href="#" class="link">answer email</a> within about a week. If you want to see what's new, the <a href="#" class="link">RSS feed</a> is the only reliable way.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="signoff">
+        Thank you for <b>reading to the bottom</b> — it means more than the analytics would ever suggest.
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="#">Mastodon</a></li>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Are.na</a></li>
+          <li><a href="#">Read.cv</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="#">RSS feed</a></li>
+          <li><a href="#">Email me</a></li>
+          <li><a href="#">Uses page</a></li>
+          <li><a href="#">Colophon</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Lang</h4>
+        <ul>
+          <li><a href="#">English</a></li>
+          <li><a href="#">Azərbaycanca</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="meta-row">
+      <span>© 2026 ilg.az · built by hand in Baku</span>
+      <span>v2.0 · editorial · light</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ─────────── THEME SWITCHER ─────────── -->
+<div class="theme-switch" id="themeSwitch">
+  <button class="trigger" onclick="document.getElementById('themeSwitch').dataset.open = document.getElementById('themeSwitch').dataset.open === 'true' ? 'false' : 'true'">
+    <span class="swatch"></span>
+    <span>Editorial</span>
+    <span style="opacity:.5">▾</span>
+  </button>
+  <div class="panel">
+    <h5>Appearance</h5>
+    <div class="opt active">
+      <div class="preview" style="background:#f6f2e9"><span style="background:#f6f2e9"></span><span style="background:#a23a26;flex:0 0 6px"></span><span style="background:#1a1714;flex:0 0 10px"></span></div>
+      <div>
+        <div class="name">Editorial <em style="font-style:italic;color:var(--mute);font-weight:400">(default)</em></div>
+        <div class="desc">Warm paper, serif, hand-made</div>
+      </div>
+      <span class="check">✓</span>
+    </div>
+    <div class="opt">
+      <div class="preview"><span style="background:#008080"></span><span style="background:#c0c0c0"></span><span style="background:#000080;flex:0 0 10px"></span></div>
+      <div>
+        <div class="name">Windows 98</div>
+        <div class="desc">Teal, gray chrome, nostalgia</div>
+      </div>
+      <span class="check">✓</span>
+    </div>
+    <div class="opt">
+      <div class="preview"><span style="background:#0a1628"></span><span style="background:#3a93ff"></span><span style="background:#7bb563"></span></div>
+      <div>
+        <div class="name">Windows XP</div>
+        <div class="desc">Bliss wallpaper, Luna blue</div>
+      </div>
+      <span class="check">✓</span>
+    </div>
+    <div class="opt">
+      <div class="preview"><span style="background:#000"></span><span style="background:#33ff33"></span><span style="background:#000"></span></div>
+      <div>
+        <div class="name">Terminal</div>
+        <div class="desc">Phosphor green, keyboard-first</div>
+      </div>
+      <span class="check">✓</span>
+    </div>
+    <div class="opt">
+      <div class="preview"><span style="background:#000080"></span><span style="background:#ffff00"></span><span style="background:#ff00ff"></span></div>
+      <div>
+        <div class="name">GeoCities</div>
+        <div class="desc">Marquees, WordArt, chaos</div>
+      </div>
+      <span class="check">✓</span>
+    </div>
+    <div class="panel-foot">Your choice is remembered. Switch anytime.</div>
+  </div>
+</div>
+
+<script>
+  // Close panel on outside click
+  document.addEventListener('click', (e) => {
+    const sw = document.getElementById('themeSwitch');
+    if (!sw.contains(e.target)) sw.dataset.open = 'false';
+  });
+  // Option clicks — visual only for now; real theming wires up when all 5 are built
+  document.querySelectorAll('.theme-switch .opt').forEach(o => {
+    o.addEventListener('click', () => {
+      document.querySelectorAll('.theme-switch .opt').forEach(x => x.classList.remove('active'));
+      o.classList.add('active');
+      const name = o.querySelector('.name').firstChild.textContent.trim();
+      document.querySelector('.theme-switch .trigger span:nth-child(2)').textContent = name;
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Retro ilg.az — Plan & Wireframes</title>
+<meta name="viewport" content="width=1440" />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Gloria+Hallelujah&family=Kalam:wght@400;700&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: #f0eee9; font-family: 'Kalam', 'Caveat', sans-serif; color: #2a251f; }
+  /* --- Plan panel (floating, scrollable) --- */
+  #plan {
+    position: fixed; left: 16px; top: 16px; width: 380px; max-height: calc(100vh - 32px);
+    background: #fffdf5; border: 2px solid #2a251f; border-radius: 6px;
+    box-shadow: 6px 6px 0 rgba(0,0,0,.15);
+    padding: 18px 20px; overflow: auto; z-index: 1000;
+    font-family: 'Kalam', sans-serif; font-size: 15px; line-height: 1.45;
+  }
+  #plan h1 { font-family: 'Caveat', cursive; font-size: 34px; margin: 0 0 4px; line-height: 1; }
+  #plan h2 { font-family: 'Caveat', cursive; font-size: 22px; margin: 18px 0 4px; border-bottom: 1.5px dashed #2a251f; padding-bottom: 2px; }
+  #plan h3 { font-family: 'Kalam', sans-serif; font-weight: 700; font-size: 15px; margin: 10px 0 2px; }
+  #plan .sub { font-family: 'Caveat', cursive; font-size: 18px; color: #7a6a4a; margin-bottom: 10px; }
+  #plan ul { padding-left: 20px; margin: 4px 0 8px; }
+  #plan li { margin: 3px 0; }
+  #plan .pill { display: inline-block; border: 1.5px solid #2a251f; border-radius: 12px; padding: 1px 8px; font-size: 12px; margin: 2px 3px 2px 0; background: #fff; }
+  #plan .note { background: #fef4a8; border: 1.5px solid #2a251f; padding: 8px 10px; border-radius: 4px; font-family: 'Caveat', cursive; font-size: 18px; line-height: 1.2; margin: 8px 0; transform: rotate(-0.4deg); }
+  #plan .toggle { position: absolute; top: 10px; right: 12px; background: none; border: 1.5px solid #2a251f; border-radius: 4px; width: 26px; height: 22px; cursor: pointer; font-size: 14px; padding: 0; line-height: 1; }
+  body.plan-collapsed #plan { max-height: 44px; overflow: hidden; width: 220px; }
+  body.plan-collapsed #plan > *:not(h1):not(.toggle) { display: none; }
+
+  /* --- Canvas positioning --- */
+  #dc-root { padding-left: 420px; }
+
+  /* ========= WIREFRAME SHARED ========= */
+  .wf { box-sizing: border-box; font-family: 'Kalam', sans-serif; color: #111; background: #fff; width: 100%; height: 100%; overflow: hidden; position: relative; }
+  .wf, .wf * { box-sizing: border-box; }
+  .wf .box { border: 1.5px solid #111; }
+  .wf .dash { border: 1.5px dashed #666; }
+  .wf .thin { border: 1px solid #333; }
+  .wf .gray { background: #e8e6e0; }
+  .wf .lbl { font-family: 'Caveat', cursive; color: #7a6a4a; font-size: 14px; }
+  .wf .scribble { font-family: 'Gloria Hallelujah', cursive; }
+  .wf .placeholder-img { background:
+      repeating-linear-gradient(45deg, #ddd 0 6px, #eee 6px 12px);
+      position: relative; display: flex; align-items: center; justify-content: center;
+      font-family: 'Caveat', cursive; color: #666; font-size: 18px;
+  }
+  .wf .placeholder-img::before, .wf .placeholder-img::after {
+      content: ''; position: absolute; inset: 0; border: 1px solid #999;
+  }
+  .wf .placeholder-img::after {
+      background: linear-gradient(to top right, transparent calc(50% - 1px), #999 50%, transparent calc(50% + 1px)),
+                  linear-gradient(to top left,  transparent calc(50% - 1px), #999 50%, transparent calc(50% + 1px));
+  }
+  .wf .btn { border: 1.5px solid #111; padding: 3px 10px; display: inline-block; background: #f4f2ec; font-family: 'Kalam', sans-serif; font-weight: 700; font-size: 13px; }
+
+  /* ========= DIRECTION 1 — WIN 98 DESKTOP ========= */
+  .d1 { background: #008080; padding: 0; font-family: 'VT323', monospace; }
+  .d1 .desktop { position: absolute; inset: 0; padding: 20px; }
+  .d1 .icon { width: 80px; text-align: center; color: #fff; font-size: 16px; margin-bottom: 16px; display: inline-block; vertical-align: top; margin-right: 10px; }
+  .d1 .icon .ico { width: 46px; height: 46px; margin: 0 auto 4px; background: #fff; border: 1.5px solid #000; display: flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; color: #666; font-size: 12px; }
+  .d1 .win { position: absolute; background: #c0c0c0; border: 2px solid #000; box-shadow: 2px 2px 0 rgba(0,0,0,.3); }
+  .d1 .win .tbar { background: #000080; color: #fff; font-family: 'VT323', monospace; font-size: 16px; padding: 2px 6px; display: flex; justify-content: space-between; }
+  .d1 .win .tbar .btns span { display: inline-block; width: 16px; height: 14px; border: 1.5px solid #000; background: #c0c0c0; margin-left: 2px; text-align: center; line-height: 12px; font-size: 12px; color: #000; }
+  .d1 .win .menu { background: #c0c0c0; border-bottom: 1px solid #808080; padding: 2px 6px; font-family: 'VT323', monospace; font-size: 15px; }
+  .d1 .win .body { padding: 10px; font-family: 'Kalam', sans-serif; font-size: 13px; }
+  .d1 .bevel { border: 2px solid; border-color: #fff #808080 #808080 #fff; background: #fff; padding: 6px; }
+  .d1 .taskbar { position: absolute; bottom: 0; left: 0; right: 0; height: 28px; background: #c0c0c0; border-top: 2px solid #fff; display: flex; align-items: center; padding: 0 4px; font-family: 'VT323', monospace; font-size: 15px; }
+  .d1 .start { background: #c0c0c0; border: 2px solid; border-color: #fff #000 #000 #fff; padding: 1px 8px; display: flex; align-items: center; gap: 4px; font-weight: bold; }
+  .d1 .taskitem { background: #c0c0c0; border: 2px solid; border-color: #fff #808080 #808080 #fff; padding: 1px 8px; margin-left: 4px; font-size: 13px; }
+  .d1 .clock { margin-left: auto; border: 1.5px inset #808080; padding: 1px 8px; background: #c0c0c0; }
+
+  /* ========= DIRECTION 2 — TERMINAL / DOS ========= */
+  .d2 { background: #000; color: #33ff33; font-family: 'VT323', monospace; padding: 0; }
+  .d2 .crt { position: absolute; inset: 0; padding: 20px 24px; overflow: hidden; text-shadow: 0 0 2px #33ff33; font-size: 16px; line-height: 1.25; }
+  .d2 .crt::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,.25) 3px); pointer-events: none; }
+  .d2 .hdr { border: 1.5px solid #33ff33; padding: 2px 8px; display: inline-block; margin-bottom: 8px; }
+  .d2 .row { display: flex; gap: 10px; }
+  .d2 .ascii { white-space: pre; font-size: 14px; line-height: 1; color: #33ff33; opacity: .9; }
+  .d2 .menu { border: 1.5px solid #33ff33; padding: 4px 10px; }
+  .d2 .menu .k { color: #ffff33; }
+  .d2 .blink { animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .d2 .statusbar { position: absolute; bottom: 0; left: 0; right: 0; background: #33ff33; color: #000; padding: 2px 10px; font-size: 14px; display: flex; justify-content: space-between; }
+
+  /* ========= DIRECTION 3 — GEOCITIES ========= */
+  .d3 { background: #000080; color: #fff; font-family: 'Comic Sans MS', 'Kalam', cursive; padding: 0; }
+  .d3 .page { background:
+      repeating-linear-gradient(45deg, #ffff88 0 14px, #fff 14px 28px);
+      min-height: 100%; padding: 10px; position: absolute; inset: 0; overflow: hidden; color: #000;
+  }
+  .d3 .wordart { font-family: 'Impact', sans-serif; font-size: 44px; font-weight: bold;
+      background: linear-gradient(180deg, #ff00ff 0%, #ffff00 50%, #00ffff 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      -webkit-text-stroke: 2px #000; text-align: center; letter-spacing: 2px;
+      transform: skew(-8deg); text-shadow: 4px 4px 0 rgba(0,0,0,.2);
+  }
+  .d3 .marquee { background: #000; color: #ffff00; padding: 4px; font-family: 'Courier New', monospace; font-size: 13px; overflow: hidden; white-space: nowrap; border: 2px ridge #ff00ff; }
+  .d3 .marquee span { display: inline-block; padding-left: 100%; animation: scroll 12s linear infinite; }
+  @keyframes scroll { to { transform: translateX(-100%); } }
+  .d3 .box3d { background: #c0c0c0; color: #000; border: 3px ridge #ff00ff; padding: 8px; }
+  .d3 .blink { animation: blink 1s steps(2) infinite; color: #ff0000; font-weight: bold; }
+  .d3 .linklist a { color: #0000ee; text-decoration: underline; display: block; }
+  .d3 .counter { background: #000; color: #00ff00; font-family: 'VT323', monospace; font-size: 18px; padding: 1px 6px; display: inline-block; letter-spacing: 2px; border: 1.5px inset #666; }
+  .d3 .under-construction { background: #ffff00; border: 2px dashed #000; padding: 4px; font-family: 'Impact', sans-serif; text-transform: uppercase; font-size: 12px; text-align: center; color: #000; }
+
+  /* ========= DIRECTION 4 — XP LUNA ========= */
+  .d4 { background: linear-gradient(180deg, #5a9bd4 0%, #7fb5e0 50%, #3d8bc4 100%); padding: 0; font-family: 'Trebuchet MS', 'Tahoma', sans-serif; }
+  .d4 .bliss { position: absolute; inset: 0; background:
+      radial-gradient(ellipse at 30% 40%, #9fcf6f 0%, #6fa83f 40%, transparent 70%),
+      linear-gradient(180deg, #8fc5e8 0%, #5a9bd4 60%, #7bb563 60%, #4a8f3d 100%);
+  }
+  .d4 .win { position: absolute; border-radius: 8px 8px 0 0; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.3); background: #ece9d8; border: 1.5px solid #0054e3; }
+  .d4 .win .tbar { background: linear-gradient(180deg, #0058ee 0%, #3a93ff 8%, #0054e3 90%, #002cb1 100%); color: #fff; padding: 4px 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 13px; text-shadow: 1px 1px 0 rgba(0,0,0,.5); }
+  .d4 .win .tbar .btns { display: flex; gap: 3px; }
+  .d4 .win .tbar .btns span { width: 22px; height: 20px; border-radius: 3px; background: linear-gradient(180deg, #f08a8a, #c4384a); border: 1px solid #a42430; display: inline-block; }
+  .d4 .win .tbar .btns .min { background: linear-gradient(180deg, #60a0ee, #2f6fbb); border-color: #1a4a90; }
+  .d4 .win .tbar .btns .max { background: linear-gradient(180deg, #60a0ee, #2f6fbb); border-color: #1a4a90; }
+  .d4 .win .body { padding: 10px; font-size: 13px; color: #111; }
+  .d4 .sidebar { background: linear-gradient(180deg, #7ba7e8, #4a82c4); color: #fff; padding: 8px; width: 110px; }
+  .d4 .sidebar .group { background: rgba(255,255,255,.25); border-radius: 4px; padding: 4px 6px; margin-bottom: 6px; font-size: 11px; }
+  .d4 .startbtn { position: absolute; bottom: 0; left: 0; background: linear-gradient(180deg, #3cb43c 0%, #389b38 40%, #1e7a1e 100%); color: #fff; font-weight: bold; font-style: italic; padding: 4px 20px 4px 28px; border-radius: 0 14px 14px 0; font-size: 14px; text-shadow: 1px 1px 0 rgba(0,0,0,.4); }
+  .d4 .taskbar { position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(180deg, #1e5ac8 0%, #2f75d6 10%, #1e5ac8 90%, #0f3b9e 100%); display: flex; align-items: center; padding-left: 100px; }
+  .d4 .tray { margin-left: auto; background: linear-gradient(180deg, #1080d0, #0956a0); padding: 2px 10px; color: #fff; font-size: 12px; height: 100%; display: flex; align-items: center; }
+
+  /* Plan footer links */
+  .plan-links a { color: #2a5aa0; }
+</style>
+</head>
+<body>
+
+<!-- ─────────── PLAN PANEL ─────────── -->
+<div id="plan">
+  <button class="toggle" onclick="document.body.classList.toggle('plan-collapsed')" title="Collapse">–</button>
+  <h1>ilg.az, but ugly</h1>
+  <div class="sub">a retro redesign plan · v0.1</div>
+
+  <div class="note">
+    Heads-up: the live ilg.az didn't give me readable HTML (JS-rendered), so
+    the wireframes below are for a generic <i>personal site / portfolio</i>
+    shape. Drop a screenshot and I'll re-cut with the real content.
+  </div>
+
+  <h2>The vibe</h2>
+  <p>You asked for: Win98, Win XP, Terminal, 90s web. That's four different
+  retro flavors — they all share "visible chrome, low resolution, no
+  minimalism" but they're aesthetically distinct. Plan is to sketch all four
+  side-by-side first, pick a winner (or a mash-up), then go hi-fi.</p>
+
+  <h2>Phases</h2>
+  <h3>① Sketch <span class="pill">you are here</span></h3>
+  <ul>
+    <li>4 low-fi wireframes on one canvas</li>
+    <li>Compare composition & navigation metaphors</li>
+    <li>Pick a direction (or combine)</li>
+  </ul>
+
+  <h3>② Hi-fi mock</h3>
+  <ul>
+    <li>Real pixel-perfect chrome for chosen era</li>
+    <li>Correct fonts (Tahoma/MS Sans Serif/VT323/Chicago)</li>
+    <li>Real content from ilg.az (need screenshot/paste)</li>
+  </ul>
+
+  <h3>③ Interactive prototype</h3>
+  <ul>
+    <li>Draggable windows, working Start menu, clock</li>
+    <li>Fake apps: Notepad (About), IE6 (Projects), MSN (Contact)</li>
+    <li>Optional easter eggs: BSOD, boot sequence, MIDI</li>
+  </ul>
+
+  <h3>④ Tweaks panel</h3>
+  <ul>
+    <li>Theme switcher (98 / XP / Terminal / GeoCities)</li>
+    <li>Ugliness dial (1–10)</li>
+    <li>Toggle gimmicks: marquee, blink, visitor counter, MIDI</li>
+  </ul>
+
+  <h2>The four directions →</h2>
+  <ul>
+    <li><b>A. Win 98 Desktop</b> — teal bg, gray windows, the classic</li>
+    <li><b>B. Terminal / BBS</b> — black + green phosphor, ASCII art nav</li>
+    <li><b>C. GeoCities chaos</b> — tiled bg, WordArt, marquees, counters</li>
+    <li><b>D. Win XP Luna</b> — Bliss wallpaper, blue gradient bars, rounded</li>
+  </ul>
+
+  <h2>Open questions</h2>
+  <ul>
+    <li>What IS ilg.az? (personal, agency, product?)</li>
+    <li>Language — keep Azerbaijani or switch to English?</li>
+    <li>How ugly, honestly? (1 tasteful ↔ 10 eye-bleach)</li>
+    <li>Scope — homepage only, or multi-page "OS" sim?</li>
+  </ul>
+
+  <h2>Next steps</h2>
+  <ul>
+    <li>You scan the 4 wireframes on the right →</li>
+    <li>Tell me which direction (or mash-up)</li>
+    <li>Send a screenshot of the real ilg.az if you can</li>
+    <li>I go hi-fi</li>
+  </ul>
+
+  <div class="note" style="transform: rotate(0.6deg);">
+    Click any wireframe's ⤢ button to see it fullscreen.
+  </div>
+</div>
+
+<!-- ─────────── CANVAS ─────────── -->
+<div id="dc-root"></div>
+
+<!-- Wireframe templates rendered later via React children -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="wireframes.jsx"></script>
+<script type="text/babel">
+  const root = ReactDOM.createRoot(document.getElementById('dc-root'));
+  root.render(
+    <DesignCanvas>
+      <DCSection id="retro" title="Retro ilg.az — 4 directions" subtitle="Low-fi, pick one (or mash-up)">
+        <DCArtboard id="d1" label="A · Windows 98 Desktop" width={720} height={520}>
+          <Win98/>
+        </DCArtboard>
+        <DCArtboard id="d2" label="B · Terminal / BBS" width={720} height={520}>
+          <Terminal/>
+        </DCArtboard>
+        <DCArtboard id="d3" label="C · GeoCities chaos" width={720} height={520}>
+          <GeoCities/>
+        </DCArtboard>
+        <DCArtboard id="d4" label="D · Windows XP Luna" width={720} height={520}>
+          <WinXP/>
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+</script>
+</body>
+</html>

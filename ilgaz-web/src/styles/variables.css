@@ -1,16 +1,23 @@
 :root {
-  --bg: #f8f8f8;
-  --bg-alt: #f0f0f0;
-  --text: #111;
-  --text-secondary: #444;
-  --text-muted: #777;
-  --accent: #111;
-  --accent-hover: #333;
-  --border: #ddd;
-  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: 'DM Serif Display', Georgia, serif;
+  /* Editorial theme palette */
+  --bg: #f6f2e9;
+  --bg-alt: #efe9dc;
+  --text: #1a1714;
+  --text-secondary: #3d362d;
+  --text-muted: #7a6f5f;
+  --accent: #a23a26;
+  --accent-soft: #e8d5cd;
+  --accent-hover: #8b3120;
+  --border: #d9d0bd;
+
+  /* Font stacks */
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Georgia', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --font-arabic: 'Scheherazade New', serif;
-  --font-article: 'ITC Souvenir', Georgia, serif;
+
+  /* Legacy aliases for existing pages */
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-article: var(--font-serif);
 }

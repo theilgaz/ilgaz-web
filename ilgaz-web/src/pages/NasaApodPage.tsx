@@ -75,7 +75,7 @@ export function NasaApodPage() {
   }
 
   const goToRandom = () => {
-    const start = new Date('1995-06-16') // APOD'un başlangıç tarihi
+    const start = new Date('1995-06-16')
     const end = new Date()
     const randomTime = start.getTime() + Math.random() * (end.getTime() - start.getTime())
     const randomDate = new Date(randomTime)
@@ -102,16 +102,18 @@ export function NasaApodPage() {
   const isToday = selectedDate === new Date().toISOString().split('T')[0]
 
   return (
-    <div className="apod-page">
-      <h1>Günün Uzay Fotoğrafı</h1>
-      <p className="lead">
-        NASA'nın her gün seçtiği astronomik görüntü. 1995'ten beri evrenin güzelliklerini keşfedin.
-      </p>
+    <div className="apod-editorial">
+      <div className="section-head">
+        <div className="idx">§ NASA</div>
+        <div>
+          <h2>Günün <em>fotoğrafı</em>.</h2>
+          <div className="sub">NASA'nın her gün seçtiği astronomik görüntü. 1995'ten beri.</div>
+        </div>
+      </div>
 
-      <div className="apod-page-nav">
-        <button onClick={goToPreviousDay} className="apod-nav-btn" title="Önceki gün">
-          ←
-        </button>
+      {/* Navigation */}
+      <div className="apod-nav">
+        <button onClick={goToPreviousDay} className="apod-nav-arrow" title="Önceki gün">←</button>
         <div className="apod-nav-center">
           <input
             type="date"
@@ -121,79 +123,66 @@ export function NasaApodPage() {
             min="1995-06-16"
             className="apod-date-input"
           />
-          <span className="apod-date-display">{formatDate(selectedDate)}</span>
+          <span className="apod-date-label">{formatDate(selectedDate)}</span>
         </div>
         <button
           onClick={goToNextDay}
-          className="apod-nav-btn"
+          className="apod-nav-arrow"
           disabled={isToday}
           title="Sonraki gün"
-        >
-          →
-        </button>
+        >→</button>
       </div>
 
-      <div className="apod-page-actions">
-        <button onClick={goToToday} disabled={isToday}>
-          Bugün
-        </button>
-        <button onClick={goToRandom}>
-          Rastgele
-        </button>
+      {/* Actions */}
+      <div className="apod-actions">
+        <button onClick={goToToday} disabled={isToday}>Bugün</button>
+        <button onClick={goToRandom}>Rastgele</button>
         <button onClick={copyLink} className={copied ? 'copied' : ''}>
-          {copied ? 'Kopyalandı!' : 'Linki Kopyala'}
+          {copied ? 'Kopyalandı' : 'Linki Kopyala'}
         </button>
       </div>
 
-      <div className="apod-page-content">
-        {loading && (
-          <div className="apod-page-loading">
-            <div className="apod-spinner" />
-            <span>Uzaydan veri alınıyor...</span>
-          </div>
-        )}
+      {/* Content */}
+      {loading && (
+        <div className="apod-loading">
+          <div className="apod-spinner" />
+          <span>Uzaydan veri alınıyor...</span>
+        </div>
+      )}
 
-        {error && (
-          <div className="apod-page-error">
-            <span>{error}</span>
-            <button onClick={() => fetchApod(selectedDate)}>Tekrar Dene</button>
-          </div>
-        )}
+      {error && (
+        <div className="apod-error">
+          <span>{error}</span>
+          <button onClick={() => fetchApod(selectedDate)}>Tekrar Dene</button>
+        </div>
+      )}
 
-        {!loading && !error && apod && (
-          <>
-            <div className="apod-page-media">
-              {apod.media_type === 'image' ? (
-                <img src={apod.url} alt={apod.title} />
-              ) : (
-                <iframe src={apod.url} title={apod.title} allowFullScreen />
+      {!loading && !error && apod && (
+        <div className="apod-content">
+          <div className="apod-media">
+            {apod.media_type === 'image' ? (
+              <img src={apod.url} alt={apod.title} />
+            ) : (
+              <iframe src={apod.url} title={apod.title} allowFullScreen />
+            )}
+          </div>
+
+          <div className="apod-info">
+            <h3>{apod.title}</h3>
+            <div className="apod-meta">
+              {apod.copyright && (
+                <span className="apod-copyright">{apod.copyright}</span>
+              )}
+              {apod.hdurl && apod.media_type === 'image' && (
+                <a href={apod.hdurl} target="_blank" rel="noopener noreferrer" className="apod-hd">
+                  HD Görüntü →
+                </a>
               )}
             </div>
-
-            <div className="apod-page-info">
-              <h2>{apod.title}</h2>
-
-              <div className="apod-page-meta">
-                {apod.copyright && (
-                  <span className="apod-copyright">Telif: {apod.copyright}</span>
-                )}
-                {apod.hdurl && apod.media_type === 'image' && (
-                  <a
-                    href={apod.hdurl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="apod-hd-link"
-                  >
-                    HD Görüntü
-                  </a>
-                )}
-              </div>
-
-              <p className="apod-explanation">{apod.explanation}</p>
-            </div>
-          </>
-        )}
-      </div>
+            <p className="apod-explanation">{apod.explanation}</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

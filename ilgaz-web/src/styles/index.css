@@ -12,4 +12,7 @@
 @import './components/collections.css';
 @import './components/progress.css';
 @import './components/tools.css';
+@import './components/nasa-apod.css';
+@import './components/theme-switch.css';
+@import './components/color-converter.css';
 @import './responsive.css';

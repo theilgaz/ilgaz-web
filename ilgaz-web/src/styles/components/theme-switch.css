@@ -1,0 +1,140 @@
+/* ───── Theme Switcher ───── */
+.theme-switch {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 100;
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+.ts-trigger {
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 99px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(26,23,20,0.2);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  transition: transform .15s;
+}
+
+.ts-trigger:hover {
+  transform: translateY(-1px);
+}
+
+.ts-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bg) 50%, var(--accent) 50%);
+  border: 1.5px solid var(--bg);
+}
+
+.ts-panel {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(26,23,20,0.15);
+  width: 280px;
+  padding: 14px;
+}
+
+.ts-heading {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+
+.ts-opt {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .12s;
+}
+
+.ts-opt:hover {
+  background: var(--bg-alt);
+}
+
+.ts-opt.active {
+  background: var(--accent-soft);
+}
+
+.ts-opt.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ts-opt.disabled:hover {
+  background: transparent;
+}
+
+.ts-preview {
+  width: 40px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.ts-name {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ts-name em {
+  font-style: italic;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.ts-name .ts-soon {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--bg-alt);
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  font-weight: 400;
+}
+
+.ts-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.ts-check {
+  margin-left: auto;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.ts-foot {
+  padding: 10px 10px 2px;
+  font-size: 11px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  font-family: var(--font-sans);
+}

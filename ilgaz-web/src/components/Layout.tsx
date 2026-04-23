@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Outlet, NavLink, Link, useLocation } from 'react-router-dom'
 import { posts } from '../content/posts'
+import { ThemeSwitch } from './ThemeSwitch'
 
 // Şehir verileri (Progress.tsx ile senkron)
 const cities: Record<string, { lat: number; lng: number; timezone: number; cityId?: string }> = {
-  // Türkiye
   konya: { lat: 37.9, lng: 32.5, timezone: 3, cityId: '552' },
   istanbul: { lat: 41.0, lng: 29.0, timezone: 3, cityId: '539' },
   ankara: { lat: 39.9, lng: 32.9, timezone: 3, cityId: '506' },
   izmir: { lat: 38.4, lng: 27.1, timezone: 3, cityId: '540' },
-  // Uluslararası
   losangeles: { lat: 34.0522, lng: -118.2437, timezone: -8 },
   newyork: { lat: 40.7128, lng: -74.0060, timezone: -5 },
   london: { lat: 51.5074, lng: -0.1278, timezone: 0 },
@@ -66,16 +65,6 @@ function calculatePrayerTimes(lat: number, lng: number, timezone: number) {
 
 const districtCache: Record<string, string> = {}
 
-// Vakit renkleri - Progress.tsx ile senkron
-const prayerColors: Record<string, string> = {
-  fajr: '#0f172a',    // imsak - lacivert/siyah (gece)
-  sunrise: '#dc2626', // güneş - kırmızı (kerahat)
-  dhuhr: '#ca8a04',   // öğle - altın (sabah güneşi)
-  asr: '#ea580c',     // ikindi - turuncu (öğleden sonra)
-  maghrib: '#dc2626', // akşam - kırmızı (kerahat)
-  isha: '#1e1b2e',    // yatsı - mor/siyah (gece)
-}
-
 function useNextPrayer() {
   const [prayerInfo, setPrayerInfo] = useState<{ id: string; name: string; time: string; remaining: string } | null>(null)
 
@@ -88,7 +77,6 @@ function useNextPrayer() {
 
         let prayerTimes: { fajr: string; sunrise: string; dhuhr: string; asr: string; maghrib: string; isha: string }
 
-        // Türkiye şehirleri için Diyanet API
         if (cityData.cityId) {
           let districtId = districtCache[cityData.cityId]
           if (!districtId) {
@@ -119,7 +107,6 @@ function useNextPrayer() {
             prayerTimes = calculatePrayerTimes(cityData.lat, cityData.lng, timezone)
           }
         } else {
-          // Uluslararası şehirler için hesaplama
           prayerTimes = calculatePrayerTimes(cityData.lat, cityData.lng, timezone)
         }
 
@@ -152,7 +139,6 @@ function useNextPrayer() {
           }
         }
 
-        // Gün bitti, yarın imsak
         const [h, m] = prayers[0].time.split(':').map(Number)
         const remaining = (h * 60 + m) + (1440 - currentMinutes)
         const hours = Math.floor(remaining / 60)
@@ -171,13 +157,11 @@ function useNextPrayer() {
     fetchPrayerTimes()
     const interval = setInterval(fetchPrayerTimes, 60000)
 
-    // localStorage değişikliğini dinle (farklı tab)
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'progress-city') fetchPrayerTimes()
     }
     window.addEventListener('storage', handleStorageChange)
 
-    // Aynı tab'da şehir değişikliğini dinle
     const handleCityChange = () => fetchPrayerTimes()
     window.addEventListener('city-changed', handleCityChange)
 
@@ -202,7 +186,6 @@ export function Layout() {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
-  // Sayfa değiştiğinde başa sar
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [location.pathname])
@@ -212,44 +195,24 @@ export function Layout() {
 
   return (
     <>
-      <nav className="top-bar">
-        <div className="top-bar-container">
-          <Link to="/" className="top-bar-brand">
-            <img src="/favicon.png" alt="ilg.az" />
-          </Link>
-          <div className="top-bar-nav">
-            <NavLink to="/blog" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-              yazı
-            </NavLink>
-            <NavLink to="/projects" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-              proje
-            </NavLink>
-            <NavLink to="/now" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-              şimdi
-            </NavLink>
-            <NavLink to="/about" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-              hakkında
-            </NavLink>
-            <NavLink to="/tools" className={({ isActive }) => `top-bar-link ${isActive ? 'active' : ''}`}>
-              araçlar
-            </NavLink>
-          </div>
-          {nextPrayer && (
-            <Link
-              to="/progress"
-              className="top-bar-prayer"
-              style={{ '--prayer-color': prayerColors[nextPrayer.id] } as React.CSSProperties}
-            >
-              <span className="prayer-icon">☪</span>
-              <span className="prayer-name">{nextPrayer.name}</span>
-              <span className="prayer-time">{nextPrayer.time}</span>
-              <span className="prayer-dot">·</span>
-              <span className="prayer-remaining">{nextPrayer.remaining}</span>
-            </Link>
-          )}
-        </div>
-      </nav>
+      {/* ─── Header ─── */}
+      <header className="nav-header">
+        <Link to="/" className="brand">
+          <span className="dot" />
+          ilg.az
+        </Link>
+        <nav className="menu">
+          <ul>
+            <li><NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>Index</NavLink></li>
+            <li><NavLink to="/blog" className={({ isActive }) => isActive ? 'active' : ''}>Yazı</NavLink></li>
+            <li><NavLink to="/projects" className={({ isActive }) => isActive ? 'active' : ''}>Proje</NavLink></li>
+            <li><NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>Hakkında</NavLink></li>
+            <li><NavLink to="/tools" className={({ isActive }) => isActive ? 'active' : ''}>Araçlar</NavLink></li>
+          </ul>
+        </nav>
+      </header>
 
+      {/* ─── Today banner ─── */}
       {isHome && todaysPosts.length > 0 && (
         <div className="today-banner">
           <div className="today-banner-content">
@@ -265,20 +228,55 @@ export function Layout() {
         </div>
       )}
 
+      {/* ─── Main ─── */}
       <main>
-        <div className="container">
+        {isHome ? (
           <Outlet />
-        </div>
+        ) : (
+          <div className="container">
+            <Outlet />
+          </div>
+        )}
       </main>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content footer-centered">
+      {/* ─── Footer ─── */}
+      <footer className="site-footer">
+        <div className="wrap">
+          <div className="foot-grid">
+            <div className="signoff">
+              Okuduğun için <b>teşekkürler</b> — analitiklerin asla gösteremeyeceği kadar değerli.
+            </div>
+            <div>
+              <h4>Başka Yerde</h4>
+              <ul>
+                <li><a href="https://github.com/theilgaz" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://x.com/theilgaz" target="_blank" rel="noopener noreferrer">X</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Takip</h4>
+              <ul>
+                <li><Link to="/about">Hakkında</Link></li>
+                <li><Link to="/tools">Araçlar</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Projeler</h4>
+              <ul>
+                <li><a href="https://mahfuz.ilg.az" target="_blank" rel="noopener noreferrer">Mahfuz</a></li>
+                <li><Link to="/projects">Tüm Projeler</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="meta-row">
+            <span>© 2026 ilg.az · built by hand</span>
             <span className="footer-arabic" title="Allah'tan başka galip yoktur">لا غالب إلا الله</span>
-            <a href="https://mahfuz.ilg.az" target="_blank" rel="noopener noreferrer" className="footer-promo">mahfuz.ilg.az</a>
           </div>
         </div>
       </footer>
+
+      {/* ─── Theme Switcher ─── */}
+      <ThemeSwitch />
     </>
   )
 }

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>ilg.az — Roadmap</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#f6f2e9; --paper-2:#efe9dc; --ink:#1a1714; --ink-2:#3d362d;
+    --mute:#7a6f5f; --rule:#d9d0bd; --accent:#a23a26; --accent-soft:#e8d5cd;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box} html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif)}
+  body{font-size:17px;line-height:1.6;padding:48px 0 120px}
+  .wrap{max-width:960px;margin:0 auto;padding:0 48px}
+  header.top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:24px;border-bottom:1px solid var(--rule);margin-bottom:48px}
+  .brand{font-size:20px;font-weight:500;letter-spacing:-0.01em;display:flex;gap:8px;align-items:baseline}
+  .brand .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;transform:translateY(-1px)}
+  .brand em{font-style:italic;color:var(--mute);font-weight:400;font-size:14px;font-family:var(--sans)}
+  .crumb{font-family:var(--sans);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mute)}
+  h1{font-family:var(--serif);font-weight:300;font-size:64px;line-height:1.02;letter-spacing:-0.02em;margin:0 0 16px;text-wrap:balance}
+  h1 em{font-style:italic;color:var(--accent);font-weight:400}
+  .lede{font-size:20px;color:var(--ink-2);max-width:640px;margin:0 0 32px;text-wrap:pretty}
+  .tldr{background:var(--paper-2);border-left:3px solid var(--accent);padding:16px 22px;font-family:var(--sans);font-size:14px;color:var(--ink-2);margin-bottom:56px}
+  .tldr b{color:var(--ink)}
+  .sect{padding:40px 0;border-top:1px solid var(--rule)}
+  .sect-head{display:grid;grid-template-columns:160px 1fr;gap:40px;align-items:baseline;margin-bottom:28px}
+  .idx{font-family:var(--sans);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute)}
+  h2{font-family:var(--serif);font-weight:400;font-size:32px;margin:0;letter-spacing:-0.01em}
+  h2 em{font-style:italic;color:var(--accent)}
+  h3{font-family:var(--serif);font-weight:500;font-size:22px;margin:24px 0 8px;letter-spacing:-0.005em}
+  h3 .num{font-family:var(--mono);font-size:13px;color:var(--mute);margin-right:10px;font-weight:400}
+  p{margin:0 0 14px;text-wrap:pretty}
+  code,kbd{font-family:var(--mono);font-size:13px;background:var(--paper-2);padding:1px 5px;border-radius:3px}
+  pre{font-family:var(--mono);font-size:13px;background:#1a1714;color:#f6f2e9;padding:16px 20px;border-radius:4px;overflow:auto;line-height:1.55}
+  pre .c{color:#a8a192}
+  ul.checks{list-style:none;padding:0;margin:8px 0 0}
+  ul.checks li{padding:6px 0 6px 28px;position:relative;font-family:var(--sans);font-size:14px;color:var(--ink-2)}
+  ul.checks li::before{content:'☐';position:absolute;left:0;color:var(--mute);font-family:var(--sans);font-size:16px;top:5px}
+  .milestone{display:grid;grid-template-columns:60px 1fr auto;gap:20px;padding:18px 0;border-top:1px dashed var(--rule);align-items:baseline}
+  .milestone:first-child{border-top:none}
+  .m-num{font-family:var(--mono);font-size:14px;color:var(--accent);font-weight:500}
+  .m-body h3{margin:0 0 4px;font-size:20px}
+  .m-body .dek{font-family:var(--sans);font-size:13px;color:var(--mute)}
+  .m-eta{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:16px}
+  .card{background:var(--paper-2);border:1px solid var(--rule);border-radius:2px;padding:18px 20px}
+  .card h4{font-family:var(--sans);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);margin:0 0 8px;font-weight:500}
+  .card p{font-size:15px;margin:0 0 8px;color:var(--ink-2)}
+  .prompt{background:#1a1714;color:#f6f2e9;padding:22px 26px;border-radius:4px;font-family:var(--mono);font-size:13px;line-height:1.6;margin:16px 0;position:relative}
+  .prompt::before{content:'FIRST PROMPT IN CLAUDE CODE';position:absolute;top:-9px;left:18px;background:var(--accent);color:var(--paper);font-family:var(--sans);font-size:10px;letter-spacing:0.18em;padding:1px 8px;border-radius:2px}
+  .prompt .y{color:#e8a83f}
+  .prompt .g{color:#9cc677}
+  .inline-files{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 16px}
+  .inline-files span{font-family:var(--mono);font-size:12px;background:var(--paper-2);border:1px solid var(--rule);padding:2px 8px;border-radius:2px;color:var(--ink-2)}
+  .signoff{font-style:italic;font-size:22px;color:var(--mute);text-align:center;margin-top:80px;padding:40px 0;border-top:1px solid var(--rule)}
+  .signoff b{font-style:normal;color:var(--accent);font-weight:500}
+  a.link{color:var(--accent);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="brand"><span class="dot"></span>ilg.az <em>est. 2018</em></div>
+  <div class="crumb">Roadmap · v0.1 · Apr 2026</div>
+</header>
+
+<div class="crumb" style="margin-bottom:8px">For Claude Code</div>
+<h1>A plan for shipping <em>ilg.az</em> — in parts, in order.</h1>
+<p class="lede">This document hands the design work off to engineering. It's written so you can paste any section as a prompt to Claude Code and get productive output. Read top to bottom once, then use it like a checklist.</p>
+
+<div class="tldr">
+  <b>TL;DR.</b> Astro + TypeScript + MDX. One homepage in the Editorial theme first. Then content routes. Then the theme system. Then the four retro themes, one at a time. Ship to Cloudflare Pages. All content in MDX, no CMS. Both files — <code>CLAUDE.md</code> and this roadmap — go in the repo root.
+</div>
+
+<!-- ─────── STEP 0 — HANDOFF ─────── -->
+<section class="sect">
+  <div class="sect-head">
+    <div class="idx">§ 00 — Handoff</div>
+    <div><h2>What <em>you're walking out with</em>.</h2></div>
+  </div>
+  <p>Two artifacts are the source of truth for the design:</p>
+  <div class="inline-files">
+    <span>themes/default.html</span>
+    <span>Retro ilg.az — Plan & Wireframes.html</span>
+    <span>wireframes.jsx</span>
+    <span>CLAUDE.md</span>
+  </div>
+  <p>Copy all four into the new repo's root under a <code>design-reference/</code> folder. They aren't shipped — they're pixel-references. Claude Code should <em>lift</em> colors, spacing, and type scales verbatim rather than re-invent them.</p>
+</section>
+
+<!-- ─────── STEP 1 — SETUP ─────── -->
+<section class="sect">
+  <div class="sect-head">
+    <div class="idx">§ 01 — Setup</div>
+    <div><h2>Bootstrap the repo.</h2></div>
+  </div>
+
+<pre><span class="c"># in a fresh directory</span>
+npm create astro@latest ilg-az -- --template minimal --typescript strict --yes
+cd ilg-az
+npm i @astrojs/mdx @astrojs/rss @astrojs/sitemap
+npx astro add mdx sitemap
+
+<span class="c"># move design references in</span>
+mkdir design-reference
+<span class="c"># copy themes/default.html, wireframes, CLAUDE.md, ROADMAP.md</span>
+
+<span class="c"># commit, push, connect Cloudflare Pages or Vercel</span>
+git init && git add . && git commit -m "scaffold"</pre>
+
+  <ul class="checks">
+    <li>Astro scaffolded with strict TS</li>
+    <li>MDX + RSS + sitemap integrations added</li>
+    <li>Design reference files committed under <code>design-reference/</code></li>
+    <li>Deployment target chosen (Cloudflare Pages recommended — free, fast, Pages KV available for visitor counter later)</li>
+    <li>Domain <code>ilg.az</code> pointed at deploy</li>
+  </ul>
+</section>
+
+<!-- ─────── MILESTONES ─────── -->
+<section class="sect">
+  <div class="sect-head">
+    <div class="idx">§ 02 — Milestones</div>
+    <div>
+      <h2>Ten chunks, <em>in order</em>.</h2>
+      <p style="font-family:var(--sans);font-size:13px;color:var(--mute);margin-top:6px">Each is a single Claude Code session. Don't skip ahead — later milestones assume earlier ones are in place.</p>
+    </div>
+  </div>
+
+  <div class="milestone"><div class="m-num">M1</div><div class="m-body"><h3>Editorial theme, one page</h3><div class="dek">Port <code>themes/default.html</code> into Astro as the homepage. Extract CSS variables into <code>tokens.css</code>. No content collection yet — hard-code everything.</div></div><div class="m-eta">~1 session</div></div>
+
+  <div class="milestone"><div class="m-num">M2</div><div class="m-body"><h3>Content collections</h3><div class="dek">Zod schemas for <code>posts</code>, <code>projects</code>, <code>now</code>. Replace homepage stubs with real collection reads. Create 3 draft posts and 2 projects in MDX.</div></div><div class="m-eta">~1 session</div></div>
+
+  <div class="milestone"><div class="m-num">M3</div><div class="m-body"><h3>Writing & Work routes</h3><div class="dek">List pages at <code>/writing</code> and <code>/work</code>. Detail pages at <code>/writing/[slug]</code> and <code>/work/[slug]</code>. RSS at <code>/rss.xml</code>. Reading-time calculated at build.</div></div><div class="m-eta">~1 session</div></div>
+
+  <div class="milestone"><div class="m-num">M4</div><div class="m-body"><h3>Theme system + switcher</h3><div class="dek">Extract every color/font/radius into CSS variables. Build the corner <code>ThemeSwitch.astro</code>. Persist to <code>localStorage</code>. Add two placeholder themes that just flip palette. Prove the mechanism.</div></div><div class="m-eta">~1 session</div></div>
+
+  <div class="milestone"><div class="m-num">M5</div><div class="m-body"><h3>Windows 98 theme</h3><div class="dek">Full chrome: desktop icons, <code>&lt;Window&gt;</code> component (draggable, minimizable), <code>&lt;Taskbar&gt;</code>, <code>&lt;StartMenu&gt;</code>. Homepage wraps in windows. Use <code>wireframes.jsx</code> as the reference.</div></div><div class="m-eta">~2 sessions</div></div>
+
+  <div class="milestone"><div class="m-num">M6</div><div class="m-body"><h3>Windows XP theme</h3><div class="dek">Reuse the Window system from M5 with XP Luna chrome. Bliss-style background, IE6 frame for article pages, green Start button.</div></div><div class="m-eta">~1 session</div></div>
+
+  <div class="milestone"><div class="m-num">M7</div><div class="m-body"><h3>Terminal theme</h3><div class="dek">Monospace, phosphor green, CRT scanline overlay. Keyboard-first nav — press a number to jump. Article pages render as <code>cat filename.txt</code>.</div></div><div class="m-eta">~1 session</div></div>
+
+  <div class="milestone"><div class="m-num">M8</div><div class="m-body"><h3>GeoCities theme</h3><div class="dek">Tiled bg, WordArt headings, marquee, visitor counter (Cloudflare KV), webring badges, under-construction gifs, optional MIDI toggle.</div></div><div class="m-eta">~1 session</div></div>
+
+  <div class="milestone"><div class="m-num">M9</div><div class="m-body"><h3>Bilingual (EN/AZ)</h3><div class="dek">Astro i18n routing. Content duplicated under <code>lang</code> in frontmatter. Lang toggle in header persists alongside theme.</div></div><div class="m-eta">~1 session</div></div>
+
+  <div class="milestone"><div class="m-num">M10</div><div class="m-body"><h3>Polish & ship</h3><div class="dek">Theme transitions (crossfade, respect <code>prefers-reduced-motion</code>), a11y pass (each theme keyboard-navigable), per-theme OG images, sitemap, 404 page styled for each theme, final domain cutover.</div></div><div class="m-eta">~1 session</div></div>
+</section>
+
+<!-- ─────── THEME CONTRACT ─────── -->
+<section class="sect">
+  <div class="sect-head">
+    <div class="idx">§ 03 — Theme contract</div>
+    <div><h2>The <em>rules</em> that make five skins tractable.</h2></div>
+  </div>
+  <p>Every theme honors the same token names. A page never references a hex code, pixel value, or font family directly — always a variable.</p>
+
+<pre><span class="c">/* tokens.css */</span>
+:root[data-theme="editorial"] {
+  --bg:#f6f2e9; --bg-alt:#efe9dc; --ink:#1a1714; --mute:#7a6f5f;
+  --rule:#d9d0bd; --accent:#a23a26;
+  --serif:'Fraunces',serif; --sans:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  --radius:2px; --shadow:none;
+}
+:root[data-theme="win98"]     { <span class="c">/* teal, gray, Tahoma, no radius */</span> }
+:root[data-theme="winxp"]     { <span class="c">/* Luna blue, Trebuchet, 3px radius */</span> }
+:root[data-theme="terminal"]  { <span class="c">/* black, #33ff33, VT323, 0 radius */</span> }
+:root[data-theme="geocities"] { <span class="c">/* #000080 bg, Comic Sans, ridge borders */</span> }</pre>
+
+  <div class="two-col">
+    <div class="card"><h4>Do</h4><p>Use <code>var(--accent)</code> everywhere. Let the theme decide.</p><p>Wrap OS-chrome in a <code>&lt;Window&gt;</code> slot component so pages don't know about chrome.</p><p>Keep content components (like <code>&lt;EntryList&gt;</code>) theme-agnostic.</p></div>
+    <div class="card"><h4>Don't</h4><p>Don't hard-code hex values in page files.</p><p>Don't duplicate content per theme. One <code>posts</code> collection renders through every skin.</p><p>Don't ship Tailwind. CSS variables are the whole trick.</p></div>
+  </div>
+</section>
+
+<!-- ─────── FIRST PROMPT ─────── -->
+<section class="sect">
+  <div class="sect-head">
+    <div class="idx">§ 04 — Go</div>
+    <div><h2>Your <em>first prompt</em> in Claude Code.</h2></div>
+  </div>
+  <p>Open the new repo in Claude Code and paste this:</p>
+
+<div class="prompt">
+<span class="y">Read</span> CLAUDE.md <span class="y">and</span> ROADMAP.md <span class="y">carefully</span>.
+<span class="g">Then start Milestone 1</span>: scaffold the Editorial theme as a single
+homepage route, porting the visual design <span class="g">exactly</span> from
+design-reference/themes/default.html.
+
+Extract every color, font, and spacing value into src/styles/tokens.css
+as CSS custom properties on :root[data-theme="editorial"].
+Use semantic component names (Hero, NowPanel, EntryList, WorkGrid, About, Footer).
+Leave content hard-coded for now — Milestone 2 introduces collections.
+
+When done, show me the file tree and open the page.
+</div>
+
+  <p style="font-family:var(--sans);font-size:13px;color:var(--mute);margin-top:18px">After M1 lands, the prompts for M2–M10 follow the same pattern: <em>"Read the roadmap, do Milestone N, show me the result."</em> That's the whole workflow.</p>
+</section>
+
+<!-- ─────── APPENDIX ─────── -->
+<section class="sect">
+  <div class="sect-head">
+    <div class="idx">§ 05 — Appendix</div>
+    <div><h2>Things to <em>not forget</em>.</h2></div>
+  </div>
+
+  <h3><span class="num">a</span>Self-host the fonts</h3>
+  <p>Google Fonts goes down, gets blocked, or changes its API. Download Fraunces, Inter, JetBrains Mono, VT323 into <code>public/fonts/</code> and load via <code>@font-face</code>. Terminal and GeoCities themes need web-safe fallbacks anyway.</p>
+
+  <h3><span class="num">b</span>Respect reduced-motion</h3>
+  <p>GeoCities marquees, terminal cursor blink, theme crossfades — all gated behind <code>@media (prefers-reduced-motion: no-preference)</code>.</p>
+
+  <h3><span class="num">c</span>Keep the switcher small</h3>
+  <p>The switcher is a visible UI element on every theme, but it must not dominate. On Windows 98 it can live in the system tray; on Terminal it can be <code>:theme</code>; on GeoCities it can be a garish button. Let it speak the local dialect.</p>
+
+  <h3><span class="num">d</span>Content first, chrome second</h3>
+  <p>If a theme makes a post harder to read, the theme is wrong. Test the long-form article layout in all five before calling any of them done.</p>
+
+  <h3><span class="num">e</span>Decide on the visitor counter honestly</h3>
+  <p>The GeoCities theme calls for one. A real counter needs a KV store and a view-increment edge function. If that's too much scope, fake it with a build-time random seed that increments per day — nobody will know.</p>
+</section>
+
+<div class="signoff">
+  Build slowly. <b>Ship often.</b> The fun part is the theme switch, but the foundation is the boring part.
+</div>
+
+</div>
+</body>
+</html>
