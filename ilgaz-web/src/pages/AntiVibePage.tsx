@@ -87,7 +87,7 @@ function cleanText(input: string): { output: string; stats: CleanStat[] } {
 }
 
 export function AntiVibePage() {
-  useDocumentTitle('antibive\u00fcr\u00fcs')
+  useDocumentTitle('antivibe\u00fcr\u00fcs')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [stats, setStats] = useState<CleanStat[]>([])
@@ -129,7 +129,7 @@ export function AntiVibePage() {
 
   return (
     <div className="antivibe-page">
-      <h1>Antibive&uuml;r&uuml;s</h1>
+      <h1>Antivibe&uuml;r&uuml;s</h1>
       <p className="lead">
         AI &ccedil;&#305;kt&#305;s&#305;ndaki em dash, ak&#305;ll&#305; t&#305;rnak ve fazla bo&#351;luk vir&uuml;slerini temizle.
       </p>
