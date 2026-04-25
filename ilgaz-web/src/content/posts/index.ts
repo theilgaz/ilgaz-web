@@ -17,6 +17,7 @@ import Post23, { frontmatter as meta23 } from './elestiriye-kapaliymisin.mdx'
 import Post24, { frontmatter as meta24 } from './bayramin-yetimi.mdx'
 import Post25, { frontmatter as meta25 } from './mahfuza-biraktiklarim.mdx'
 import Post26, { frontmatter as meta26 } from './ates-topunu-yakacak.mdx'
+import Post27, { frontmatter as meta27 } from './gece-yarisi-kiminle-konusuyorsun.mdx'
 
 export interface PostMeta {
   slug: string
@@ -32,6 +33,7 @@ export interface Post {
 }
 
 export const posts: Post[] = [
+  { meta: meta27, Content: Post27 },
   { meta: meta26, Content: Post26 },
   { meta: meta25, Content: Post25 },
   { meta: meta24, Content: Post24 },
