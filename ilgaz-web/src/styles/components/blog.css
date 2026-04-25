@@ -642,6 +642,7 @@
   font-size: 1rem;
   line-height: 1.8;
   color: var(--text-secondary);
+  text-align: justify;
 }
 
 .article-content h2 {
