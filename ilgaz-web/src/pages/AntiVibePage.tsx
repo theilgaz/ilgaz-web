@@ -55,6 +55,22 @@ function cleanText(input: string): { output: string; stats: CleanStat[] } {
     stats.push({ label: 'noktalama \u00f6ncesi bo\u015fluk', count: punctSpaceCount })
   }
 
+  // Soft-wrap (terminal sarmalama) -> tek satir
+  // a) Trailing whitespace + tek newline (paragraf sonu degil) -> bosluk
+  const trailingWrapCount = count(/[ \t]{2,}\n(?![ \t]*\n)/g)
+  if (trailingWrapCount > 0) {
+    text = text.replace(/[ \t]{2,}\n(?![ \t]*\n)/g, ' ')
+  }
+  // b) Tek newline + devam girintisi -> bosluk (paragraf sonu degil)
+  const indentWrapCount = count(/(?<!\n)\n[ \t]+(?=\S)/g)
+  if (indentWrapCount > 0) {
+    text = text.replace(/(?<!\n)\n[ \t]+(?=\S)/g, ' ')
+  }
+  const wrapCount = trailingWrapCount + indentWrapCount
+  if (wrapCount > 0) {
+    stats.push({ label: 'satır sarmalama açıldı', count: wrapCount })
+  }
+
   // Cift/uclu bosluk → tek
   const multiSpaceCount = count(/[^\S\n]{2,}/g)
   if (multiSpaceCount > 0) {
