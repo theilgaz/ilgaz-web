@@ -38,7 +38,7 @@ export function Taskbar({ windows, onWindowClick, onStartClick, startOpen }: Tas
         className={`w98-start ${startOpen ? 'active' : ''}`}
         onClick={onStartClick}
       >
-        <span className="w98-start-icon">▣</span> Start
+        <img src="/images/win98/start-logo.png" alt="" className="w98-start-icon" /> Başlat
       </button>
 
       <div className="w98-taskbar-divider" />

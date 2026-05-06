@@ -505,7 +505,7 @@ export function WinXPDesktop() {
           className={`xp-start-btn ${startOpen ? 'active' : ''}`}
           onClick={() => setStartOpen(!startOpen)}
         >
-          <span className="xp-start-btn-icon">⊞</span>
+          <img src="/images/xp/start-logo.png" alt="" className="xp-start-btn-icon" />
           <span className="xp-start-btn-text">start</span>
         </button>
 

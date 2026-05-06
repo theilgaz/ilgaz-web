@@ -246,7 +246,10 @@
 }
 
 .w98-start-icon {
-  font-size: 14px;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
 }
 
 .w98-taskbar-divider {
