@@ -21,6 +21,7 @@ import { FailureLessonsPage } from '../../pages/FailureLessonsPage'
 import { Progress } from '../../pages/Progress'
 import { Collections } from '../../pages/Collections'
 import { CollectionDetail } from '../../pages/CollectionDetail'
+import { WinXPTodo } from './WinXPTodo'
 
 /* ─── Types ─── */
 interface WindowState {
@@ -64,6 +65,7 @@ function RouteContent({ route, onNavigate }: {
     case '/failure-lessons': return <FailureLessonsPage />
     case '/progress': return <Progress />
     case '/collections': return <Collections />
+    case '/todo': return <WinXPTodo />
     default: return <WelcomeContent onNavigate={onNavigate} />
   }
 }
@@ -249,6 +251,16 @@ const INITIAL_WINDOWS: WindowState[] = [
     width: 580,
     route: '/',
   },
+  {
+    id: 'todo',
+    title: 'Bugün — Görevler',
+    minimized: false,
+    zIndex: 11,
+    x: 220,
+    y: 110,
+    width: 480,
+    route: '/todo',
+  },
 ]
 
 /* ─── Main Desktop ─── */
@@ -383,6 +395,7 @@ export function WinXPDesktop() {
 
   const startItems = [
     { label: 'Ana Sayfa', icon: '🏠', onClick: () => openWindow('welcome', 'ilg.az', '/', 140, 30, 580) },
+    { label: 'Bugün — Görevler', icon: '🗒️', onClick: () => openWindow('todo', 'Bugün — Görevler', '/todo', 220, 110, 480) },
     { label: 'Yazılar', icon: '📝', onClick: () => openWindow('blog', 'Yazılar', '/blog', 160, 50, 560) },
     { label: 'Projeler', icon: '📂', onClick: () => openWindow('projects', 'Projeler', '/projects', 180, 60, 520) },
     { label: 'Araçlar', icon: '🔧', onClick: () => openWindow('tools', 'Araçlar', '/tools', 200, 70) },

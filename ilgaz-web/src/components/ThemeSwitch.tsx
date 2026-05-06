@@ -4,26 +4,26 @@ const themes = [
   {
     id: 'editorial',
     name: 'Editorial',
-    desc: 'Warm paper, serif, hand-made',
+    desc: 'Sıcak kâğıt, serif, el yapımı',
     default: true,
     colors: ['#f6f2e9', '#a23a26', '#1a1714'],
   },
   {
     id: 'win98',
     name: 'Windows 98',
-    desc: 'Teal, gray chrome, nostalgia',
+    desc: 'Petrol mavisi, gri chrome, nostalji',
     colors: ['#008080', '#c0c0c0', '#000080'],
   },
   {
     id: 'winxp',
     name: 'Windows XP',
-    desc: 'Bliss wallpaper, Luna blue',
+    desc: 'Bliss duvar kâğıdı, Luna mavisi',
     colors: ['#0a1628', '#3a93ff', '#7bb563'],
   },
   {
     id: 'terminal',
     name: 'Terminal',
-    desc: 'Phosphor green, keyboard-first',
+    desc: 'Fosfor yeşili, klavye odaklı',
     colors: ['#000', '#33ff33', '#000'],
   },
 ]
@@ -65,7 +65,7 @@ export function ThemeSwitch() {
       </button>
       {open && (
         <div className="ts-panel">
-          <h5 className="ts-heading">Appearance</h5>
+          <h5 className="ts-heading">Görünüm</h5>
           {themes.map(t => (
             <div
               key={t.id}
@@ -80,14 +80,14 @@ export function ThemeSwitch() {
               <div>
                 <div className="ts-name">
                   {t.name}
-                  {t.default && <em> (default)</em>}
+                  {t.default && <em> (varsayılan)</em>}
                 </div>
                 <div className="ts-desc">{t.desc}</div>
               </div>
               {t.id === active && <span className="ts-check">✓</span>}
             </div>
           ))}
-          <div className="ts-foot">Your choice is remembered. Switch anytime.</div>
+          <div className="ts-foot">Seçimin hatırlanır. İstediğin zaman değiştir.</div>
         </div>
       )}
     </div>

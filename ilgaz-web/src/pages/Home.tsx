@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { posts } from '../content/posts'
 import { projects } from '../content/projects'
+import { HomeTodo } from '../components/HomeTodo'
 
 export function Home() {
   useDocumentTitle('ana sayfa')
@@ -47,10 +48,13 @@ export function Home() {
         </div>
       </section>
 
+      {/* ─────────── TODO ─────────── */}
+      <HomeTodo />
+
       {/* ─────────── WRITING ─────────── */}
       <section className="section wrap" id="writing">
         <div className="section-head">
-          <div className="idx">§ 02 Yazı</div>
+          <div className="idx">§ 03 Yazı</div>
           <div>
             <h2>Son <em>yazılar</em>.</h2>
             <div className="sub">Denemeler, notlar ve küçük teknik parçalar. Bülten yok, sadece düzenli okuma.</div>
@@ -75,7 +79,7 @@ export function Home() {
       {/* ─────────── WORK ─────────── */}
       <section className="section wrap" id="work">
         <div className="section-head">
-          <div className="idx">§ 03 Proje</div>
+          <div className="idx">§ 04 Proje</div>
           <div>
             <h2>Yaptığım <em>şeyler</em>.</h2>
             <div className="sub">Küçük, tamamlanmış ve hâlâ çevrimiçi.</div>
@@ -109,7 +113,7 @@ export function Home() {
       {/* ─────────── ABOUT ─────────── */}
       <section className="section wrap" id="about">
         <div className="section-head">
-          <div className="idx">§ 04 Hakkında</div>
+          <div className="idx">§ 05 Hakkında</div>
           <div>
             <h2>Kısa <em>biyografi</em>.</h2>
             <div className="sub">Zaman zaman güncellenir.</div>

@@ -25,6 +25,7 @@ import { FailureLessonsPage } from '../../pages/FailureLessonsPage'
 import { Progress } from '../../pages/Progress'
 import { Collections } from '../../pages/Collections'
 import { CollectionDetail } from '../../pages/CollectionDetail'
+import { Win98Todo } from './Win98Todo'
 
 interface WindowState {
   id: string
@@ -47,6 +48,16 @@ const INITIAL_WINDOWS: WindowState[] = [
     y: 40,
     width: 520,
     route: '/',
+  },
+  {
+    id: 'todo',
+    title: 'Bugün — Görevler',
+    minimized: false,
+    zIndex: 11,
+    x: 240,
+    y: 110,
+    width: 460,
+    route: '/todo',
   },
 ]
 
@@ -83,6 +94,7 @@ function RouteContent({ route, onOpenWindow }: {
     case '/failure-lessons': return <FailureLessonsPage />
     case '/progress': return <Progress />
     case '/collections': return <Collections />
+    case '/todo': return <Win98Todo />
     default: return <WelcomeContent onOpenWindow={onOpenWindow} />
   }
 }
@@ -166,6 +178,7 @@ export function Win98Desktop() {
 
   const startItems = [
     { label: 'Ana Sayfa', icon: '🏠', onClick: () => openWindow('welcome', 'ilg.az — Hoş Geldin', '/', 180, 40, 520) },
+    { label: 'Bugün — Görevler', icon: '🗒️', onClick: () => openWindow('todo', 'Bugün — Görevler', '/todo', 240, 110, 460) },
     { label: 'Yazılar', icon: '📝', onClick: () => openWindow('blog', 'Yazılar', '/blog', 200, 50) },
     { label: 'Projeler', icon: '📂', onClick: () => openWindow('projects', 'Projeler', '/projects', 220, 70, 460) },
     { label: 'Araçlar', icon: '🔧', onClick: () => openWindow('tools', 'Araçlar', '/tools', 240, 80) },

@@ -1031,6 +1031,228 @@
 }
 
 /* Inputs inside windows */
+/* ─── XP Todo ─── */
+.xp-todo {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.xp-todo-nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d6d2c2;
+  margin-bottom: 6px;
+}
+
+.xp-todo-arrow {
+  min-width: 24px;
+  padding: 2px 6px !important;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.xp-todo-date {
+  flex: 1;
+  margin-left: 4px;
+  font-weight: bold;
+  color: #003399;
+  font-family: 'Trebuchet MS', 'Tahoma', sans-serif;
+  font-size: 13px;
+}
+
+.xp-todo-count {
+  color: #808080;
+  margin-right: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.xp-todo-empty {
+  color: #808080;
+  padding: 10px 4px;
+  font-style: italic;
+}
+
+.xp-todo-list {
+  flex: 1;
+  min-height: 60px;
+}
+
+.xp-todo-group {
+  margin-bottom: 8px;
+}
+
+.xp-todo-group-head {
+  font-family: 'Trebuchet MS', 'Tahoma', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #003399;
+  border-bottom: 1px solid #d6d2c2;
+  padding: 3px 4px;
+  margin-bottom: 3px;
+  cursor: grab;
+  user-select: none;
+}
+
+.xp-todo-group-head:active { cursor: grabbing; }
+.xp-todo-group-head.is-dragging { opacity: 0.4; }
+.xp-todo-group-head.is-drop-before { box-shadow: inset 0 2px 0 0 #316ac5; }
+.xp-todo-group-head.is-drop-after { box-shadow: inset 0 -2px 0 0 #316ac5; }
+
+.xp-todo-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.xp-todo-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  border-radius: 2px;
+}
+
+.xp-todo-row:hover {
+  background: #ecf3fb;
+}
+
+.xp-todo-row.is-dragging { opacity: 0.4; }
+.xp-todo-row.is-drop-before { box-shadow: inset 0 2px 0 0 #316ac5; }
+.xp-todo-row.is-drop-after { box-shadow: inset 0 -2px 0 0 #316ac5; }
+
+.xp-todo-grip {
+  color: #aaa;
+  cursor: grab;
+  user-select: none;
+  font-size: 12px;
+  letter-spacing: -3px;
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.xp-todo-grip:active { cursor: grabbing; }
+.xp-todo-row:hover .xp-todo-grip { color: #555; }
+
+.xp-todo-check {
+  background: #fff;
+  border: 1px solid #7f9db9;
+  border-radius: 2px;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  font-size: 11px;
+  line-height: 1;
+  padding: 0;
+  font-family: inherit;
+  color: #003399;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.xp-todo-check:hover {
+  border-color: #316ac5;
+}
+
+.xp-todo-text {
+  flex: 1;
+  cursor: text;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  word-break: break-word;
+}
+
+.xp-todo-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.xp-todo-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.xp-todo-tag {
+  color: #808080;
+  font-size: 11px;
+}
+
+.xp-todo-row.is-done .xp-todo-body,
+.xp-todo-row.is-done .xp-todo-text {
+  text-decoration: line-through;
+  color: #808080;
+}
+
+.xp-todo-row.is-done .xp-todo-tag {
+  opacity: 0.6;
+}
+
+.xp-todo-edit-input {
+  background: #fff;
+  border: 1px solid #316ac5;
+  padding: 1px 4px;
+  font: inherit;
+  flex: 1;
+  outline: none;
+  color: #000;
+  border-radius: 0;
+}
+
+.xp-todo-remove {
+  background: none;
+  border: none;
+  color: #808080;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 4px;
+  opacity: 0;
+  font-family: inherit;
+  border-radius: 2px;
+}
+
+.xp-todo-row:hover .xp-todo-remove { opacity: 1; }
+.xp-todo-remove:hover { color: #c00; background: rgba(192, 0, 0, 0.08); }
+
+.xp-todo-add {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #d6d2c2;
+}
+
+.xp-todo-input {
+  background: #fff;
+  border: 1px solid #7f9db9;
+  padding: 3px 6px;
+  font: inherit;
+  flex: 1;
+  outline: none;
+  color: #000;
+  border-radius: 0;
+}
+
+.xp-todo-input:focus {
+  border-color: #316ac5;
+}
+
+.xp-todo-add-btn {
+  min-width: 60px;
+}
+
 .xp-body input,
 .xp-body textarea,
 .xp-body select {

@@ -181,6 +181,211 @@
   max-width: 700px;
 }
 
+/* ─── Terminal todo ─── */
+.term-todo {
+  margin: 16px 0 0;
+}
+
+.term-todo-nav {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-left: 2ch;
+  margin-bottom: 6px;
+  color: #88ff88;
+}
+
+.term-todo-btn {
+  background: none;
+  border: none;
+  color: #ffff33;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-shadow: 0 0 2px #ffff33;
+}
+
+.term-todo-btn:hover {
+  color: #fff;
+  text-shadow: 0 0 4px #fff;
+}
+
+.term-todo-date {
+  flex: 1;
+}
+
+.term-todo-count {
+  color: #448844;
+}
+
+.term-todo-empty {
+  padding-left: 2ch;
+  color: #448844;
+}
+
+.term-todo-group {
+  margin: 6px 0;
+}
+
+.term-todo-group-head {
+  padding-left: 2ch;
+  color: #ffff33;
+  text-shadow: 0 0 2px #ffff33;
+  cursor: grab;
+  user-select: none;
+}
+
+.term-todo-group-head:active {
+  cursor: grabbing;
+}
+
+.term-todo-group-head.is-dragging {
+  opacity: 0.4;
+}
+
+.term-todo-group-head.is-drop-before {
+  box-shadow: inset 0 2px 0 0 #ffff33;
+}
+
+.term-todo-group-head.is-drop-after {
+  box-shadow: inset 0 -2px 0 0 #ffff33;
+}
+
+.term-todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 4ch;
+}
+
+.term-todo-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 1px 0;
+}
+
+.term-todo-row.is-dragging {
+  opacity: 0.4;
+}
+
+.term-todo-row.is-drop-before {
+  box-shadow: inset 0 2px 0 0 #ffff33;
+}
+
+.term-todo-row.is-drop-after {
+  box-shadow: inset 0 -2px 0 0 #ffff33;
+}
+
+.term-todo-grip {
+  color: #448844;
+  cursor: grab;
+  user-select: none;
+  padding: 0 2px;
+}
+
+.term-todo-grip:active {
+  cursor: grabbing;
+}
+
+.term-todo-row:hover .term-todo-grip {
+  color: #88ff88;
+}
+
+.term-todo-checkbox {
+  background: none;
+  border: none;
+  color: #33ff33;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-shadow: inherit;
+}
+
+.term-todo-checkbox:hover {
+  color: #ffff33;
+  text-shadow: 0 0 2px #ffff33;
+}
+
+.term-todo-text {
+  flex: 1;
+  cursor: text;
+  word-break: break-word;
+}
+
+.term-todo-row.is-done .term-todo-text {
+  text-decoration: line-through;
+  color: #448844;
+}
+
+.term-todo-tag {
+  color: #448844;
+}
+
+.term-todo-row.is-done .term-todo-tag {
+  opacity: 0.6;
+}
+
+.term-todo-edit {
+  background: none;
+  border: none;
+  border-bottom: 1px dashed #33ff33;
+  color: #33ff33;
+  font: inherit;
+  outline: none;
+  flex: 1;
+  padding: 0;
+  text-shadow: inherit;
+}
+
+.term-todo-remove {
+  background: none;
+  border: none;
+  color: #448844;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0;
+  transition: opacity .1s, color .1s;
+}
+
+.term-todo-row:hover .term-todo-remove {
+  opacity: 1;
+}
+
+.term-todo-remove:hover {
+  color: #ffff33;
+  text-shadow: 0 0 2px #ffff33;
+}
+
+.term-todo-add-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  padding-left: 2ch;
+  margin-top: 12px;
+}
+
+.term-todo-add {
+  background: none;
+  border: none;
+  color: #33ff33;
+  font: inherit;
+  outline: none;
+  flex: 1;
+  padding: 0;
+  text-shadow: inherit;
+  caret-color: transparent;
+}
+
+.term-todo-add::placeholder {
+  color: #448844;
+}
+
+.term-todo-add-row .term-cursor {
+  color: #33ff33;
+  text-shadow: 0 0 2px #33ff33;
+}
+
 /* ─── Nav bar (sub-pages) ─── */
 .term-nav {
   border-bottom: 1px solid #33ff33;

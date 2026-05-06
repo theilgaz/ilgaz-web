@@ -18,6 +18,7 @@ import { FailureLessonsPage } from '../../pages/FailureLessonsPage'
 import { Progress } from '../../pages/Progress'
 import { Collections } from '../../pages/Collections'
 import { CollectionDetail } from '../../pages/CollectionDetail'
+import { TerminalTodo } from './TerminalTodo'
 
 // Route label map for breadcrumb display
 const routeLabels: Record<string, string> = {
@@ -220,9 +221,7 @@ export function TerminalDesktop() {
               Sayi tuslariyla gezin · ESC = ana sayfa
             </div>
 
-            <div className="term-block">
-              <span className="term-prompt">&gt; <span className="term-cursor">█</span></span>
-            </div>
+            <TerminalTodo />
           </div>
         ) : (
           <div className="term-page">

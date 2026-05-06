@@ -503,6 +503,211 @@
   color: #aaa;
 }
 
+/* ─── Win98 todo ─── */
+.w98-todo {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.w98-todo-nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #808080;
+  margin-bottom: 6px;
+}
+
+.w98-todo-arrow {
+  min-width: 26px;
+  padding: 2px 6px;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.w98-todo-date {
+  font-weight: bold;
+  flex: 1;
+  margin-left: 4px;
+}
+
+.w98-todo-count {
+  color: #606060;
+  margin-right: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.w98-todo-empty {
+  color: #606060;
+  padding: 8px 4px;
+  font-style: italic;
+}
+
+.w98-todo-list {
+  flex: 1;
+  min-height: 60px;
+}
+
+.w98-todo-group {
+  margin-bottom: 8px;
+}
+
+.w98-todo-group-head {
+  font-size: 11px;
+  font-weight: bold;
+  color: #000080;
+  border-bottom: 1px solid #808080;
+  padding: 2px 4px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: grab;
+  user-select: none;
+}
+
+.w98-todo-group-head:active { cursor: grabbing; }
+.w98-todo-group-head.is-dragging { opacity: 0.4; }
+.w98-todo-group-head.is-drop-before { box-shadow: inset 0 2px 0 0 #000080; }
+.w98-todo-group-head.is-drop-after { box-shadow: inset 0 -2px 0 0 #000080; }
+
+.w98-todo-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.w98-todo-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px;
+}
+
+.w98-todo-row.is-dragging { opacity: 0.4; }
+.w98-todo-row.is-drop-before { box-shadow: inset 0 2px 0 0 #000080; }
+.w98-todo-row.is-drop-after { box-shadow: inset 0 -2px 0 0 #000080; }
+
+.w98-todo-grip {
+  color: #808080;
+  cursor: grab;
+  user-select: none;
+  font-size: 12px;
+  letter-spacing: -3px;
+  padding: 0 1px;
+  width: 14px;
+  text-align: center;
+}
+
+.w98-todo-grip:active { cursor: grabbing; }
+.w98-todo-row:hover .w98-todo-grip { color: #000; }
+
+.w98-todo-check {
+  background: #fff;
+  border: 1px solid;
+  border-color: #808080 #fff #fff #808080;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  font-size: 11px;
+  line-height: 1;
+  padding: 0;
+  font-family: inherit;
+  flex-shrink: 0;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.w98-todo-check:active {
+  border-color: #000 #fff #fff #000;
+}
+
+.w98-todo-text {
+  flex: 1;
+  cursor: text;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  word-break: break-word;
+}
+
+.w98-todo-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.w98-todo-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.w98-todo-tag {
+  color: #606060;
+  font-size: 11px;
+}
+
+.w98-todo-row.is-done .w98-todo-body,
+.w98-todo-row.is-done .w98-todo-text {
+  text-decoration: line-through;
+  color: #808080;
+}
+
+.w98-todo-row.is-done .w98-todo-tag {
+  opacity: 0.6;
+}
+
+.w98-todo-edit-input {
+  background: #fff;
+  border: 1px solid;
+  border-color: #808080 #fff #fff #808080;
+  padding: 1px 4px;
+  font: inherit;
+  flex: 1;
+  outline: none;
+  color: #000;
+}
+
+.w98-todo-remove {
+  background: none;
+  border: none;
+  color: #606060;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 4px;
+  opacity: 0;
+  font-family: inherit;
+}
+
+.w98-todo-row:hover .w98-todo-remove { opacity: 1; }
+.w98-todo-remove:hover { color: #c00; }
+
+.w98-todo-add {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #808080;
+}
+
+.w98-todo-input {
+  background: #fff;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+  padding: 2px 4px;
+  font: inherit;
+  flex: 1;
+  outline: none;
+  color: #000;
+}
+
 /* ─── BSOD ─── */
 .w98-bsod {
   position: fixed;
